@@ -1,0 +1,148 @@
+<div class="card my-5">
+  <div class="card-body" [hidden]="submitted">
+    <form (ngSubmit)="onSubmit()" #restaurantForm="ngForm">
+
+      <div>
+        <h1> Restaurant Owner Details</h1>
+        <div class="form-group">
+          <label for="ownerFirstName">Enter Restaurant Owner First Name:</label>
+          <input type="text" required [(ngModel)]="addRestaurantDTO.ownerFirstName"
+            class="form-control ng-untouched ng-pristine ng-valid" id="ownerFirstName" name="ownerFirstName"
+            #ownerFirstName="ngModel">
+          <div [hidden]="ownerFirstName.valid || ownerFirstName.pristine" class="alert alert-danger"> First name is
+            required</div>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Enter Restaurant Owner Last Name:</label>
+          <input type="text" required [(ngModel)]="addRestaurantDTO.ownerLastName"
+            class="form-control ng-untouched ng-pristine ng-valid" id="lastName" name="ownerLastName"
+            #ownerLastName="ngModel">
+          <div [hidden]="ownerLastName.valid || ownerLastName.pristine" class="alert alert-danger"> Last name is
+            required</div>
+        </div>
+        <div class="form-group">
+          <label for="email">Enter Restaurant Owner E-mail:</label>
+          <input type="text" required [(ngModel)]="addRestaurantDTO.ownerEmail"
+            class="form-control ng-untouched ng-pristine ng-valid" id="email" name="email" #email="ngModel">
+          <div [hidden]="email.valid || email.pristine" class="alert alert-danger"> Email is required</div>
+        </div>
+      </div>
+
+      <div>
+        <h1> Restaurant Location</h1>
+        <div class="form-group">
+          <label for="address">Enter Street Address:</label>
+          <input type="text" required [(ngModel)]="addRestaurantDTO.street"
+            class="form-control ng-untouched ng-pristine ng-valid" id="address" name="address" #address="ngModel">
+          <div [hidden]="address.valid || address.pristine" class="alert alert-danger"> Street Address is required</div>
+        </div>
+        <div class="form-group">
+          <label for="city">Enter City:</label>
+          <input type="text" required [(ngModel)]="addRestaurantDTO.city"
+            class="form-control ng-untouched ng-pristine ng-valid" id="city" name="city" #city="ngModel">
+          <div [hidden]="city.valid || city.pristine" class="alert alert-danger"> City is required</div>
+        </div>
+        <div class="form-group">
+          <label for="zip">Enter Zip Code:</label>
+          <input type="text" required [(ngModel)]="addRestaurantDTO.zip"
+            class="form-control ng-untouched ng-pristine ng-valid" id="zip" name="zip" #zip="ngModel">
+          <div [hidden]="zip.valid || zip.pristine" class="alert alert-danger"> Zip Code is required</div>
+        </div>
+        <div class="form-group">
+          <label for="state">Enter State:</label>
+          <input type="text" required [(ngModel)]="addRestaurantDTO.state"
+            class="form-control ng-untouched ng-pristine ng-valid" id="state" name="state" #state="ngModel">
+          <div [hidden]="state.valid || state.pristine" class="alert alert-danger"> State is required</div>
+        </div>
+      </div>
+
+      <div>
+        <h1> Restaurant Details</h1>
+        <div class="form-group">
+          <label for="resName">Enter Restaurant Name:</label>
+          <input type="text" required [(ngModel)]="addRestaurantDTO.name"
+            class="form-control ng-untouched ng-pristine ng-valid" id="resName" name="resName" #resName="ngModel">
+          <div [hidden]="resName.valid || resName.pristine" class="alert alert-danger"> Restaurant Name is required</div>
+        </div>
+        
+        <div class="form-group">
+          <label for="priceRating">Choose Price Rating:</label>
+         <div class="form-control">
+           <input type="radio" value=1 name="priceRating" id="priceRating" class="form-control" required
+                [(ngModel)]="addRestaurantDTO.priceRating" #priceRating="ngModel"> 1
+              <input type="radio" value=2 name="priceRating" id="priceRating" class="form-control" required
+                [(ngModel)]="addRestaurantDTO.priceRating" #priceRating="ngModel"> 2
+              <input type="radio" value=3 name="priceRating" id="priceRating" class="form-control" required
+                [(ngModel)]="addRestaurantDTO.priceRating" #priceRating="ngModel"> 3
+            </div>
+          <div [hidden]="priceRating.valid || priceRating.pristine" class="alert alert-danger"> Price rating is required</div>
+        </div>
+      </div>
+      <!-- <div class="form-group">
+            <label for="categories">Enter Restaurant Categories separated by a comma:</label>
+            <input type="text" required [(ngModel)]="addRestaurantDTO.categories"class="form-control ng-untouched ng-pristine ng-valid" id="categories" name="categories" #categories ="ngModel">
+            <div [hidden]="categories.valid || categories.pristine" class="alert alert-danger"> At least one category is required</div>
+        </div> 
+       -->
+       <div class="form-group">
+        <label for="categories">Enter Restaurant Categories separated by a comma:</label>
+         <select name="categories" [(ngModel)]="categories" multiple size="10">
+           <option *ngFor="let cat of catOptions" [ngValue]="cat">{{cat.name}}</option>
+         </select>
+       </div>
+      
+        
+        
+        <br><br>
+        <div><button type="submit" class="btn btn-success" [disabled]="!restaurantForm.form.valid">Submit</button></div>
+        <pre>{{ restaurantForm.value | json }}</pre>
+      </form> 
+      
+      
+
+
+      <div class="card-body" [hidden]="!submitted">
+        <h2>You submitted the following:</h2>
+        <div class="row">
+          <div class="col-xs-3"> First Name: </div>
+          <div class="col-xs-9">{{ addRestaurantDTO.ownerFirstName }}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">Last Name: </div>
+          <div class="col-xs-9">{{ addRestaurantDTO.ownerLastName}}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">E-mail: </div>
+          <div class="col-xs-9">{{ addRestaurantDTO.ownerEmail }}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">Street Address: </div>
+          <div class="col-xs-9">{{ addRestaurantDTO.street }}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">City: </div>
+          <div class="col-xs-9">{{ addRestaurantDTO.city }}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">Zip Code: </div>
+          <div class="col-xs-9">{{ addRestaurantDTO.zip }}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">State: </div>
+          <div class="col-xs-9">{{ addRestaurantDTO.state }}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">Restaurant name: </div>
+          <div class="col-xs-9">{{ addRestaurantDTO.ownerEmail }}</div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">Price rating: </div>
+          <div class="col-xs-9">{{ addRestaurantDTO.priceRating }}</div>
+        </div>
+        <br>
+        <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+        <button class="btn btn-primary" (click)="gotoRestaurantList()">Done</button>
+      </div>
+  
+  </div>
+</div>
