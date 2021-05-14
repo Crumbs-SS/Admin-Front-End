@@ -78,71 +78,65 @@
           <div [hidden]="priceRating.valid || priceRating.pristine" class="alert alert-danger"> Price rating is required</div>
         </div>
       </div>
-      <!-- <div class="form-group">
-            <label for="categories">Enter Restaurant Categories separated by a comma:</label>
-            <input type="text" required [(ngModel)]="addRestaurantDTO.categories"class="form-control ng-untouched ng-pristine ng-valid" id="categories" name="categories" #categories ="ngModel">
-            <div [hidden]="categories.valid || categories.pristine" class="alert alert-danger"> At least one category is required</div>
-        </div> 
-       -->
        <div class="form-group">
-        <label for="categories">Enter Restaurant Categories separated by a comma:</label>
-         <select name="categories" [(ngModel)]="categories" multiple size="10">
+        <label for="categories">Choose Restaurant Category:</label>
+         <select name="categories" [(ngModel)]="addRestaurantDTO.categories" multiple size="10">
            <option *ngFor="let cat of catOptions" [ngValue]="cat">{{cat.name}}</option>
          </select>
        </div>
       
-        
-        
         <br><br>
+        <div class="card-body" >
+          <h1>You Entered the following:</h1>
+          <div class="row">
+            <div class="col-xs-3"> First Name:  </div>
+            <div class="col-xs-9"> {{ addRestaurantDTO.ownerFirstName }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">Last Name: </div>
+            <div class="col-xs-9">{{ addRestaurantDTO.ownerLastName}}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">E-mail: </div>
+            <div class="col-xs-9">{{ addRestaurantDTO.ownerEmail }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">Street Address: </div>
+            <div class="col-xs-9">{{ addRestaurantDTO.street }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">City: </div>
+            <div class="col-xs-9">{{ addRestaurantDTO.city }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">Zip Code: </div>
+            <div class="col-xs-9">{{ addRestaurantDTO.zip }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">State: </div>
+            <div class="col-xs-9">{{ addRestaurantDTO.state }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">Restaurant name: </div>
+            <div class="col-xs-9">{{ addRestaurantDTO.name }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">Price rating: </div>
+            <div class="col-xs-9">{{ addRestaurantDTO.priceRating }}</div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">Categories: </div>
+            <div class="col-xs-9" *ngFor = "let cat of addRestaurantDTO.categories">{{ cat.name }}</div>
+          </div>
+          <br>
+          <!-- <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+          <button class="btn btn-primary" (click)="gotoRestaurantList()">Done</button> -->
+        </div>
+
         <div><button type="submit" class="btn btn-success" [disabled]="!restaurantForm.form.valid">Submit</button></div>
-        <pre>{{ restaurantForm.value | json }}</pre>
+        <!-- <pre>{{ restaurantForm.value | json }}</pre> -->
       </form> 
       
-      
-
-
-      <div class="card-body" [hidden]="!submitted">
-        <h2>You submitted the following:</h2>
-        <div class="row">
-          <div class="col-xs-3"> First Name: </div>
-          <div class="col-xs-9">{{ addRestaurantDTO.ownerFirstName }}</div>
-        </div>
-        <div class="row">
-          <div class="col-xs-3">Last Name: </div>
-          <div class="col-xs-9">{{ addRestaurantDTO.ownerLastName}}</div>
-        </div>
-        <div class="row">
-          <div class="col-xs-3">E-mail: </div>
-          <div class="col-xs-9">{{ addRestaurantDTO.ownerEmail }}</div>
-        </div>
-        <div class="row">
-          <div class="col-xs-3">Street Address: </div>
-          <div class="col-xs-9">{{ addRestaurantDTO.street }}</div>
-        </div>
-        <div class="row">
-          <div class="col-xs-3">City: </div>
-          <div class="col-xs-9">{{ addRestaurantDTO.city }}</div>
-        </div>
-        <div class="row">
-          <div class="col-xs-3">Zip Code: </div>
-          <div class="col-xs-9">{{ addRestaurantDTO.zip }}</div>
-        </div>
-        <div class="row">
-          <div class="col-xs-3">State: </div>
-          <div class="col-xs-9">{{ addRestaurantDTO.state }}</div>
-        </div>
-        <div class="row">
-          <div class="col-xs-3">Restaurant name: </div>
-          <div class="col-xs-9">{{ addRestaurantDTO.ownerEmail }}</div>
-        </div>
-        <div class="row">
-          <div class="col-xs-3">Price rating: </div>
-          <div class="col-xs-9">{{ addRestaurantDTO.priceRating }}</div>
-        </div>
-        <br>
-        <button class="btn btn-primary" (click)="submitted=false">Edit</button>
-        <button class="btn btn-primary" (click)="gotoRestaurantList()">Done</button>
-      </div>
   
   </div>
 </div>
