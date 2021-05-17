@@ -66,26 +66,47 @@
         </div>
         
         <div class="form-group">
-          <label for="priceRating">Choose Price Rating:</label>
-         <div class="form-control">
-           <input type="radio" value=1 name="priceRating" id="priceRating" class="form-control" required
-                [(ngModel)]="addRestaurantDTO.priceRating" #priceRating="ngModel"> 1
-              <input type="radio" value=2 name="priceRating" id="priceRating" class="form-control" required
-                [(ngModel)]="addRestaurantDTO.priceRating" #priceRating="ngModel"> 2
-              <input type="radio" value=3 name="priceRating" id="priceRating" class="form-control" required
-                [(ngModel)]="addRestaurantDTO.priceRating" #priceRating="ngModel"> 3
-            </div>
-          <div [hidden]="priceRating.valid || priceRating.pristine" class="alert alert-danger"> Price rating is required</div>
+          <label>Choose Price Rating: </label>
+          <div class="form-control">
+            <label class="radio-inline">
+              <input type="radio" name="priceRating" value=1 required
+              [(ngModel)]="addRestaurantDTO.priceRating" #priceRating="ngModel">
+              1 &nbsp;&nbsp;&nbsp;&nbsp;
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="priceRating" value=2 required
+              [(ngModel)]="addRestaurantDTO.priceRating" #priceRating="ngModel">
+              2 &nbsp;&nbsp;&nbsp;&nbsp;
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="priceRating" value=3 required
+              [(ngModel)]="addRestaurantDTO.priceRating" #priceRating="ngModel">
+              3
+            </label>
+          </div>
         </div>
-      </div>
-       <div class="form-group">
+
+      <div class="form-group">
         <label for="categories">Choose Restaurant Category:</label>
+        <div>
          <select name="categories" [(ngModel)]="addRestaurantDTO.categories" multiple size="10">
            <option *ngFor="let cat of catOptions" [ngValue]="cat">{{cat.name}}</option>
          </select>
-       </div>
-      
+        </div>
+       </div> 
+
+      </div>
         <br><br>
+      <div><button type="submit" class="btn btn-success" [disabled]="!restaurantForm.form.valid">Submit</button></div>
+         <pre>{{ restaurantForm.value | json }}</pre>
+      </form> 
+      
+  
+  </div>
+</div>
+
+
+        <!-- <br><br>
         <div class="card-body" >
           <h1>You Entered the following:</h1>
           <div class="row">
@@ -129,14 +150,6 @@
             <div class="col-xs-9" *ngFor = "let cat of addRestaurantDTO.categories">{{ cat.name }}</div>
           </div>
           <br>
-          <!-- <button class="btn btn-primary" (click)="submitted=false">Edit</button>
-          <button class="btn btn-primary" (click)="gotoRestaurantList()">Done</button> -->
-        </div>
-
-        <div><button type="submit" class="btn btn-success" [disabled]="!restaurantForm.form.valid">Submit</button></div>
-        <!-- <pre>{{ restaurantForm.value | json }}</pre> -->
-      </form> 
-      
-  
-  </div>
-</div>
+         <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+          <button class="btn btn-primary" (click)="gotoRestaurantList()">Done</button> 
+        </div> -->

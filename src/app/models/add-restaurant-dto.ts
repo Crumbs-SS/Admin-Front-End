@@ -8,7 +8,7 @@ export class AddRestaurantDTO {
 
     street!: string;
     city!: string;
-    zip!: string;
+    zip!: number;
     state!: string;
 
     name!: string;

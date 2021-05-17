@@ -21,6 +21,7 @@ export class RestaurantListComponent implements OnInit {
     this.HttpService.getAll().subscribe((res) => {
       this.restaurants = res;
       this.totalRestaurants = this.restaurants.length;
+
     });
   }
 

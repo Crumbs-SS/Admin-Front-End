@@ -12,6 +12,8 @@ import { RestaurantListComponent } from './restaurant_components/restaurant-list
 import { RestaurantFormComponent } from './restaurant_components/restaurant-form/restaurant-form.component';
 import { FormsModule } from '@angular/forms';
 import { RestaurantService } from './shared/services/restaurant.service';
+import { ViewMenuComponent } from './restaurant_components/view-menu/view-menu.component';
+
 
 @NgModule({
   declarations: [
@@ -23,13 +25,14 @@ import { RestaurantService } from './shared/services/restaurant.service';
     UsersComponent,
     RestaurantListComponent,
     RestaurantFormComponent,
+    ViewMenuComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    
+  
   ],
   providers: [RestaurantService],
   bootstrap: [AppComponent]
