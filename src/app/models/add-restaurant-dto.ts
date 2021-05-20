@@ -1,7 +1,8 @@
 import { Category } from "./category"
 
 export class AddRestaurantDTO {
-    
+
+    id!: number;
     ownerFirstName!: string;
     ownerLastName!: string;
     ownerEmail!: string;

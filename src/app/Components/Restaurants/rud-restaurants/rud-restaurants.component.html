@@ -1,0 +1,259 @@
+<div class="card my-5">
+    <h1 style="text-align: center;">List of Restaurants in Crumbs Food Service</h1>
+    <div class="card-body">
+        <h2 style="text-align: center;"> Total number of restaurants: {{ totalRestaurants }}</h2>
+        <div class='form-group row'>
+            <label for="search" class="col-sm-2 col-form-label" style="text-align: right;">Search</label>
+            <div class="col-sm-6">
+                <input type="text" [(ngModel)]="searchString" class="form-control" id="search">
+            </div>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Restaurant Owner</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Categories</th>
+                    <th scope="col">Price rating</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Menu</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let r of restaurants | searchfilter:searchString; let i = index">
+                    <td>{{i + 1}}</td>
+                    <td>{{r.name}}</td>
+                    <td>
+                        <p>Name: {{r.restaurantOwner.userDetail.firstName}} {{r.restaurantOwner.userDetail.lastName}}
+                        </p>
+                        <p>E-mail: {{r.restaurantOwner.userDetail.email}}</p>
+                    </td>
+                    <td>{{r.location.street}}, {{r.location.city}} {{r.location.zipCode}}, {{r.location.state}}</td>
+                    <td>
+                        <p *ngFor="let cat of r.categories">{{cat.id.categoryId}} </p>
+                    </td>
+                    <td>{{r.priceRating}}</td>
+                    <td>{{r.rating}}</td>
+                    <td>
+                        <ng-template #menu let-modal>
+                            <div class="modal-header">
+                                <h4 class="modal-title">Restaurant Menu</h4>
+                                <button type="button" class="close" aria-label="Close"
+                                    (click)="modal.dismiss('Cross click')">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p *ngFor="let item of r.menuItems; let i=index">{{i+1}}) Item Name: {{item.name}}
+                                    <br>Price: {{item.price}}$
+                                    <br>Description: {{item.description}}
+                                </p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light"
+                                    (click)="modal.close('Close click')">Close</button>
+                            </div>
+
+                        </ng-template>
+                        <button type="button" class="btn btn-primary" (click)="open(menu)">View Menu</button>
+                    </td>
+
+                    <td>
+                        <ng-template #update let-modal>
+                            
+                            <div class="modal-header">
+                                <h4 class="modal-title">Update Restaurant: {{r.name}}</h4>
+                                <button type="button" class="close" aria-label="Close"
+                                    (click)="modal.dismiss('Cross click')">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                                
+                            <div class="modal-body">
+                                <form (ngSubmit)="onSubmit()" #restaurantForm="ngForm">
+  
+                                    <div>
+                                      <h1> Restaurant Owner Details</h1>
+                                      <div class="form-group">
+                                        <label for="ownerFirstName">Enter Restaurant Owner First Name:</label>
+                                        <input type="text" required [(ngModel)]="restaurant.restaurantOwner.userDetail.firstName"
+                                        required maxlength="30" pattern="^[a-zA-Z ]*$"
+                                        [class.is-valid]="ownerFirstName.valid"
+                                          class="form-control ng-untouched ng-pristine ng-valid" id="ownerFirstName" name="ownerFirstName"
+                                          #ownerFirstName="ngModel">
+                                        <div [hidden]="ownerFirstName.valid || ownerFirstName.pristine" class="alert alert-danger"> First name is
+                                          required</div>
+                                          <div *ngIf="ownerFirstName.errors?.pattern" class="alert alert-danger">
+                                            First name can only contain letters
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="lastName">Enter Restaurant Owner Last Name:</label>
+                                        <input type="text" required [(ngModel)]="restaurant.restaurantOwner.userDetail.lastName"
+                                        required maxlength="30" pattern="^[a-zA-Z ]*$"
+                                        [class.is-valid]="ownerLastName.valid"
+                                          class="form-control ng-untouched ng-pristine ng-valid" id="lastName" name="ownerLastName"
+                                          #ownerLastName="ngModel">
+                                        <div [hidden]="ownerLastName.valid || ownerLastName.pristine" class="alert alert-danger"> Last name is
+                                          required</div>
+                                          <div *ngIf="ownerLastName.errors?.pattern" class="alert alert-danger">
+                                            First name can only contain letters
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="email">Enter Restaurant Owner E-mail:</label>
+                                        <input type="email" required [(ngModel)]="restaurant.restaurantOwner.userDetail.email"
+                                        pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                        [class.is-valid]="email.valid"
+                                          class="form-control ng-untouched ng-pristine ng-valid" id="email" name="email" #email="ngModel">
+                                        <div [hidden]="email.valid || email.pristine" class="alert alert-danger"> Email is required</div>
+                                        <div *ngIf="email.errors?.pattern" class="alert alert-danger">
+                                            Please provide a valid e-mail address
+                                          </div>
+                                      </div>
+                                    </div>
+                              
+                                    <div>
+                                      <h1> Restaurant Location</h1>
+                                      <div class="form-group">
+                                        <label for="address">Enter Street Address:</label>
+                                        <input type="text" required [(ngModel)]="restaurant.location.street"
+                                        [class.is-valid]="address.valid" pattern="^[#.0-9a-zA-Z\s,-]+$"
+                                          class="form-control ng-untouched ng-pristine ng-valid" id="address" name="address" #address="ngModel">
+                                        <div [hidden]="address.valid || address.pristine" class="alert alert-danger"> Street Address is required</div>
+                                        <div *ngIf="address.errors?.pattern" class="alert alert-danger">
+                                            Special characters are not allowed in street address
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="city">Enter City:</label>
+                                        <input type="text" required [(ngModel)]="restaurant.location.city"
+                                        required maxlength="15" pattern="^[a-zA-Z ]*$"
+                                        [class.is-valid]="city.valid"
+                                          class="form-control ng-untouched ng-pristine ng-valid" id="city" name="city" #city="ngModel">
+                                        <div [hidden]="city.valid || city.pristine" class="alert alert-danger"> City is required</div>
+                                        <div *ngIf="city.errors?.pattern" class="alert alert-danger">
+                                            City name can only contain letters
+                                          </div>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="zip">Enter Zip Code:</label>
+                                        <input type="text" required [(ngModel)]="restaurant.location.zipCode"
+                                        required minlength="5" required maxlength="5" pattern="[0-9]*"
+                                        [class.is-valid]="zip.valid"
+                                          class="form-control ng-untouched ng-pristine ng-valid" id="zip" name="zip" #zip="ngModel">
+                                        <div [hidden]="zip.valid || zip.pristine" class="alert alert-danger"> Zip Code is required</div>
+                                        <div *ngIf="zip.errors?.minlength" class="alert alert-danger">
+                                          Zip must be exactly 5 characters long.
+                                        </div>
+                                        <div *ngIf="zip.errors?.pattern" class="alert alert-danger">
+                                          Zip must only consist of numbers
+                                        </div>
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                        <label for="state">Enter State:</label>
+                                        <input type="text" required [(ngModel)]="restaurant.location.state"
+                                        required minlength="2" required maxlength="2" pattern="^[a-zA-Z ]*$"
+                                        [class.is-valid]="state.valid"
+                                          class="form-control ng-untouched ng-pristine ng-valid" id="state" name="state" #state="ngModel">
+                                        <div [hidden]="state.valid || state.pristine" class="alert alert-danger"> State is required</div>
+                                        <div *ngIf="state.errors?.pattern" class="alert alert-danger">
+                                            State can only contain letters
+                                          </div>
+                                        <div *ngIf="state.errors?.minlength" class="alert alert-danger">
+                                          State must be exactly 2 characters long.
+                                        </div>
+                                      </div>
+                                    </div>
+                              
+                                    <div>
+                                      <h1> Restaurant Details</h1>
+                                      <div class="form-group">
+                                        <label for="resName">Enter Restaurant Name:</label>
+                                        <input type="text" required [(ngModel)]="restaurant.name"
+                                        required maxlength="30"
+                                          class="form-control ng-untouched ng-pristine ng-valid" id="resName" name="resName" #resName="ngModel">
+                                        <div [hidden]="resName.valid || resName.pristine" class="alert alert-danger"> Restaurant Name is required</div>
+                                        
+                                      </div>
+                                      
+                                      <div class="form-group">
+                                        <label>Choose Price Rating: </label>
+                                        <div class="form-control">
+                                          <label class="radio-inline">
+                                            <input type="radio" name="priceRating" value=1 required
+                                            [(ngModel)]="restaurant.priceRating" #priceRating="ngModel">
+                                            1 &nbsp;&nbsp;&nbsp;&nbsp;
+                                          </label>
+                                          <label class="radio-inline">
+                                            <input type="radio" name="priceRating" value=2 required
+                                            [(ngModel)]="restaurant.priceRating" #priceRating="ngModel">
+                                            2 &nbsp;&nbsp;&nbsp;&nbsp;
+                                          </label>
+                                          <label class="radio-inline">
+                                            <input type="radio" name="priceRating" value=3 required
+                                            [(ngModel)]="restaurant.priceRating" #priceRating="ngModel">
+                                            3
+                                          </label>
+                                        </div>
+                                      </div>
+                              
+                                    <div class="form-group">
+                                      <label for="categories">Choose Restaurant Categories:</label>
+                                      <div>
+                                       <select name="categories" [(ngModel)]="restaurant.categories" multiple size="10">
+                                         <option *ngFor="let cat of catOptions" [ngValue]="cat">{{cat.name}}</option>
+                                       </select>
+                                      </div>
+                                     </div> 
+                              
+                                    </div>
+                                      <br>
+                                    <div><button type="submit" class="btn btn-success" [disabled]="!restaurantForm.form.valid">Submit</button></div>
+                                       <pre>{{ restaurantForm.value | json }}</pre>
+                                    </form> 
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light"(click)="modal.close('Close click')">Cancel</button>
+                                <button type="submit" class="btn btn-primary" (click)="reloadCurrentPage()" (click)="modal.close('Close click')" >Update </button>
+                            </div>
+                        
+                        </ng-template>
+                        <button type="button" class="btn btn-primary" (click)="openUpdate(update, r)">Edit</button>
+                    </td>
+                    <td>
+                        <ng-template #delete let-modal>
+                            <div class="modal-header">
+                                <h4 class="modal-title">Confirm</h4>
+                                <button type="button" class="close" aria-label="Close"
+                                    (click)="modal.dismiss('Cross click')">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                <p>Are you sure you wish to delete restaurant with name: {{r.name}} ?</p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light"
+                                    (click)="modal.close('Close click')">Cancel</button>
+                                <button type="button" class="btn btn-danger" (click)="deleteRestaurant(r.id)"
+                                    (click)="reloadCurrentPage()" (click)="modal.close('Close click')" >Delete </button>
+                            </div>
+
+                        </ng-template>
+                        <button type="button" class="btn btn-danger" (click)="open(delete)">Delete </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

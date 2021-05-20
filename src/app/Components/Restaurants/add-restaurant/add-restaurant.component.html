@@ -1,0 +1,149 @@
+<div class="card my-5">
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" #restaurantForm="ngForm">
+  
+        <div>
+          <h1> Restaurant Owner Details</h1>
+          <div class="form-group">
+            <label for="ownerFirstName">Enter Restaurant Owner First Name:</label>
+            <input type="text" required [(ngModel)]="addRestaurantDTO.ownerFirstName"
+            required maxlength="30" pattern="^[a-zA-Z ]*$"
+            [class.is-valid]="ownerFirstName.valid"
+              class="form-control ng-untouched ng-pristine ng-valid" id="ownerFirstName" name="ownerFirstName"
+              #ownerFirstName="ngModel">
+            <div [hidden]="ownerFirstName.valid || ownerFirstName.pristine" class="alert alert-danger"> First name is
+              required</div>
+              <div *ngIf="ownerFirstName.errors?.pattern" class="alert alert-danger">
+                First name can only contain letters
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Enter Restaurant Owner Last Name:</label>
+            <input type="text" required [(ngModel)]="addRestaurantDTO.ownerLastName"
+            required maxlength="30" pattern="^[a-zA-Z ]*$"
+            [class.is-valid]="ownerLastName.valid"
+              class="form-control ng-untouched ng-pristine ng-valid" id="lastName" name="ownerLastName"
+              #ownerLastName="ngModel">
+            <div [hidden]="ownerLastName.valid || ownerLastName.pristine" class="alert alert-danger"> Last name is
+              required</div>
+              <div *ngIf="ownerLastName.errors?.pattern" class="alert alert-danger">
+                First name can only contain letters
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Enter Restaurant Owner E-mail:</label>
+            <input type="email" required [(ngModel)]="addRestaurantDTO.ownerEmail"
+            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            [class.is-valid]="email.valid"
+              class="form-control ng-untouched ng-pristine ng-valid" id="email" name="email" #email="ngModel">
+            <div [hidden]="email.valid || email.pristine" class="alert alert-danger"> Email is required</div>
+            <div *ngIf="email.errors?.pattern" class="alert alert-danger">
+                Please provide a valid e-mail address
+              </div>
+          </div>
+        </div>
+  
+        <div>
+          <h1> Restaurant Location</h1>
+          <div class="form-group">
+            <label for="address">Enter Street Address:</label>
+            <input type="text" required [(ngModel)]="addRestaurantDTO.street"
+            [class.is-valid]="address.valid" pattern="^[#.0-9a-zA-Z\s,-]+$"
+              class="form-control ng-untouched ng-pristine ng-valid" id="address" name="address" #address="ngModel">
+            <div [hidden]="address.valid || address.pristine" class="alert alert-danger"> Street Address is required</div>
+            <div *ngIf="address.errors?.pattern" class="alert alert-danger">
+                Special characters are not allowed in street address
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="city">Enter City:</label>
+            <input type="text" required [(ngModel)]="addRestaurantDTO.city"
+            required maxlength="15" pattern="^[a-zA-Z ]*$"
+            [class.is-valid]="city.valid"
+              class="form-control ng-untouched ng-pristine ng-valid" id="city" name="city" #city="ngModel">
+            <div [hidden]="city.valid || city.pristine" class="alert alert-danger"> City is required</div>
+            <div *ngIf="city.errors?.pattern" class="alert alert-danger">
+                City name can only contain letters
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="zip">Enter Zip Code:</label>
+            <input type="text" required [(ngModel)]="addRestaurantDTO.zip"
+            required minlength="5" required maxlength="5" pattern="[0-9]*"
+            [class.is-valid]="zip.valid"
+              class="form-control ng-untouched ng-pristine ng-valid" id="zip" name="zip" #zip="ngModel">
+            <div [hidden]="zip.valid || zip.pristine" class="alert alert-danger"> Zip Code is required</div>
+            <div *ngIf="zip.errors?.minlength" class="alert alert-danger">
+              Zip must be exactly 5 characters long.
+            </div>
+            <div *ngIf="zip.errors?.pattern" class="alert alert-danger">
+              Zip must only consist of numbers
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="state">Enter State:</label>
+            <input type="text" required [(ngModel)]="addRestaurantDTO.state"
+            required minlength="2" required maxlength="2" pattern="^[a-zA-Z ]*$"
+            [class.is-valid]="state.valid"
+              class="form-control ng-untouched ng-pristine ng-valid" id="state" name="state" #state="ngModel">
+            <div [hidden]="state.valid || state.pristine" class="alert alert-danger"> State is required</div>
+            <div *ngIf="state.errors?.pattern" class="alert alert-danger">
+                State can only contain letters
+              </div>
+            <div *ngIf="state.errors?.minlength" class="alert alert-danger">
+              State must be exactly 2 characters long.
+            </div>
+          </div>
+        </div>
+  
+        <div>
+          <h1> Restaurant Details</h1>
+          <div class="form-group">
+            <label for="resName">Enter Restaurant Name:</label>
+            <input type="text" required [(ngModel)]="addRestaurantDTO.name"
+            required maxlength="30"
+              class="form-control ng-untouched ng-pristine ng-valid" id="resName" name="resName" #resName="ngModel">
+            <div [hidden]="resName.valid || resName.pristine" class="alert alert-danger"> Restaurant Name is required</div>
+            
+          </div>
+          
+          <div class="form-group">
+            <label>Choose Price Rating: </label>
+            <div class="form-control">
+              <label class="radio-inline">
+                <input type="radio" name="priceRating" value=1 required
+                [(ngModel)]="addRestaurantDTO.priceRating" #priceRating="ngModel">
+                1 &nbsp;&nbsp;&nbsp;&nbsp;
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="priceRating" value=2 required
+                [(ngModel)]="addRestaurantDTO.priceRating" #priceRating="ngModel">
+                2 &nbsp;&nbsp;&nbsp;&nbsp;
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="priceRating" value=3 required
+                [(ngModel)]="addRestaurantDTO.priceRating" #priceRating="ngModel">
+                3
+              </label>
+            </div>
+          </div>
+  
+        <div class="form-group">
+          <label for="categories">Choose Restaurant Categories:</label>
+          <div>
+           <select name="categories" [(ngModel)]="addRestaurantDTO.categories" multiple size="10">
+             <option *ngFor="let cat of catOptions" [ngValue]="cat">{{cat.name}}</option>
+           </select>
+          </div>
+         </div> 
+  
+        </div>
+          <br>
+        <div><button type="submit" class="btn btn-success" [disabled]="!restaurantForm.form.valid">Submit</button></div>
+           <pre>{{ restaurantForm.value | json }}</pre>
+        </form> 
+        
+    
+    </div>
+  </div>

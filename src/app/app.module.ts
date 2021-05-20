@@ -1,38 +1,57 @@
+//Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { DriversComponent } from './drivers_components/drivers/drivers.component';
-import { RestaurantsComponent } from './restaurant_components/restaurants/restaurants.component';
-import { OrdersComponent } from './orders_components/orders/orders.component';
-import { UsersComponent } from './user_components/users/users.component';
-import { RestaurantListComponent } from './restaurant_components/restaurant-list/restaurant-list.component';
-import { RestaurantFormComponent } from './restaurant_components/restaurant-form/restaurant-form.component';
-import { FormsModule } from '@angular/forms';
-import { RestaurantService } from './shared/services/restaurant.service';
-import { ViewMenuComponent } from './restaurant_components/view-menu/view-menu.component';
+import {HttpClientModule} from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from '@angular/material/card';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatSelectModule} from '@angular/material/select';
 
+//Service
+import { RestaurantService } from './Shared/Service/restaurant.service';
+
+//Components
+import { AppComponent } from './app.component';
+
+import { DriversComponent } from './Components/Drivers/drivers/drivers.component';
+import { OrdersComponent } from './Components/Orders/orders/orders.component';
+import { RestaurantsComponent } from './Components/Restaurants/restaurants/restaurants.component';
+import { UsersComponent } from './Components/Users/users/users.component';
+import { AdminComponent } from './Components/Admin/admin/admin.component';
+import { AddRestaurantComponent } from './Components/Restaurants/add-restaurant/add-restaurant.component';
+import { RudRestaurantsComponent } from './Components/Restaurants/rud-restaurants/rud-restaurants.component';
+
+//Pipes
+import { SearchfilterPipe } from './Shared/Custom/searchfilter.pipe';
+import { PriceRatingSortPipe } from './Shared/Custom/price-rating-sort.pipe'
+import { RestaurantSortPipe } from './Shared/Custom/restaurant-sort.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    RestaurantSortPipe,
     DriversComponent,
-    RestaurantsComponent,
     OrdersComponent,
+    RestaurantsComponent,
     UsersComponent,
-    RestaurantListComponent,
-    RestaurantFormComponent,
-    ViewMenuComponent,
+    AdminComponent,
+    AddRestaurantComponent,
+    RudRestaurantsComponent,
+    SearchfilterPipe,
+    PriceRatingSortPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    MatCardModule,
     HttpClientModule,
     FormsModule,
-  
+    MatSelectModule,
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [RestaurantService],
   bootstrap: [AppComponent]

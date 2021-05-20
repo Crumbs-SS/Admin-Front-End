@@ -1,47 +1,49 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DriversComponent } from './drivers_components/drivers/drivers.component';
-import { HomeComponent } from './home/home.component';
-import { OrdersComponent } from './orders_components/orders/orders.component';
-import { RestaurantFormComponent } from './restaurant_components/restaurant-form/restaurant-form.component';
-import { RestaurantListComponent } from './restaurant_components/restaurant-list/restaurant-list.component';
-import { RestaurantsComponent } from './restaurant_components/restaurants/restaurants.component';
-import { UsersComponent } from './user_components/users/users.component';
+//Components
+import { AdminComponent } from './Components/Admin/admin/admin.component';
+import { DriversComponent } from './Components/Drivers/drivers/drivers.component';
+import { OrdersComponent } from './Components/Orders/orders/orders.component';
+import { UsersComponent } from './Components/Users/users/users.component';
+import { RestaurantsComponent } from './Components/Restaurants/restaurants/restaurants.component';
+import { RudRestaurantsComponent } from './Components/Restaurants/rud-restaurants/rud-restaurants.component';
+import { AddRestaurantComponent } from './Components/Restaurants/add-restaurant/add-restaurant.component';
 
 const routes: Routes = [
   {
     path:'',
-    redirectTo: 'utopia/home',
+    redirectTo: 'crumbs/admin',
     pathMatch: 'full'
   },
   {
-    path: 'utopia/home',
-    component: HomeComponent
+    path: 'crumbs/admin',
+    component: AdminComponent
   },
   {
-    path: 'utopia/drivers',
+    path: 'crumbs/admin/drivers',
     component: DriversComponent
   },
   {
-    path: 'utopia/restaurants',
+    path: 'crumbs/admin/restaurants',
     component: RestaurantsComponent
   },
   {
-    path: 'utopia/orders',
+    path: 'crumbs/admin/orders',
     component: OrdersComponent
   },
   {
-    path: 'utopia/users',
+    path: 'crumbs/admin/users',
     component: UsersComponent
   },
   {
-    path: 'utopia/restaurants/listRestaurants',
-    component: RestaurantListComponent
+    path: 'crumbs/admin/restaurants/rudRestaurants',
+    component: RudRestaurantsComponent
   },
   {
-    path: 'utopia/restaurants/addRestaurant',
-    component: RestaurantFormComponent
+    path: 'crumbs/admin/restaurants/addRestaurant',
+    component: AddRestaurantComponent
   },
+
 ];
 
 @NgModule({
