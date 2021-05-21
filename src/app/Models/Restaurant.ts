@@ -1,13 +1,15 @@
-export class Restaurant {
-    id!: number;
-    city!: string;
-    zipCode!: number;
-    state!: string;
-    street!: string;
+import { MenuItem } from "./MenuItem";
+import { RestaurantCategory } from "./RestaurantCategory";
+import { restaurantOwner } from "./RestaurantOwner";
 
-    constructor(
-        name: string
-    ){}
+export interface Restaurant {
+    id: number;
+    name: string;
+    priceRating: number;
+    rating: number;
+    restaurantOwner: restaurantOwner;
+    location: Location;
+    menu: MenuItem[];
+    categories: RestaurantCategory[];
 
-    
 }

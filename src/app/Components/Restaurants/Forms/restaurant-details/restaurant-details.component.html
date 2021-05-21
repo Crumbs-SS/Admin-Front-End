@@ -1,0 +1,48 @@
+<form (ngSubmit)="sendRestaurantDetail(restaurantDetail)" #restaurantForm="ngForm">
+<div>
+    <h1> Restaurant Details</h1>
+    <div class="form-group">
+      <label for="resName">Enter Restaurant Name:</label>
+      <input type="text" required [(ngModel)]="restaurantDetail.name"
+      required maxlength="30"
+        class="form-control ng-untouched ng-pristine ng-valid" id="resName" name="resName" #resName="ngModel">
+      <div [hidden]="resName.valid || resName.pristine" class="alert alert-danger"> Restaurant Name is required</div>
+      
+    </div>
+    
+    <div class="form-group">
+      <label>Choose Price Rating: </label>
+      <div class="form-control">
+        <label class="radio-inline">
+          <input type="radio" name="priceRating" value=1 required
+          [(ngModel)]="restaurantDetail.priceRating" #priceRating="ngModel">
+          1 &nbsp;&nbsp;&nbsp;&nbsp;
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="priceRating" value=2 required
+          [(ngModel)]="restaurantDetail.priceRating" #priceRating="ngModel">
+          2 &nbsp;&nbsp;&nbsp;&nbsp;
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="priceRating" value=3 required
+          [(ngModel)]="restaurantDetail.priceRating" #priceRating="ngModel">
+          3
+        </label>
+      </div>
+    </div>
+
+  <div class="form-group">
+    <label for="categories">Choose Restaurant Categories:</label>
+    <div>
+     <select name="categories" [(ngModel)]="restaurantDetail.categories" multiple size="10">
+       <option *ngFor="let cat of catOptions" [ngValue]="cat">{{cat.name}}</option>
+     </select>
+    </div>
+   </div> 
+
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary" [disabled]="!restaurantForm.form.valid">Next</button>
+</div>
+<!-- <pre>{{ restaurantForm.value | json }}</pre> -->
+</form>

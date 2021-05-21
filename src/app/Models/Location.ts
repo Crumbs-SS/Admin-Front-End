@@ -1,13 +1,7 @@
-export class Location {
+export class RestaurantLocation {
     id!: number;
     city!: string;
-    zipCode!: number;
+    zip!: number;
     state!: string;
-    street!: string;
-
-    constructor(
-        name: string
-    ){}
-
-    
+    street!: string;   
 }

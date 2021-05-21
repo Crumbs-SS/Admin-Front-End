@@ -6,7 +6,7 @@ import { DriversComponent } from './Components/Drivers/drivers/drivers.component
 import { OrdersComponent } from './Components/Orders/orders/orders.component';
 import { UsersComponent } from './Components/Users/users/users.component';
 import { RestaurantsComponent } from './Components/Restaurants/restaurants/restaurants.component';
-import { RudRestaurantsComponent } from './Components/Restaurants/rud-restaurants/rud-restaurants.component';
+import { RudRestaurantsComponent } from './Components/Restaurants/edit-restaurants/rud-restaurants.component';
 import { AddRestaurantComponent } from './Components/Restaurants/add-restaurant/add-restaurant.component';
 
 const routes: Routes = [

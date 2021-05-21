@@ -1,12 +1,6 @@
 export class userDetail {
-    id!: number;
+    id!:string;
     firstName!: string;
-    lastName!: number;
-    email!: string;
-
-    // constructor(
-    //     name: string
-    // ){}
-
-    
+    lastName!: string;
+    email!: string; 
 }

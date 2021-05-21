@@ -1,9 +1,3 @@
-export class Category {
-    name!: string;
-
-    constructor(
-        name: string
-    ){}
-
-    
+export interface Category{
+    name: string;
 }

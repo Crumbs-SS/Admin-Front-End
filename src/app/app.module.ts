@@ -8,6 +8,7 @@ import {MatCardModule} from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatSelectModule} from '@angular/material/select';
+import {MatStepperModule} from '@angular/material/stepper';
 
 //Service
 import { RestaurantService } from './Shared/Service/restaurant.service';
@@ -21,12 +22,17 @@ import { RestaurantsComponent } from './Components/Restaurants/restaurants/resta
 import { UsersComponent } from './Components/Users/users/users.component';
 import { AdminComponent } from './Components/Admin/admin/admin.component';
 import { AddRestaurantComponent } from './Components/Restaurants/add-restaurant/add-restaurant.component';
-import { RudRestaurantsComponent } from './Components/Restaurants/rud-restaurants/rud-restaurants.component';
+import { RudRestaurantsComponent } from './Components/Restaurants/edit-restaurants/rud-restaurants.component';
 
 //Pipes
 import { SearchfilterPipe } from './Shared/Custom/searchfilter.pipe';
 import { PriceRatingSortPipe } from './Shared/Custom/price-rating-sort.pipe'
 import { RestaurantSortPipe } from './Shared/Custom/restaurant-sort.pipe';
+import { SortPipe } from './Shared/Custom/sort.pipe';
+import { UserDetailComponent } from './Components/Restaurants/Forms/user-detail/user-detail.component';
+import { LocationComponent } from './Components/Restaurants/Forms/location/location.component';
+import { RestaurantDetailsComponent } from './Components/Restaurants/Forms/restaurant-details/restaurant-details.component';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +47,10 @@ import { RestaurantSortPipe } from './Shared/Custom/restaurant-sort.pipe';
     RudRestaurantsComponent,
     SearchfilterPipe,
     PriceRatingSortPipe,
+    SortPipe,
+    UserDetailComponent,
+    LocationComponent,
+    RestaurantDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +61,8 @@ import { RestaurantSortPipe } from './Shared/Custom/restaurant-sort.pipe';
     FormsModule,
     MatSelectModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatStepperModule
   ],
   providers: [RestaurantService],
   bootstrap: [AppComponent]

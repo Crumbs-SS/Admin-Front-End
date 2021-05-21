@@ -1,0 +1,41 @@
+<form (ngSubmit)="sendUserDetail(user)" #restaurantForm="ngForm">
+    <div>
+        <h1> Restaurant Owner Details</h1>
+        <div class="form-group">
+            <label for="firstName">Enter Restaurant Owner First Name:</label>
+            <input type="text" required [(ngModel)]="user.firstName" required maxlength="30" pattern="^[a-zA-Z ]*$"
+                [class.is-valid]="firstName.valid" class="form-control ng-untouched ng-pristine ng-valid"
+                id="firstName" name="firstName" #firstName="ngModel">
+            <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger"> First name is
+                required</div>
+            <div *ngIf="firstName.errors?.pattern" class="alert alert-danger">
+                First name can only contain letters
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Enter Restaurant Owner Last Name:</label>
+            <input type="text" required [(ngModel)]="user.lastName" required maxlength="30" pattern="^[a-zA-Z ]*$"
+                [class.is-valid]="lastName.valid" class="form-control ng-untouched ng-pristine ng-valid"
+                id="lastName" name="lastName" #lastName="ngModel">
+            <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger"> Last name is
+                required</div>
+            <div *ngIf="lastName.errors?.pattern" class="alert alert-danger">
+                First name can only contain letters
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Enter Restaurant Owner E-mail:</label>
+            <input type="email" required [(ngModel)]="user.email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                [class.is-valid]="email.valid" class="form-control ng-untouched ng-pristine ng-valid" id="email"
+                name="email" #email="ngModel">
+            <div [hidden]="email.valid || email.pristine" class="alert alert-danger"> Email is required</div>
+            <div *ngIf="email.errors?.pattern" class="alert alert-danger">
+                Please provide a valid e-mail address
+            </div>
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary" [disabled]="!restaurantForm.form.valid">Next</button>
+    </div>
+    <!-- <pre>{{ restaurantForm.value | json }}</pre> -->
+</form>

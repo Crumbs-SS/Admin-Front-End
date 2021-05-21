@@ -16,7 +16,9 @@
                     <th scope="col">Restaurant Owner</th>
                     <th scope="col">Location</th>
                     <th scope="col">Categories</th>
-                    <th scope="col">Price rating</th>
+                    <th scope="col">Price rating
+                      <!-- <button type="button" class="btn btn-primary"  onclick()="sortRestaurants()">Sort </button> -->
+                    </th>
                     <th scope="col">Rating</th>
                     <th scope="col">Menu</th>
                     <th>Edit</th>
@@ -28,8 +30,7 @@
                     <td>{{i + 1}}</td>
                     <td>{{r.name}}</td>
                     <td>
-                        <p>Name: {{r.restaurantOwner.userDetail.firstName}} {{r.restaurantOwner.userDetail.lastName}}
-                        </p>
+                        <p>Name: {{r.restaurantOwner.userDetail.firstName}} {{r.restaurantOwner.userDetail.lastName}}</p>
                         <p>E-mail: {{r.restaurantOwner.userDetail.email}}</p>
                     </td>
                     <td>{{r.location.street}}, {{r.location.city}} {{r.location.zipCode}}, {{r.location.state}}</td>
@@ -53,7 +54,6 @@
                                     <br>Description: {{item.description}}
                                 </p>
                             </div>
-
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-light"
                                     (click)="modal.close('Close click')">Close</button>
@@ -75,7 +75,50 @@
                             </div>
                                 
                             <div class="modal-body">
-                                <form (ngSubmit)="onSubmit()" #restaurantForm="ngForm">
+                              <app-user-detail (newItemEvent)="sendUserDetail($event)"></app-user-detail>
+                              <app-location (newItemEvent)="sendLocation($event)"></app-location>
+                              <app-restaurant-details (newItemEvent)="sendRestaurantDetail($event)"></app-restaurant-details>
+                              <pre>{{ restaurant | json }}</pre>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light"(click)="modal.close('Close click')">Cancel</button>
+                                <button type="button" class="btn btn-success" (click)="onSubmit()" (click)="reloadCurrentPage()" (click)="modal.close('Close click')">Update</button>
+                            </div>
+                        
+                        </ng-template>
+                        <button type="button" class="btn btn-primary" (click)="openUpdate(update, r)">Edit</button>
+                    </td>
+                    <td>
+                        <ng-template #delete let-modal>
+                            <div class="modal-header">
+                                <h4 class="modal-title">Confirm</h4>
+                                <button type="button" class="close" aria-label="Close"
+                                    (click)="modal.dismiss('Cross click')">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                <p>Are you sure you wish to delete restaurant with name: {{r.name}} ?</p>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light"
+                                    (click)="modal.close('Close click')">Cancel</button>
+                                <button type="button" class="btn btn-danger" (click)="deleteRestaurant(r.id)"
+                                    (click)="reloadCurrentPage()" (click)="modal.close('Close click')" >Delete </button>
+                            </div>
+
+                        </ng-template>
+                        <button type="button" class="btn btn-danger" (click)="open(delete)">Delete </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+ <!-- <form (ngSubmit)="onSubmit()" #restaurantForm="ngForm">
   
                                     <div>
                                       <h1> Restaurant Owner Details</h1>
@@ -177,7 +220,7 @@
                                       <div class="form-group">
                                         <label for="resName">Enter Restaurant Name:</label>
                                         <input type="text" required [(ngModel)]="restaurant.name"
-                                        required maxlength="30"
+                                        required maxlength="30" [class.is-valid]="state.valid"
                                           class="form-control ng-untouched ng-pristine ng-valid" id="resName" name="resName" #resName="ngModel">
                                         <div [hidden]="resName.valid || resName.pristine" class="alert alert-danger"> Restaurant Name is required</div>
                                         
@@ -207,7 +250,7 @@
                                     <div class="form-group">
                                       <label for="categories">Choose Restaurant Categories:</label>
                                       <div>
-                                       <select name="categories" [(ngModel)]="restaurant.categories" multiple size="10">
+                                       <select name="categories" [(ngModel)]="restaurant.categories.id" multiple size="10">
                                          <option *ngFor="let cat of catOptions" [ngValue]="cat">{{cat.name}}</option>
                                        </select>
                                       </div>
@@ -215,45 +258,7 @@
                               
                                     </div>
                                       <br>
-                                    <div><button type="submit" class="btn btn-success" [disabled]="!restaurantForm.form.valid">Submit</button></div>
+                                    <div><button type="submit" class="btn btn-success">Submit</button></div>
+                                       <pre>{{ this.restaurant | json }}</pre>
                                        <pre>{{ restaurantForm.value | json }}</pre>
-                                    </form> 
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light"(click)="modal.close('Close click')">Cancel</button>
-                                <button type="submit" class="btn btn-primary" (click)="reloadCurrentPage()" (click)="modal.close('Close click')" >Update </button>
-                            </div>
-                        
-                        </ng-template>
-                        <button type="button" class="btn btn-primary" (click)="openUpdate(update, r)">Edit</button>
-                    </td>
-                    <td>
-                        <ng-template #delete let-modal>
-                            <div class="modal-header">
-                                <h4 class="modal-title">Confirm</h4>
-                                <button type="button" class="close" aria-label="Close"
-                                    (click)="modal.dismiss('Cross click')">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-
-                            <div class="modal-body">
-                                <p>Are you sure you wish to delete restaurant with name: {{r.name}} ?</p>
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light"
-                                    (click)="modal.close('Close click')">Cancel</button>
-                                <button type="button" class="btn btn-danger" (click)="deleteRestaurant(r.id)"
-                                    (click)="reloadCurrentPage()" (click)="modal.close('Close click')" >Delete </button>
-                            </div>
-
-                        </ng-template>
-                        <button type="button" class="btn btn-danger" (click)="open(delete)">Delete </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+                                    </form>  -->
