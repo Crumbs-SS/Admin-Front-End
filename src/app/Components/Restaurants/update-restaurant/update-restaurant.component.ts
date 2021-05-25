@@ -46,7 +46,9 @@ export class UpdateRestaurantComponent{
   }
   onUpdate() {
     this.HttpService.update(this.restaurant.id, this.restaurantDTO).subscribe(
-      (response) => { alert("Update Successful"); },
+      (response) => { 
+        console.log(response);
+        alert("Update Successful"); },
       (error) => {
         console.log(error)
         alert(error.error.message)

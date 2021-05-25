@@ -38,7 +38,9 @@ export class AddRestaurantComponent  {
   
   onSubmit() {
     this.httpService.save(this.addRestaurantDTO).subscribe(
-      (result) => {this.gotoRestaurantList();},
+      (response) => {
+        console.log(response);
+        this.gotoRestaurantList();},
       (error) => {
         console.log(error)
       alert(error.error.message)}

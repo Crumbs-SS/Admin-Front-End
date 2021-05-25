@@ -24,13 +24,15 @@ export class DeleteRestaurantComponent implements OnInit {
     window.location.reload();
   }
   deleteRestaurant(id: any) {
-    this.HttpService.delete(id).subscribe(
-      () => { alert("Delete Successful"); },
-      (error) => {
-        console.log(error)
-        alert(error.error.message)
-      },
-    );
+    this.HttpService.delete(id)
+    .subscribe(
+      (response) => { 
+        console.log(response)
+        alert("Delete Successful"); },
+    (error) => {
+      console.log(error)
+      alert(error.error.message)
+    },);
   }
 
 }
