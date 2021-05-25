@@ -1,6 +1,6 @@
 import { userDetail } from "./UserDetail";
 
-export interface restaurantOwner {
-    id: number;
-    userDetail: userDetail;  
+export class restaurantOwner {
+    id!: number;
+    userDetail!: userDetail;  
 }

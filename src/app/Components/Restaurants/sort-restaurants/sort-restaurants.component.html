@@ -1,0 +1,17 @@
+<mat-form-field appearance="fill">
+    <mat-label>Sort</mat-label>
+    <mat-select>
+      <mat-option (click)="sortPriceAscending()">
+        Sort by price rating (low to high)
+      </mat-option>
+      <mat-option (click)="sortPriceDescending()">
+        Sort by price rating (high to low)
+      </mat-option>
+      <mat-option (click)="sortRatingAscending()">
+        Sort by rating (low to high)
+      </mat-option>
+      <mat-option (click)="sortRatingDescending()">
+        Sort by rating (high to low)
+      </mat-option>
+    </mat-select>
+  </mat-form-field>

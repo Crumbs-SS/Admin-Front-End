@@ -1,55 +1,179 @@
+<div class="card my-5">
+  <div class="card-body">
 
-  <div class="card my-5">
-    <div class="card-body">
-      <mat-horizontal-stepper linear #stepper>
+    <mat-horizontal-stepper linear #stepper>
+      <form (ngSubmit)="onSubmit()" #restaurantForm="ngForm">
         <mat-step>
           <ng-template matStepLabel>Fill out Restaurant Owner Details</ng-template>
-          <app-user-detail (newItemEvent)="sendUserDetail($event)"></app-user-detail>
+          <div>
+            <h1> Restaurant Owner Details</h1>
+            <div class="form-group">
+              <label for="firstName">Enter Restaurant Owner First Name:</label>
+              <input type="text" required [(ngModel)]="addRestaurantDTO.firstName" required maxlength="30"
+                pattern="^[a-zA-Z ]*$" [class.is-valid]="firstName.valid"
+                class="form-control ng-untouched ng-pristine ng-valid" id="firstName" name="firstName"
+                #firstName="ngModel">
+              <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger"> First name is
+                required</div>
+              <div *ngIf="firstName.errors?.pattern" class="alert alert-danger">
+                First name can only contain letters
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Enter Restaurant Owner Last Name:</label>
+              <input type="text" required [(ngModel)]="addRestaurantDTO.lastName" required maxlength="30"
+                pattern="^[a-zA-Z ]*$" [class.is-valid]="lastName.valid"
+                class="form-control ng-untouched ng-pristine ng-valid" id="lastName" name="lastName"
+                #lastName="ngModel">
+              <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger"> Last name is
+                required</div>
+              <div *ngIf="lastName.errors?.pattern" class="alert alert-danger">
+                First name can only contain letters
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Enter Restaurant Owner E-mail:</label>
+              <input type="email" required [(ngModel)]="addRestaurantDTO.email"
+                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [class.is-valid]="email.valid"
+                class="form-control ng-untouched ng-pristine ng-valid" id="email" name="email" #email="ngModel">
+              <div [hidden]="email.valid || email.pristine" class="alert alert-danger"> Email is required</div>
+              <div *ngIf="email.errors?.pattern" class="alert alert-danger">
+                Please provide a valid e-mail address
+              </div>
+            </div>
+          </div>
           <div>
             <button mat-button matStepperNext>Next</button>
           </div>
         </mat-step>
+
         <mat-step>
           <ng-template matStepLabel>Fill out Restaurant Location</ng-template>
-          <app-location (newItemEvent)="sendLocation($event)"></app-location>
+          <div>
+            <h1> Restaurant Location</h1>
+            <div class="form-group">
+              <label for="address">Enter Street Address:</label>
+              <input type="text" required [(ngModel)]="addRestaurantDTO.street" [class.is-valid]="address.valid"
+                pattern="^[#.0-9a-zA-Z\s,-]+$" class="form-control ng-untouched ng-pristine ng-valid" id="address"
+                name="address" #address="ngModel">
+              <div [hidden]="address.valid || address.pristine" class="alert alert-danger"> Street Address is required
+              </div>
+              <div *ngIf="address.errors?.pattern" class="alert alert-danger">
+                Special characters are not allowed in street address
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="city">Enter City:</label>
+              <input type="text" required [(ngModel)]="addRestaurantDTO.city" required maxlength="15"
+                pattern="^[a-zA-Z ]*$" [class.is-valid]="city.valid"
+                class="form-control ng-untouched ng-pristine ng-valid" id="city" name="city" #city="ngModel">
+              <div [hidden]="city.valid || city.pristine" class="alert alert-danger"> City is required</div>
+              <div *ngIf="city.errors?.pattern" class="alert alert-danger">
+                City name can only contain letters
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="zip">Enter Zip Code:</label>
+              <input type="text" required [(ngModel)]="addRestaurantDTO.zip" required minlength="5" required
+                maxlength="5" pattern="[0-9]*" [class.is-valid]="zip.valid"
+                class="form-control ng-untouched ng-pristine ng-valid" id="zip" name="zip" #zip="ngModel">
+              <div [hidden]="zip.valid || zip.pristine" class="alert alert-danger"> Zip Code is required</div>
+              <div *ngIf="zip.errors?.minlength" class="alert alert-danger">
+                Zip must be exactly 5 characters long.
+              </div>
+              <div *ngIf="zip.errors?.pattern" class="alert alert-danger">
+                Zip must only consist of numbers
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="state">Enter State:</label>
+              <input type="text" required [(ngModel)]="addRestaurantDTO.state" required minlength="2" required
+                maxlength="2" pattern="^[a-zA-Z ]*$" [class.is-valid]="state.valid"
+                class="form-control ng-untouched ng-pristine ng-valid" id="state" name="state" #state="ngModel">
+              <div [hidden]="state.valid || state.pristine" class="alert alert-danger"> State is required</div>
+              <div *ngIf="state.errors?.pattern" class="alert alert-danger">
+                State can only contain letters
+              </div>
+              <div *ngIf="state.errors?.minlength" class="alert alert-danger">
+                State must be exactly 2 characters long.
+              </div>
+            </div>
+          </div>
           <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
           </div>
         </mat-step>
+
         <mat-step>
           <ng-template matStepLabel>Fill out Restaurant Details</ng-template>
-          <app-restaurant-details (newItemEvent)="sendRestaurantDetail($event)"></app-restaurant-details>
+          <div>
+            <h1> Restaurant Details</h1>
+            <div class="form-group">
+              <label for="resName">Enter Restaurant Name:</label>
+              <input type="text" required [(ngModel)]="addRestaurantDTO.name" required maxlength="30"
+                class="form-control ng-untouched ng-pristine ng-valid" id="resName" name="resName" #resName="ngModel">
+              <div [hidden]="resName.valid || resName.pristine" class="alert alert-danger"> Restaurant Name is required
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label id="priceRating">Choose Price Rating: </label>
+              <div class="form-control">
+                <mat-radio-group aria-labelledby="priceRating" class="priceRating" name="priceRating" required
+                  [(ngModel)]="addRestaurantDTO.priceRating" #priceRating="ngModel">
+                  <mat-radio-button value="1">1 &nbsp;</mat-radio-button>
+                  <mat-radio-button value="2">2 &nbsp;</mat-radio-button>
+                  <mat-radio-button value="3">3</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <mat-form-field appearance="fill">
+                <mat-label>Categories</mat-label>
+                <mat-select name="categories" [(ngModel)]="addRestaurantDTO.categories" multiple size="10">
+                  <mat-option *ngFor="let cat of catOptions" [value]="cat">{{cat.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
           <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
           </div>
         </mat-step>
+
         <mat-step>
           <ng-template matStepLabel>Done</ng-template>
-          <h1>You have entered the following:</h1>
-          <h2>Restaurant Owner Details:</h2>
-          <p>First Name: {{addRestaurantDTO.firstName}}</p>
-          <p>Last Name: {{addRestaurantDTO.firstName}}</p>
-          <p>Email: {{addRestaurantDTO.email}}</p>
-          <h2>Restaurant Location Details:</h2>
-          <p>Street: {{addRestaurantDTO.street}}</p>
-          <p>City: {{addRestaurantDTO.city}}</p>
-          <p>ZIP: {{addRestaurantDTO.zip}}</p>
-          <p>State: {{addRestaurantDTO.state}}</p>
-          <h2>Restaurant Details</h2>
-          <p>Restaurant Name: {{addRestaurantDTO.name}}</p>
-          <p>Restaurant Price Rating: {{addRestaurantDTO.priceRating}}</p>
-          <p *ngFor="let cat of addRestaurantDTO.categories">Restaurant Category: {{cat.name}}</p>
+          <div>
+            <h1>You have entered the following:</h1>
+            <h2>Restaurant Owner Details:</h2>
+            <p>First Name: {{addRestaurantDTO.firstName}}</p>
+            <p>Last Name: {{addRestaurantDTO.firstName}}</p>
+            <p>Email: {{addRestaurantDTO.email}}</p>
+            <h2>Restaurant Location Details:</h2>
+            <p>Street: {{addRestaurantDTO.street}}</p>
+            <p>City: {{addRestaurantDTO.city}}</p>
+            <p>ZIP: {{addRestaurantDTO.zip}}</p>
+            <p>State: {{addRestaurantDTO.state}}</p>
+            <h2>Restaurant Details</h2>
+            <p>Restaurant Name: {{addRestaurantDTO.name}}</p>
+            <p>Restaurant Price Rating: {{addRestaurantDTO.priceRating}}</p>
+            <p *ngFor="let cat of addRestaurantDTO.categories">Restaurant Category: {{cat.name}}</p>
+          </div>
           <div>
             <button mat-button matStepperPrevious>Back</button>
-            <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
-            <button type="button" class="btn btn-success" (click)="onSubmit()">Submit</button>
+            <button type="button" class="btn btn-success" (click)="onSubmit()"
+              [disabled]="!restaurantForm.form.valid">Submit</button>
           </div>
         </mat-step>
-      </mat-horizontal-stepper>
-    </div>
-    <div>
-      <pre>{{ addRestaurantDTO | json }}</pre>
-    </div>
+      </form>
+    </mat-horizontal-stepper>
+
   </div>
+  <!-- <div>
+    <pre>{{ addRestaurantDTO | json }}</pre>
+  </div> -->
+</div>

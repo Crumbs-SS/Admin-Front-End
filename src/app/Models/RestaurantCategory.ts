@@ -1,7 +1,7 @@
 import { Category } from "./Category";
+import { RestaurantCategoryID } from "./RestaurantCategoryID";
 
-export interface RestaurantCategory{
+export class RestaurantCategory{
 
-    id: number;
-    category: Category;
+    catID!:RestaurantCategoryID;
 }

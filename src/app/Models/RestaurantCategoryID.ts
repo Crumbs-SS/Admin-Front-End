@@ -1,4 +1,4 @@
-export interface RestaurantCategoryID{
-    restaurantID: number;
-    categoryId: string;
+export class RestaurantCategoryID{
+    restaurantID!: number;
+    categoryId!: string;
 }

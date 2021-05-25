@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestaurantService } from 'src/app/Shared/Service/restaurant.service';
-import { AddRestaurantDTO } from 'src/app/Models/add-restaurant-dto';
+import { RestaurantDTO } from 'src/app/Models/restaurant-dto';
 import { userDetail } from 'src/app/Models/UserDetail';
 import { Category } from 'src/app/Models/Category';
 import { RestaurantLocation } from 'src/app/Models/Location';
-import { RestaurantDetailsComponent } from '../Forms/restaurant-details/restaurant-details.component';
 import { RestaurantDetail } from 'src/app/Models/RestaurantDetail';
 
 @Component({
@@ -15,13 +14,26 @@ import { RestaurantDetail } from 'src/app/Models/RestaurantDetail';
 })
 export class AddRestaurantComponent  {
 
-  addRestaurantDTO: AddRestaurantDTO;
+  addRestaurantDTO: RestaurantDTO;
+  catOptions: Category[] = 
+  [
+      {name:"American"},
+      {name:"Japanese"},
+      {name:"Italian"},
+      {name:"Pizza"},
+      {name:"Burger"},
+      {name:"Sushi"},
+      {name:"Fast-Food"},
+      {name:"Fine Dining"},
+      {name:"Breakfast"},
+      {name:"Healthy"}
+  ]
   
   constructor(
     private route: ActivatedRoute, 
       private router: Router, 
         private httpService: RestaurantService) {
-          this.addRestaurantDTO = new AddRestaurantDTO();
+          this.addRestaurantDTO = new RestaurantDTO();
   }
   
   onSubmit() {
@@ -34,23 +46,6 @@ export class AddRestaurantComponent  {
   }
  
   gotoRestaurantList() {
-    this.router.navigate(['crumbs/admin/restaurants/rudRestaurants']);
+    this.router.navigate(['crumbs/admin/restaurants/viewRestaurants']);
   }
-  sendUserDetail(user:userDetail){
-      this.addRestaurantDTO.firstName= user.firstName;
-      this.addRestaurantDTO.lastName= user.lastName;
-      this.addRestaurantDTO.email= user.email;
-  }
-  sendLocation(location:RestaurantLocation){
-    this.addRestaurantDTO.street= location.street;
-    this.addRestaurantDTO.city= location.city;
-    this.addRestaurantDTO.zip= location.zip;
-    this.addRestaurantDTO.state= location.state;
-}
-sendRestaurantDetail(restaurantDetail: RestaurantDetail){
-  this.addRestaurantDTO.name = restaurantDetail.name;
-  this.addRestaurantDTO.priceRating = restaurantDetail.priceRating;
-  this.addRestaurantDTO.categories = restaurantDetail.categories;
-}
-
 }

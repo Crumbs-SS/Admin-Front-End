@@ -1,6 +1,7 @@
 import { Category } from "./Category";
+import { MenuItem } from "./MenuItem";
 
-export class AddRestaurantDTO {
+export class RestaurantDTO {
 
     id!: number;
     firstName!: string;
@@ -15,6 +16,5 @@ export class AddRestaurantDTO {
     name!: string;
     priceRating!: number;
     categories!: Category[];
-    
-    //menuItems: MenuItem[] = [];
+    menuItems!: MenuItem[];
 }
