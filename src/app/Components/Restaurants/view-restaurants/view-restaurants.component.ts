@@ -29,4 +29,5 @@ export class ViewRestaurantComponents implements OnInit {
   returnSortedRestaurants(restaurants:any){
     this.restaurants = restaurants;
   }
+  
 }

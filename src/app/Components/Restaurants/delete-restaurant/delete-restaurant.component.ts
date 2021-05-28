@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output ,EventEmitter} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { RestaurantService } from 'src/app/Shared/Service/restaurant.service';
 
 @Component({
@@ -9,11 +10,13 @@ import { RestaurantService } from 'src/app/Shared/Service/restaurant.service';
   styleUrls: ['./delete-restaurant.component.css']
 })
 export class DeleteRestaurantComponent implements OnInit {
-  
+
   @Input() restaurant!: any;
+  @Output() deleted = new EventEmitter<boolean>();
+  deleteSuccess: boolean = true;
 
   constructor(private route: ActivatedRoute, private router: Router,
-    private HttpService: RestaurantService,private modalService: NgbModal) { }
+    private HttpService: RestaurantService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
   }
@@ -25,14 +28,16 @@ export class DeleteRestaurantComponent implements OnInit {
   }
   deleteRestaurant(id: any) {
     this.HttpService.delete(id)
-    .subscribe(
-      (response) => { 
-        console.log(response)
-        alert("Delete Successful"); },
-    (error) => {
-      console.log(error)
-      alert(error.error.message)
-    },);
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.deleted.emit(this.deleteSuccess);
+        },
+        error => {
+          console.log(error)
+          this.deleteSuccess = false;
+        })
   }
+
 
 }

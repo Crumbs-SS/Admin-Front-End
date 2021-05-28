@@ -16,5 +16,5 @@ export class RestaurantDTO {
     name!: string;
     priceRating!: number;
     categories!: Category[];
-    menuItems!: MenuItem[];
+    //menuItems!: MenuItem[];
 }

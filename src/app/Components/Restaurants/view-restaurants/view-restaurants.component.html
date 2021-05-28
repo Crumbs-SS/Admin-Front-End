@@ -43,10 +43,10 @@
             <app-view-menu [restaurant]="r"></app-view-menu>
           </td>
           <td>
-            <app-update-restaurant [restaurant]="r"></app-update-restaurant>
+            <app-update-restaurant [restaurant]="r" (updated)="this.ngOnInit()"></app-update-restaurant>
           </td>
           <td>
-            <app-delete-restaurant [restaurant]="r"></app-delete-restaurant>
+            <app-delete-restaurant [restaurant]="r" (deleted)="this.ngOnInit()"></app-delete-restaurant>
           </td>
         </tr>
       </tbody>

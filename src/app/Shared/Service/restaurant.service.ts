@@ -11,10 +11,10 @@ export class RestaurantService {
   private restaurantURL : string;
 
   constructor(private http: HttpClient) {
-    this.restaurantURL = 'http://localhost:8080/restaurants';
+    this.restaurantURL = 'http://localhost:8070/restaurants';
    }
    public getAll() {
-    return this.http.get(this.restaurantURL);
+    return this.http.get(this.restaurantURL+"s");
   }
   public save(aRestaurantDTO: RestaurantDTO){
     return this.http.post<RestaurantDTO>(this.restaurantURL, aRestaurantDTO);

@@ -16,6 +16,7 @@ import { RestaurantService } from 'src/app/Shared/Service/restaurant.service';
 export class UpdateRestaurantComponent{
 
   @Input() restaurant!: any;
+  @Output() updated = new EventEmitter<boolean>();
   submitted:boolean = true;
   restaurantDTO: RestaurantDTO;
   catOptions: Category[] = 
@@ -36,11 +37,6 @@ export class UpdateRestaurantComponent{
     private HttpService: RestaurantService, private modalService: NgbModal) {
     this.restaurantDTO = new RestaurantDTO();
    }
-   @Output() newItemEvent = new EventEmitter<RestaurantDTO>();
-
-  sendDTO(restaurantDTO: RestaurantDTO) {
-    this.newItemEvent.emit(restaurantDTO);
-  }
   onViewChanges(){
     this.submitted = false;
   }
@@ -48,7 +44,8 @@ export class UpdateRestaurantComponent{
     this.HttpService.update(this.restaurant.id, this.restaurantDTO).subscribe(
       (response) => { 
         console.log(response);
-        alert("Update Successful"); },
+        this.updated.emit()
+      },
       (error) => {
         console.log(error)
         alert(error.error.message)
@@ -57,9 +54,6 @@ export class UpdateRestaurantComponent{
   }
   openUpdate(longContent: any) {
     this.modalService.open(longContent, { scrollable: true, size: 'xl' });
-  }
-  reloadCurrentPage() {
-    window.location.reload();
   }
 
 

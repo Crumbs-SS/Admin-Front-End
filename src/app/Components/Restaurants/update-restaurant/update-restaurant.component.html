@@ -124,20 +124,25 @@
                 <div class="form-group">
                     <h3>Original values:</h3>
                     <p *ngFor="let cat of restaurant.categories">{{cat.id.categoryId}}</p>
-                    <label for="categories">Choose new restaurant categories or leave field blank:</label>
+                    <label>Choose new restaurant categories or leave field blank:</label>
                     <div>
-                        <select name="categories" [(ngModel)]="restaurantDTO.categories" multiple size="10"
-                            id="categories" class="form-control" #categories="ngModel">
-                            <option *ngFor="let cat of catOptions" [ngValue]="cat">{{cat.name}}</option>
-                        </select>
+                        <mat-form-field appearance="fill">
+                            <mat-label>New Categories</mat-label>
+                        <mat-select name="categories" [(ngModel)]="restaurantDTO.categories" multiple size="10"
+                            id="categories"  #categories="ngModel">
+                            <mat-option *ngFor="let cat of catOptions" [value]="cat">{{cat.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
                     </div>
                 </div>
+
             </div>
 
             <div>
                 <button type="submit" class="btn btn-primary" >View Changes</button>
             </div>
-            <!-- <pre>{{ restaurantDTO | json }}</pre> -->
+            <pre>{{ restaurantDTO | json }}</pre>
+            <pre>{{restaurant.id}}</pre>
         </form>
 
         <div [hidden]="submitted">
@@ -211,7 +216,7 @@
 
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Cancel</button>
-        <button type="button" class="btn btn-success" (click)="onUpdate()" (click)="reloadCurrentPage()"
+        <button type="button" class="btn btn-success" (click)="onUpdate()"
             (click)="modal.close('Close click')" [disabled]="!restaurantForm.form.valid">Update</button>
     </div>
 
