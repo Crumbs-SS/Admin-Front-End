@@ -30,7 +30,10 @@ import { SortRestaurantsComponent } from './Components/Restaurants/sort-restaura
 
 //Pipes
 import { SearchfilterPipe } from './Shared/Custom/searchfilter.pipe';
+import { PriceFilterPipe } from './Shared/Custom/priceFilter.pipe';
+import { RatingFilterPipe } from './Shared/Custom/ratingFilter.pipe';
 import { SortPipe } from './Shared/Custom/sort.pipe';
+import { FilterPriceRatingComponent } from './Components/Restaurants/filter-price-rating/filter-price-rating.component';
 
 
 @NgModule({
@@ -44,11 +47,14 @@ import { SortPipe } from './Shared/Custom/sort.pipe';
     AddRestaurantComponent,
     ViewRestaurantComponents,
     SearchfilterPipe,
+    PriceFilterPipe,
+    RatingFilterPipe,
     SortPipe,
     UpdateRestaurantComponent,
     ViewMenuComponent,
     DeleteRestaurantComponent,
-    SortRestaurantsComponent
+    SortRestaurantsComponent,
+    FilterPriceRatingComponent
   ],
   imports: [
     BrowserModule,

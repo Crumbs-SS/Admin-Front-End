@@ -8,29 +8,29 @@ import { SortPipe } from 'src/app/Shared/Custom/sort.pipe';
 })
 export class SortRestaurantsComponent{
   
-  @Input() restaurants!: any;
+  @Input() restaurants!: any[];
   @Output() newSortEvent = new EventEmitter<any>();
 
   constructor(private sortPipe: SortPipe) { }
 
-  returnSortedRestaurants(restaurants:any){
+  returnRestaurants(restaurants:any){
     this.newSortEvent.emit(this.restaurants)
   }
   sortPriceAscending() {
     this.restaurants = this.sortPipe.transform(this.restaurants, "asc", "priceRating")
-    this.returnSortedRestaurants(this.restaurants);
+    this.returnRestaurants(this.restaurants);
   }
   sortPriceDescending(){
     this.restaurants = this.sortPipe.transform(this.restaurants, "desc", "priceRating")
-    this.returnSortedRestaurants(this.restaurants);
+    this.returnRestaurants(this.restaurants);
   }
   sortRatingAscending() {
     this.restaurants = this.sortPipe.transform(this.restaurants, "asc", "rating")
-    this.returnSortedRestaurants(this.restaurants);
+    this.returnRestaurants(this.restaurants);
   }
   sortRatingDescending(){
     this.restaurants = this.sortPipe.transform(this.restaurants, "desc", "rating")
-    this.returnSortedRestaurants(this.restaurants);
+    this.returnRestaurants(this.restaurants);
   }
 
 }

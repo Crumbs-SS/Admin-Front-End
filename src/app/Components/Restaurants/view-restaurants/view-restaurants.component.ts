@@ -13,6 +13,8 @@ export class ViewRestaurantComponents implements OnInit {
   restaurants: any;
   totalRestaurants = 0;
   searchString!: string;
+  price!: number;
+  rating!: number;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private HttpService: RestaurantService, private modalService: NgbModal) {}
@@ -21,13 +23,19 @@ export class ViewRestaurantComponents implements OnInit {
     this.loadAllRestaurants();
   }
   loadAllRestaurants() {
-    this.HttpService.getAll().subscribe((res) => {
+    this.HttpService.getAll().subscribe(res => {
       this.restaurants = res;
       this.totalRestaurants = this.restaurants.length;
     });
   }
-  returnSortedRestaurants(restaurants:any){
+  returnRestaurants(restaurants:any){
     this.restaurants = restaurants;
   }
-  
+  returnPriceValue(val:number){
+    this.price = val;
+  }
+  returnRatingValue(val:number){
+    this.rating = val;
+  }
+
 }

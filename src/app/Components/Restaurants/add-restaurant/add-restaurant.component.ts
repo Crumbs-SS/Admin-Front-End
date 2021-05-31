@@ -15,6 +15,7 @@ import { RestaurantDetail } from 'src/app/Models/RestaurantDetail';
 export class AddRestaurantComponent  {
 
   addRestaurantDTO: RestaurantDTO;
+  errorMessage!:string;
   catOptions: Category[] = 
   [
       {name:"American"},
@@ -43,7 +44,7 @@ export class AddRestaurantComponent  {
         this.gotoRestaurantList();},
       (error) => {
         console.log(error)
-      alert(error.error.message)}
+        this.errorMessage = error.error.message;}
       );
   }
  

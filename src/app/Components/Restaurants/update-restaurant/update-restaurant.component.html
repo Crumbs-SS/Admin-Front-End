@@ -14,7 +14,7 @@
                     <h3>Original value: {{restaurant.restaurantOwner.userDetail.firstName}}</h3>
                     <label for="firstName">Enter new restaurant owner first name or leave field blank:</label>
                     <input type="text" [(ngModel)]="restaurantDTO.firstName" class="form-control" id="firstName"
-                        name="firstName" maxlength="30" spattern="^[a-zA-Z ]*$"
+                        name="firstName" maxlength="30" pattern="^[a-zA-Z ]*$"
                         [class.is-valid]="firstName.valid && firstName.dirty" #firstName="ngModel">
                     <div *ngIf="firstName.errors?.pattern" class="alert alert-danger">
                         First name can only contain letters
