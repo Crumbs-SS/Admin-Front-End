@@ -7,7 +7,7 @@
     </div>
 
     <div class="modal-body">
-        <form (ngSubmit)="onViewChanges()" #restaurantForm="ngForm" [hidden]="!submitted">
+        <form (ngSubmit)="onViewChanges()" #restaurantForm="ngForm" [hidden]="updateStatus!=1">
             <div>
                 <h1> Update Restaurant Owner Details</h1>
                 <div class="form-group">
@@ -39,6 +39,9 @@
                     <div *ngIf="email.errors?.pattern" class="alert alert-danger">
                         Please provide a valid e-mail address
                     </div>
+                    <div *ngIf="emailError" class="alert alert-danger">
+                        Restaurant owner with this email was already found in database. Please enter new e-mail address.
+                      </div>
                 </div>
             </div>
             <div>
@@ -52,6 +55,9 @@
                     <div *ngIf="address.errors?.pattern" class="alert alert-danger">
                         Special characters are not allowed in street address
                     </div>
+                    <div *ngIf="locationError" class="alert alert-danger">
+                        This location already exists in database. Please enter new location.
+                     </div>
                 </div>
                 <div class="form-group">
                     <h3>Original value: {{restaurant.location.city}}</h3>
@@ -145,7 +151,7 @@
             <pre>{{restaurant.id}}</pre>
         </form>
 
-        <div [hidden]="submitted">
+        <div [hidden]="updateStatus!=2">
 
             <div class="card-body">
                 <h1>You have modified these fields:</h1>
@@ -164,6 +170,9 @@
                 <div *ngIf="email.dirty && email.value!=''">
                     <div>New E-mail: {{ restaurantDTO.email }}</div>
                     <div>Instead of: {{restaurant.restaurantOwner.userDetail.email}}</div>
+                    <div *ngIf="emailError" class="alert alert-danger">
+                        Restaurant owner with this email was already found in database. Please enter new e-mail address.
+                      </div>
                 </div>
                 <br><br>
 
@@ -171,6 +180,9 @@
                 <div *ngIf="address.dirty && address.value!=''">
                     <div>New Street Address: {{ restaurantDTO.street }}</div>
                     <div>Instead of: {{ restaurant.location.street}}</div>
+                    <div *ngIf="locationError" class="alert alert-danger">
+                        This location already exists in database. Please enter new location.
+                     </div>
                 </div>
                 <br>
                 <div *ngIf="city.dirty && city.value!=''">
@@ -207,17 +219,21 @@
                     </div>
                 </div>
                 <br>
-                <button class="btn btn-primary" (click)="submitted=true">Edit</button>
+                <button class="btn btn-primary" (click)="updateStatus=1">Edit</button>
             </div>
 
         </div>
+        <div [hidden]= "updateStatus!=3">
+            <h1>Update Successful!</h1>
+        </div>
+        
 
     </div>
+   
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Cancel</button>
-        <button type="button" class="btn btn-success" (click)="onUpdate()"
-            (click)="modal.close('Close click')" [disabled]="!restaurantForm.form.valid">Update</button>
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        <button type="button" class="btn btn-success" (click)="onUpdate()" [disabled]="!restaurantForm.form.valid"[hidden]="updateStatus==3">Update</button>
     </div>
 
 </ng-template>

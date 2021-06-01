@@ -3,7 +3,7 @@ import { MenuItem } from "./MenuItem";
 
 export class RestaurantDTO {
 
-    id!: number;
+    //id!: number;
     firstName!: string;
     lastName!: string;
     email!: string;

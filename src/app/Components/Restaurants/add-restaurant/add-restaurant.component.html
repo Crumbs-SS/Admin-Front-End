@@ -153,8 +153,14 @@
             <p>First Name: {{addRestaurantDTO.firstName}}</p>
             <p>Last Name: {{addRestaurantDTO.firstName}}</p>
             <p>Email: {{addRestaurantDTO.email}}</p>
+            <div *ngIf="emailError" class="alert alert-danger">
+              Restaurant owner with this email was already found in database. Please enter new e-mail address.
+            </div>
             <h2>Restaurant Location Details:</h2>
             <p>Street: {{addRestaurantDTO.street}}</p>
+            <div *ngIf="locationError" class="alert alert-danger">
+               This location already exists in database. Please enter new location.
+            </div>
             <p>City: {{addRestaurantDTO.city}}</p>
             <p>ZIP: {{addRestaurantDTO.zip}}</p>
             <p>State: {{addRestaurantDTO.state}}</p>
@@ -173,7 +179,7 @@
     </mat-horizontal-stepper>
 
   </div>
-  <!-- <div>
+  <div>
     <pre>{{ addRestaurantDTO | json }}</pre>
-  </div> -->
+  </div>
 </div>

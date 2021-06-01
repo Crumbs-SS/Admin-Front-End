@@ -17,8 +17,12 @@ export class UpdateRestaurantComponent{
 
   @Input() restaurant!: any;
   @Output() updated = new EventEmitter<boolean>();
+  updateStatus: number = 1;
   submitted:boolean = true;
   restaurantDTO: RestaurantDTO;
+  emailError: boolean = false;
+  locationError: boolean = false;
+  updateSuccess: boolean =false;
   catOptions: Category[] = 
   [
       {name:"American"},
@@ -38,17 +42,29 @@ export class UpdateRestaurantComponent{
     this.restaurantDTO = new RestaurantDTO();
    }
   onViewChanges(){
-    this.submitted = false;
+    this.updateStatus = 2;
+    //this.submitted = false;
   }
   onUpdate() {
+    this.updateSuccess =false;
+    this.emailError = false;
+    this.locationError = false;
+    
     this.HttpService.update(this.restaurant.id, this.restaurantDTO).subscribe(
       (response) => { 
         console.log(response);
         this.updated.emit()
+        this.updateStatus=3;
+        //this.updateSuccess=true;
       },
       (error) => {
         console.log(error)
-        alert(error.error.message)
+        if(error.error.message.includes("email")){
+          this.emailError = true;}
+        if(error.error.message.includes("location")){
+          this.locationError = true;}
+        //this.submitted = false;
+        this.updateStatus=2;
       },
     );
   }

@@ -15,7 +15,8 @@ import { RestaurantDetail } from 'src/app/Models/RestaurantDetail';
 export class AddRestaurantComponent  {
 
   addRestaurantDTO: RestaurantDTO;
-  errorMessage!:string;
+  emailError: boolean = false;
+  locationError: boolean = false;
   catOptions: Category[] = 
   [
       {name:"American"},
@@ -38,14 +39,20 @@ export class AddRestaurantComponent  {
   }
   
   onSubmit() {
+    this.emailError = false;
+    this.locationError = false;
+    
     this.httpService.save(this.addRestaurantDTO).subscribe(
       (response) => {
         console.log(response);
         this.gotoRestaurantList();},
       (error) => {
         console.log(error)
-        this.errorMessage = error.error.message;}
-      );
+        if(error.error.message.includes("email")){
+          this.emailError = true;}
+        if(error.error.message.includes("location")){
+          this.locationError = true;}
+       });
   }
  
   gotoRestaurantList() {
