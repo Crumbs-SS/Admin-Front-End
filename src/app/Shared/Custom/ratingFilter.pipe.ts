@@ -9,7 +9,7 @@ export class RatingFilterPipe implements PipeTransform {
     if(!value || !ratingValue){
       return value;
     }
-    return value.filter( r => r.rating == ratingValue);
+    return value.filter( (r: { rating: number; })=> r.rating == ratingValue);
    
   }
 

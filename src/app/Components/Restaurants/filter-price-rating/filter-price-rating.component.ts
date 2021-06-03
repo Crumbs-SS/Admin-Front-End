@@ -9,13 +9,14 @@ import { SortPipe } from 'src/app/Shared/Custom/sort.pipe';
 })
 export class FilterPriceRatingComponent  {
 
-  @Output() newFilterEvent = new EventEmitter<number>();
+  @Output() newPriceRatingFilterEvent = new EventEmitter<number>();
+  @Output() newRatingFilterEvent = new EventEmitter<number>();
 
   returnPriceValue(val:number){
-    this.newFilterEvent.emit(val);
+    this.newPriceRatingFilterEvent.emit(val);
   }
   returnRatingValue(val:number){
-    this.newFilterEvent.emit(val);
+    this.newRatingFilterEvent.emit(val);
   }
 
 }

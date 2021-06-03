@@ -7,7 +7,7 @@
       <div class="col-sm-6">
         <input type="text" [(ngModel)]="searchString" class="form-control" id="search">
         <app-sort-restaurants [restaurants]="restaurants" (newSortEvent)="returnRestaurants($event)"></app-sort-restaurants>
-        <app-filter-price-rating  (newFilterEvent)="returnPriceValue($event)" (newFilterEvent)="returnRatingValue($event)"></app-filter-price-rating>
+        <app-filter-price-rating  (newPriceRatingFilterEvent)="returnPriceValue($event)" (newRatingFilterEvent)="returnRatingValue($event)" ></app-filter-price-rating>
       </div>
     </div>
     <table class="table table-bordered table-striped">

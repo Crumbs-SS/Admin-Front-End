@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { DeleteRestaurantComponent } from './delete-restaurant.component';
 
@@ -8,7 +9,15 @@ describe('DeleteRestaurantComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeleteRestaurantComponent ]
+      declarations: [ DeleteRestaurantComponent ],
+      providers: [{
+        provide: ActivatedRoute,
+        useValue: {
+          snapshot: {params: {id: '24fkzrw3487943uf358lovd'}}
+        }
+      },
+      Router
+    ]
     })
     .compileComponents();
   });

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 
 import { AddRestaurantComponent } from './add-restaurant.component';
 
@@ -8,7 +9,13 @@ describe('AddRestaurantComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddRestaurantComponent ]
+      declarations: [ AddRestaurantComponent ],
+      providers:
+      [
+        {
+          provide: ActivatedRoute,
+        }
+      ]
     })
     .compileComponents();
   });

@@ -9,7 +9,7 @@ export class PriceFilterPipe implements PipeTransform {
     if(!value || !priceValue){
       return value;
     }
-    return value.filter( r => r.priceRating == priceValue);
+    return value.filter( (r: { priceRating: number; }) => r.priceRating == priceValue);
    
   }
 
