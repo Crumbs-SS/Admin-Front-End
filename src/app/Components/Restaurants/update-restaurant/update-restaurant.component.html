@@ -136,7 +136,7 @@
                             <mat-label>New Categories</mat-label>
                         <mat-select name="categories" [(ngModel)]="restaurantDTO.categories" multiple size="10"
                             id="categories"  #categories="ngModel">
-                            <mat-option *ngFor="let cat of catOptions" [value]="cat">{{cat.name}}</mat-option>
+                            <mat-option *ngFor="let cat of catOptions" [value]="cat.name">{{cat.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                     </div>
@@ -147,8 +147,8 @@
             <div>
                 <button type="submit" class="btn btn-primary" >View Changes</button>
             </div>
-            <pre>{{ restaurantDTO | json }}</pre>
-            <pre>{{restaurant.id}}</pre>
+            <!-- <pre>{{ restaurantDTO | json }}</pre>
+            <pre>{{restaurant.id}}</pre> -->
         </form>
 
         <div [hidden]="updateStatus!=2">
@@ -213,7 +213,7 @@
                 </div>
                 <br>
                 <div *ngIf="categories.dirty && categories.value!=''">
-                    <div>Categories: <p *ngFor="let cat of restaurantDTO.categories">{{ cat.name }}</p>
+                    <div>Categories: <p *ngFor="let cat of restaurantDTO.categories">{{ cat}}</p>
                     </div>
                     <div>Instead of: <p *ngFor="let cat of restaurant.categories">{{ cat.id.categoryId}}</p>
                     </div>

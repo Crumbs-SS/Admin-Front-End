@@ -1,6 +1,4 @@
-import { Component, Input,Output ,EventEmitter} from '@angular/core';
-import { restaurantOwner } from 'src/app/Models/RestaurantOwner';
-import { SortPipe } from 'src/app/Shared/Custom/sort.pipe';
+import { Component, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-filter-price-rating',

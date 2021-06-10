@@ -23,9 +23,6 @@ export class DeleteRestaurantComponent implements OnInit {
   open(longContent: any) {
     this.modalService.open(longContent, { scrollable: true, size: 's' });
   }
-  reloadCurrentPage() {
-    window.location.reload();
-  }
   deleteRestaurant(id: any) {
     this.HttpService.delete(id)
       .subscribe(

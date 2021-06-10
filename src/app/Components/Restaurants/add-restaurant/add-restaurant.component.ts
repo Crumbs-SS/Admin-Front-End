@@ -2,10 +2,7 @@ import { Component} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RestaurantService } from 'src/app/Shared/Service/restaurant.service';
 import { RestaurantDTO } from 'src/app/Models/restaurant-dto';
-import { userDetail } from 'src/app/Models/UserDetail';
-import { Category } from 'src/app/Models/Category';
-import { RestaurantLocation } from 'src/app/Models/Location';
-import { RestaurantDetail } from 'src/app/Models/RestaurantDetail';
+import { Category } from 'src/app/Models/category';
 
 @Component({
   selector: 'app-add-restaurant',
@@ -17,19 +14,7 @@ export class AddRestaurantComponent  {
   addRestaurantDTO: RestaurantDTO;
   emailError: boolean = false;
   locationError: boolean = false;
-  catOptions: Category[] = 
-  [
-      {name:"American"},
-      {name:"Japanese"},
-      {name:"Italian"},
-      {name:"Pizza"},
-      {name:"Burger"},
-      {name:"Sushi"},
-      {name:"Fast-Food"},
-      {name:"Fine Dining"},
-      {name:"Breakfast"},
-      {name:"Healthy"}
-  ]
+  catOptions: Category[] = [];
   
   constructor(
     private route: ActivatedRoute, 
@@ -37,7 +22,14 @@ export class AddRestaurantComponent  {
         private httpService: RestaurantService) {
           this.addRestaurantDTO = new RestaurantDTO();
   }
-  
+  ngOnInit() {
+    this.loadCategories();
+  }
+  loadCategories() {
+    this.httpService.getCategories().subscribe(res => {
+      this.catOptions = res;
+    });
+  }
   onSubmit() {
     this.emailError = false;
     this.locationError = false;

@@ -134,7 +134,7 @@
               <mat-form-field appearance="fill">
                 <mat-label>Categories</mat-label>
                 <mat-select name="categories" [(ngModel)]="addRestaurantDTO.categories" multiple size="10">
-                  <mat-option *ngFor="let cat of catOptions" [value]="cat">{{cat.name}}</mat-option>
+                  <mat-option *ngFor="let cat of catOptions" [value]="cat.name">{{cat.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -167,7 +167,7 @@
             <h2>Restaurant Details</h2>
             <p>Restaurant Name: {{addRestaurantDTO.name}}</p>
             <p>Restaurant Price Rating: {{addRestaurantDTO.priceRating}}</p>
-            <p *ngFor="let cat of addRestaurantDTO.categories">Restaurant Category: {{cat.name}}</p>
+            <p *ngFor="let cat of addRestaurantDTO.categories">Restaurant Category: {{cat}}</p>
           </div>
           <div>
             <button mat-button matStepperPrevious>Back</button>
