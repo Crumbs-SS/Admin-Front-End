@@ -113,9 +113,7 @@ describe('#save()', () => {
       "name": "Jonathan's Banger Restaurant",
       "priceRating": 1,
       "categories": [
-        {
-          "name": "American"
-        }
+        "American"
       ]
     };
 
@@ -145,9 +143,7 @@ describe('#update()', () => {
       "name": "Jonathan's Banger Restaurant",
       "priceRating": 1,
       "categories": [
-        {
-          "name": "American"
-        }
+          "American"
       ]
     };
 
