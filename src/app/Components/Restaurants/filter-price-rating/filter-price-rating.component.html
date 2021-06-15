@@ -39,3 +39,18 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Filter Status</mat-label>
+    <mat-select>
+      <mat-option (click)="returnStatusValue('')">
+        Show All
+      </mat-option>
+      <mat-option (click)="returnStatusValue('is_active')">
+        Active
+      </mat-option>
+      <mat-option (click)="returnStatusValue('pending_delete')">
+        Pending Delete
+      </mat-option>
+    </mat-select>
+  </mat-form-field>

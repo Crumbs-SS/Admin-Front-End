@@ -27,13 +27,14 @@ import { UpdateRestaurantComponent } from './Components/Restaurants/update-resta
 import { ViewMenuComponent } from './Components/Restaurants/view-menu/view-menu.component';
 import { DeleteRestaurantComponent } from './Components/Restaurants/delete-restaurant/delete-restaurant.component';
 import { SortRestaurantsComponent } from './Components/Restaurants/sort-restaurants/sort-restaurants.component';
+import { FilterPriceRatingComponent } from './Components/Restaurants/filter-price-rating/filter-price-rating.component';
 
 //Pipes
 import { SearchfilterPipe } from './Shared/Custom/searchfilter.pipe';
 import { PriceFilterPipe } from './Shared/Custom/priceFilter.pipe';
 import { RatingFilterPipe } from './Shared/Custom/ratingFilter.pipe';
+import { StatusFilterPipe } from './Shared/Custom/statusFilter.pipe';
 import { SortPipe } from './Shared/Custom/sort.pipe';
-import { FilterPriceRatingComponent } from './Components/Restaurants/filter-price-rating/filter-price-rating.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { FilterPriceRatingComponent } from './Components/Restaurants/filter-pric
     SearchfilterPipe,
     PriceFilterPipe,
     RatingFilterPipe,
+    StatusFilterPipe,
     SortPipe,
     UpdateRestaurantComponent,
     ViewMenuComponent,

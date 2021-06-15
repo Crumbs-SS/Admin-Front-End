@@ -15,6 +15,7 @@ export class ViewRestaurantComponents implements OnInit {
   searchString!: string;
   price!: number;
   rating!: number;
+  status!: String;
 
   constructor(private route: ActivatedRoute, private router: Router,
     private HttpService: RestaurantService, private modalService: NgbModal) {}
@@ -36,6 +37,9 @@ export class ViewRestaurantComponents implements OnInit {
   }
   returnRatingValue(val:number){
     this.rating = val;
+  }
+  returnStatusValue(val: String){
+    this.status = val;
   }
 
 }

@@ -7,7 +7,7 @@
       <div class="col-sm-6">
         <input type="text" [(ngModel)]="searchString" class="form-control" id="search">
         <app-sort-restaurants [restaurants]="restaurants" (newSortEvent)="returnRestaurants($event)"></app-sort-restaurants>
-        <app-filter-price-rating  (newPriceRatingFilterEvent)="returnPriceValue($event)" (newRatingFilterEvent)="returnRatingValue($event)" ></app-filter-price-rating>
+        <app-filter-price-rating  (newPriceRatingFilterEvent)="returnPriceValue($event)" (newRatingFilterEvent)="returnRatingValue($event)" (newStatusFilterEvent)="returnStatusValue($event)"></app-filter-price-rating>
       </div>
     </div>
     <table class="table table-bordered table-striped">
@@ -21,12 +21,13 @@
           <th scope="col">Price rating</th>
           <th scope="col">Rating</th>
           <th scope="col">Menu</th>
-          <th>Edit</th>
-          <th>Delete</th>
+          <th scope="col">Status</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let r of restaurants | searchfilter:searchString | pricefilter:price | ratingfilter:rating; let i = index">
+        <tr *ngFor="let r of restaurants | searchfilter:searchString | pricefilter:price | ratingfilter:rating | statusfilter:status; let i = index">
           <td>{{i + 1}}</td>
           <td>{{r.name}}</td>
           <td>
@@ -41,6 +42,9 @@
           <td>{{r.rating}}</td>
           <td>
             <app-view-menu [restaurant]="r"></app-view-menu>
+          </td>
+          <td>
+            {{r.status}}
           </td>
           <td>
             <app-update-restaurant [restaurant]="r" (updated)="this.ngOnInit()"></app-update-restaurant>
