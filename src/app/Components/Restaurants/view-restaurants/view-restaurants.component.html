@@ -31,8 +31,10 @@
           <td>{{i + 1}}</td>
           <td>{{r.name}}</td>
           <td>
-            <p>Name: {{r.restaurantOwner.userDetail.firstName}} {{r.restaurantOwner.userDetail.lastName}}</p>
-            <p>E-mail: {{r.restaurantOwner.userDetail.email}}</p>
+            <p>Name: {{r.restaurantOwner.userDetails.firstName}} {{r.restaurantOwner.userDetails.lastName}}</p>
+            <p>E-mail: {{r.restaurantOwner.userDetails.email}}</p>
+            <p>Phone: {{r.restaurantOwner.userDetails.phone}}</p>
+            <p>Username: {{r.restaurantOwner.userDetails.username}}</p>
           </td>
           <td>{{r.location.street}}, {{r.location.city}} {{r.location.zipCode}}, {{r.location.state}}</td>
           <td>
@@ -44,7 +46,7 @@
             <app-view-menu [restaurant]="r"></app-view-menu>
           </td>
           <td>
-            {{r.status}}
+            {{r.restaurantStatus.status}}
           </td>
           <td>
             <app-update-restaurant [restaurant]="r" (updated)="this.ngOnInit()"></app-update-restaurant>

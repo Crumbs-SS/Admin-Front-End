@@ -25,7 +25,7 @@ export class ViewRestaurantComponents implements OnInit {
   }
   loadAllRestaurants() {
     this.HttpService.getAll().subscribe(res => {
-      this.restaurants = res;
+      this.restaurants = res.content;
       this.totalRestaurants = this.restaurants.length;
     });
   }

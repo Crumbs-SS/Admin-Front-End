@@ -11,7 +11,7 @@
             <div>
                 <h1> Update Restaurant Owner Details</h1>
                 <div class="form-group">
-                    <h3>Original value: {{restaurant.restaurantOwner.userDetail.firstName}}</h3>
+                    <h3>Original value: {{restaurant.restaurantOwner.userDetails.firstName}}</h3>
                     <label for="firstName">Enter new restaurant owner first name or leave field blank:</label>
                     <input type="text" [(ngModel)]="restaurantDTO.firstName" class="form-control" id="firstName"
                         name="firstName" maxlength="30" pattern="^[a-zA-Z ]*$"
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <h3>Original value: {{restaurant.restaurantOwner.userDetail.lastName}}</h3>
+                    <h3>Original value: {{restaurant.restaurantOwner.userDetails.lastName}}</h3>
                     <label for="lastName">Enter new restaurant owner last name or leave field blank:</label>
                     <input type="text" [(ngModel)]="restaurantDTO.lastName" class="form-control" id="lastName"
                         name="lastName" maxlength="30" pattern="^[a-zA-Z ]*$"
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <h3>Original value: {{restaurant.restaurantOwner.userDetail.email}}</h3>
+                    <h3>Original value: {{restaurant.restaurantOwner.userDetails.email}}</h3>
                     <label for="email">Enter new restaurant owner e-mail or leave field blank:</label>
                     <input type="email" [(ngModel)]="restaurantDTO.email" class="form-control" id="email" name="email"
                         pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [class.is-valid]="email.valid && email.dirty"
@@ -147,8 +147,8 @@
             <div>
                 <button type="submit" class="btn btn-primary" >View Changes</button>
             </div>
-            <!-- <pre>{{ restaurantDTO | json }}</pre>
-            <pre>{{restaurant.id}}</pre> -->
+            <!-- <pre>{{ restaurantDTO | json }}</pre> -->
+           
         </form>
 
         <div [hidden]="updateStatus!=2">
@@ -159,17 +159,17 @@
                 <h2>Restaurant Owner Details:</h2>
                 <div *ngIf="firstName.dirty && firstName.value!=''">
                     <div> New First Name: {{ restaurantDTO.firstName }}</div>
-                    <div> Instead of: {{restaurant.restaurantOwner.userDetail.firstName}}</div>
+                    <div> Instead of: {{restaurant.restaurantOwner.userDetails.firstName}}</div>
                 </div>
                 <br>
                 <div *ngIf="lastName.dirty && lastName.value!=''">
                     <div>New Last Name: {{ restaurantDTO.lastName}}</div>
-                    <div>Instead of: {{restaurant.restaurantOwner.userDetail.lastName}}</div>
+                    <div>Instead of: {{restaurant.restaurantOwner.userDetails.lastName}}</div>
                 </div>
                 <br>
                 <div *ngIf="email.dirty && email.value!=''">
                     <div>New E-mail: {{ restaurantDTO.email }}</div>
-                    <div>Instead of: {{restaurant.restaurantOwner.userDetail.email}}</div>
+                    <div>Instead of: {{restaurant.restaurantOwner.userDetails.email}}</div>
                     <div *ngIf="emailError" class="alert alert-danger">
                         Restaurant owner with this email was already found in database. Please enter new e-mail address.
                       </div>

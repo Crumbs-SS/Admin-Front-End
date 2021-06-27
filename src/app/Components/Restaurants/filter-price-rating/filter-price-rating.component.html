@@ -46,11 +46,17 @@
       <mat-option (click)="returnStatusValue('')">
         Show All
       </mat-option>
-      <mat-option (click)="returnStatusValue('is_active')">
+      <mat-option (click)="returnStatusValue('ACTIVE')">
         Active
       </mat-option>
-      <mat-option (click)="returnStatusValue('pending_delete')">
+      <mat-option (click)="returnStatusValue('PENDING_DELETE')">
         Pending Delete
+      </mat-option>
+      <mat-option (click)="returnStatusValue('DELETED')">
+        Deleted
+      </mat-option>
+      <mat-option (click)="returnStatusValue('PENDING_REGISTRATION')">
+        Pending Registration
       </mat-option>
     </mat-select>
   </mat-form-field>

@@ -41,10 +41,12 @@ export class AddRestaurantComponent  {
       (error) => {
         console.log(error)
         if(error.error.message.includes("email")){
-          this.emailError = true;}
+          this.emailError = true;
+       }
         if(error.error.message.includes("location")){
           this.locationError = true;}
-       });
+       }
+       );
   }
  
   gotoRestaurantList() {

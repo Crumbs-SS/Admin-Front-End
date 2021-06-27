@@ -15,7 +15,7 @@ export class RestaurantService {
     this.restaurantURL = 'http://localhost:8070/restaurants';
    }
    public getAll() :Observable<any>{
-    return this.http.get(this.restaurantURL+"s");
+    return this.http.get(this.restaurantURL);
   }
   public getCategories():Observable<any>{
     return this.http.get('http://localhost:8070/categories');

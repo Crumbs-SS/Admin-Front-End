@@ -9,7 +9,7 @@ export class StatusFilterPipe implements PipeTransform {
     if(!value || !statusValue){
       return value;
     }
-    return value.filter( (r: { status: String; })=> r.status == statusValue);
+    return value.filter( r=> r.restaurantStatus.status == statusValue);
    
   }
 }
