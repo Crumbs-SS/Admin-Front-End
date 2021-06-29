@@ -52,4 +52,13 @@ export class AddRestaurantComponent  {
   gotoRestaurantList() {
     this.router.navigate(['crumbs/admin/restaurants/viewRestaurants']);
   }
+ 
+  existingOwner(restaurantForm: any){
+    restaurantForm.controls['firstName'].setValue("mock");
+   restaurantForm.controls['lastName'].setValue("mock");
+   restaurantForm.controls['email'].setValue("mock@g.com");
+   restaurantForm.controls['phone'].setValue("1111111111");
+   restaurantForm.controls['password'].setValue("aaaaaa");
+
+  }
 }

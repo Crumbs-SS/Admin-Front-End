@@ -7,6 +7,10 @@ export class RestaurantDTO {
     firstName!: string;
     lastName!: string;
     email!: string;
+    username!: string;
+    password!: string;
+    phone!: string;
+    newOwner!: boolean;
 
     street!: string;
     city!: string;
