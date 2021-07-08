@@ -1,9 +1,9 @@
 import { Component, OnInit , Input,Output, EventEmitter} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RestaurantDTO } from 'src/app/Models/restaurant-dto';
+import { RestaurantDTO } from 'src/app/Models/RestaurantDTO';
 import { RestaurantService } from 'src/app/Shared/Service/restaurant.service';
-import { Category } from 'src/app/Models/category';
+import { Category } from 'src/app/Models/Category';
 
 @Component({
   selector: 'app-update-restaurant',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { RestaurantDTO } from 'src/app/Models/restaurant-dto';
+import { RestaurantDTO } from 'src/app/Models/RestaurantDTO';
 import { AddRestaurantComponent } from 'src/app/Components/Restaurants/add-restaurant/add-restaurant.component';
 import { Observable } from 'rxjs';
 
