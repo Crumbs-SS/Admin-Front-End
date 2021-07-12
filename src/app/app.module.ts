@@ -13,6 +13,7 @@ import {MatRadioModule} from '@angular/material/radio';
 
 //Service
 import { RestaurantService } from './Shared/Service/restaurant.service';
+import { AccountService } from './Shared/Service/account.service';
 
 //Components
 import { AppComponent } from './app.component';
@@ -71,7 +72,7 @@ import { SortPipe } from './Shared/Custom/sort.pipe';
     MatStepperModule,
     MatRadioModule
   ],
-  providers: [RestaurantService, SortPipe],
+  providers: [RestaurantService, AccountService, SortPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

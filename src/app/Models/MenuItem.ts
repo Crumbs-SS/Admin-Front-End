@@ -1,6 +1,6 @@
-export interface MenuItem{
-    id: number;
-    name: string;
-    price: number;
-    description: string;
+export class MenuItem{
+    id!: number;
+    name!: string;
+    price!: number;
+    description!: string;
 }
