@@ -1,1 +1,42 @@
-<p>users works!</p>
+<div class="card my-5">
+    <h1 style="text-align: center;">Users</h1>
+    <div class="card-body">
+      <h2 style="text-align: center;"> Total number of users: {{ totalUsers }}</h2>
+      <div class='form-group row'>
+        <label for="search" class="col-sm-2 col-form-label" style="text-align: right;">Search</label>
+        <div class="col-sm-6">
+        </div>
+      </div>
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone Number</th> 
+            <th scope="col">Roles</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.id}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.getFullName()}}</td>
+            <td> {{ user.email}} </td>
+            <td> {{ user.phone | phoneFormat }} </td>
+            <td> {{ user.getRoles() }} </td>
+            <td>
+              <app-edit-user-form [user]='user' (updatedUser)='loadAllUsers()'></app-edit-user-form>
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

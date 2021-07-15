@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
@@ -29,6 +29,7 @@ import { ViewMenuComponent } from './Components/Restaurants/view-menu/view-menu.
 import { DeleteRestaurantComponent } from './Components/Restaurants/delete-restaurant/delete-restaurant.component';
 import { SortRestaurantsComponent } from './Components/Restaurants/sort-restaurants/sort-restaurants.component';
 import { FilterPriceRatingComponent } from './Components/Restaurants/filter-price-rating/filter-price-rating.component';
+import { EditUserFormComponent } from './Components/Users/edit-user-form/edit-user-form.component';
 
 //Pipes
 import { SearchfilterPipe } from './Shared/Custom/searchfilter.pipe';
@@ -36,6 +37,7 @@ import { PriceFilterPipe } from './Shared/Custom/priceFilter.pipe';
 import { RatingFilterPipe } from './Shared/Custom/ratingFilter.pipe';
 import { StatusFilterPipe } from './Shared/Custom/statusFilter.pipe';
 import { SortPipe } from './Shared/Custom/sort.pipe';
+import { PhoneFormatPipe } from './Shared/Custom/phone-format.pipe';
 
 
 @NgModule({
@@ -57,7 +59,9 @@ import { SortPipe } from './Shared/Custom/sort.pipe';
     ViewMenuComponent,
     DeleteRestaurantComponent,
     SortRestaurantsComponent,
-    FilterPriceRatingComponent
+    FilterPriceRatingComponent,
+    PhoneFormatPipe,
+    EditUserFormComponent
   ],
   imports: [
     BrowserModule,
