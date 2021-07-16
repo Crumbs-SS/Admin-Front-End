@@ -28,4 +28,8 @@ export class AccountService {
   public updateUser(user: User, userId: number){
     return this.http.put(this.accountsUrl + `/users/${userId}`, user);
   }
+
+  public deleteUser(userId: number){
+    return this.http.delete(this.accountsUrl + `/users/${userId}`);
+  }
 }

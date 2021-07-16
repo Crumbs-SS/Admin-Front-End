@@ -1,3 +1,4 @@
+import { isEmptyBindingElement } from "typescript";
 import { PhoneFormatPipe } from "../Shared/Custom/phone-format.pipe";
 import { Deserializable } from "./deserializable";
 
@@ -34,14 +35,18 @@ export class User implements Deserializable{
 
     public getRoles(){
         let roles: String[] = [];
-        if(this.customer)
+        if(this.customer && this.customer.userStatus.status !== 'DELETED')
             roles.push('Customer');
-        if(this.admin)
+        if(this.admin && this.admin.userStatus.status !== 'DELETED')
             roles.push('Admin');
-        if(this.driver)
+        if(this.driver && this.driver.userStatus.status !== 'DELETED')
             roles.push('Driver');
-        if(this.owner)
+        if(this.owner && this.owner.userStatus.status !== 'DELETED')
             roles.push('Owner');
+        if(roles.length === 0)
+            roles.push('Deactivated');
+        
         return roles.join(', ');
     }
+
 }
