@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { AccountService } from 'src/app/Shared/Service/account.service';
 import { User } from 'src/app/Models/User';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class DeleteUsersComponent implements OnInit {
   @Input() user: User = new User();
+  @Output() userDeleted: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private accountService: AccountService, private ngbModal: NgbModal) { }
 
@@ -21,7 +22,11 @@ export class DeleteUsersComponent implements OnInit {
   }
 
   deleteUser(){
-    this.accountService.deleteUser(this.user.id).subscribe(console.log);
+    this.accountService.deleteUser(this.user.id).subscribe(
+      () => {
+        this.userDeleted.emit();
+        this.ngbModal.dismissAll();
+      });
   }
 
 }

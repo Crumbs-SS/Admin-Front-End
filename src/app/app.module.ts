@@ -39,6 +39,7 @@ import { StatusFilterPipe } from './Shared/Custom/statusFilter.pipe';
 import { SortPipe } from './Shared/Custom/sort.pipe';
 import { PhoneFormatPipe } from './Shared/Custom/phone-format.pipe';
 import { DeleteUsersComponent } from './Components/Users/delete-users/delete-users.component';
+import { EnableUsersComponent } from './Components/Users/enable-users/enable-users.component';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { DeleteUsersComponent } from './Components/Users/delete-users/delete-use
     FilterPriceRatingComponent,
     PhoneFormatPipe,
     EditUserFormComponent,
-    DeleteUsersComponent
+    DeleteUsersComponent,
+    EnableUsersComponent,
   ],
   imports: [
     BrowserModule,

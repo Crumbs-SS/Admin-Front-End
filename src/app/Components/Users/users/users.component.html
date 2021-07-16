@@ -17,7 +17,7 @@
             <th scope="col">Phone Number</th> 
             <th scope="col">Roles</th>
             <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
+            <th scope="col">Delete/Enable</th>
           </tr>
         </thead>
         <tbody>
@@ -25,14 +25,23 @@
             <td>{{user.id}}</td>
             <td>{{user.username}}</td>
             <td>{{user.getFullName()}}</td>
-            <td> {{ user.email}} </td>
+            <td> {{ user.email }} </td>
             <td> {{ user.phone | phoneFormat }} </td>
             <td> {{ user.getRoles() }} </td>
             <td>
               <app-edit-user-form [user]='user' (updatedUser)='loadAllUsers()'></app-edit-user-form>
             </td>
             <td>
-              <app-delete-users [user]='user'></app-delete-users>
+              <app-delete-users 
+                (userDeleted)='loadAllUsers()'
+                *ngIf="user.getRoles() !== 'Deleted' " 
+                [user]='user'></app-delete-users>
+              <app-enable-users 
+                *ngIf="user.getRoles() === 'Deleted' " 
+                [user]='user'
+                (userEnabled)='loadAllUsers()'
+              ></app-enable-users>
+
             </td>
           </tr>
         </tbody>

@@ -32,4 +32,8 @@ export class AccountService {
   public deleteUser(userId: number){
     return this.http.delete(this.accountsUrl + `/users/${userId}`);
   }
+
+  public enableUser(userId: number, enableUser: any){
+    return this.http.put(this.accountsUrl + `/users/${userId}/status`, enableUser);
+  }
 }

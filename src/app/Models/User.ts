@@ -44,9 +44,24 @@ export class User implements Deserializable{
         if(this.owner && this.owner.userStatus.status !== 'DELETED')
             roles.push('Owner');
         if(roles.length === 0)
-            roles.push('Deactivated');
+            roles.push('Deleted');
         
         return roles.join(', ');
+    }
+
+    public getAllRoles(){
+        let roles: string[] = [];
+
+        if(this.admin)
+            roles.push('Admin');
+        if(this.customer)
+            roles.push('Customer');
+        if(this.driver)
+            roles.push('Driver');
+        if(this.owner)
+            roles.push('Owner');
+
+        return roles;
     }
 
 }
