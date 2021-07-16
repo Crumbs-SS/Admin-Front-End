@@ -7,6 +7,12 @@
         <div class="col-sm-6">
         </div>
       </div>
+      <app-pagination 
+      [totalPages]='totalPages'
+      [currentPage]='page'
+      (previous)='previousPage()' 
+      (next)='nextPage()' 
+      (selected)='pageSelected($event)'></app-pagination>
       <table class="table table-bordered table-striped">
         <thead class="thead-dark">
           <tr>
@@ -46,6 +52,12 @@
           </tr>
         </tbody>
       </table>
+      <app-pagination 
+        [totalPages]='totalPages'
+        [currentPage]='page'
+        (previous)='previousPage()' 
+        (next)='nextPage()' 
+        (selected)='pageSelected($event)'></app-pagination>
     </div>
   </div>
   

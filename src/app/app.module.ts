@@ -40,7 +40,7 @@ import { SortPipe } from './Shared/Custom/sort.pipe';
 import { PhoneFormatPipe } from './Shared/Custom/phone-format.pipe';
 import { DeleteUsersComponent } from './Components/Users/delete-users/delete-users.component';
 import { EnableUsersComponent } from './Components/Users/enable-users/enable-users.component';
-
+import { PaginationComponent } from './Components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +66,7 @@ import { EnableUsersComponent } from './Components/Users/enable-users/enable-use
     EditUserFormComponent,
     DeleteUsersComponent,
     EnableUsersComponent,
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,

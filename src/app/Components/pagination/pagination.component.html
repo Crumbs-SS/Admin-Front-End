@@ -1,0 +1,8 @@
+<div class = 'pagination'>
+    <button (click)='previous.emit()'> Previous </button>
+    <ng-container *ngFor="let n of [].constructor(totalPages); let number = index;">
+       <button (click)='onSelected(number)'> {{ number + 1}} </button>
+    </ng-container>
+    <button (click)='next.emit()'> Next </button>
+
+</div>

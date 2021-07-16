@@ -35,8 +35,8 @@ export class EnableUsersComponent implements OnInit {
       () =>{          
           this.userEnabled.emit();
           this.ngbModal.dismissAll();
-        }
-    )
+    });
+    
   }
 
   open(template: any){

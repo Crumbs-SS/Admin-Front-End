@@ -13,19 +13,50 @@ export class UsersComponent implements OnInit {
   totalUsers = 0;
   page = 0;
   size = 5;
+  totalPages = 0;
 
-  constructor(private HttpService: AccountService) { }
+  constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
     this.loadAllUsers();
   }
 
   loadAllUsers(){
-    this.HttpService.getUsers().subscribe(res => { 
+    this.accountService.getUsers(this.page, this.size).subscribe(res => { 
       const content = res.content;    
       if(content) 
         this.users = content.map((user: User) => new User().deserialize(user));            
         this.totalUsers = res.totalElements;
+        this.totalPages = res.totalPages;
     })
   }
+
+  previousPage(){
+    if(this.page > 0)
+      this.page -= 1;
+    else
+      this.page = 0;
+
+    console.log(this.page);
+    this.loadAllUsers();
+  }
+
+  nextPage(){
+    if(this.page < this.totalPages)
+      this.page += 1;
+    else
+      this.page = this.totalPages
+
+    console.log(this.page);
+    this.loadAllUsers();
+  }
+
+  pageSelected(page: number){
+    if(page <= this.totalPages || page >= 0)
+      this.page = page;
+
+    console.log(page);
+    this.loadAllUsers();
+  }
+
 }
