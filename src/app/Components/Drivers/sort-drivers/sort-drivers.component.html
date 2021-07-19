@@ -1,0 +1,17 @@
+<mat-form-field appearance="fill">
+    <mat-label>Sort</mat-label>
+    <mat-select>
+        <mat-option (click)="sortIdAscending()">
+            Sort by Id (low-high)
+        </mat-option>
+        <mat-option (click)="sortIdDescending()">
+            Sort by Id (high-low)
+        </mat-option>
+      <mat-option (click)="sortAlphabetical()">
+        Sort by name (A-Z)
+      </mat-option>
+      <mat-option (click)="sortAlphabeticalReverse()">
+        Sort by name (Z-A)
+      </mat-option>
+    </mat-select>
+</mat-form-field>

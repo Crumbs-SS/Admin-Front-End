@@ -13,10 +13,11 @@ import {MatRadioModule} from '@angular/material/radio';
 
 //Service
 import { RestaurantService } from './Shared/Service/restaurant.service';
+import { UserService } from './Shared/Service/user.service';
 
 //Components
 import { AppComponent } from './app.component';
-import { DriversComponent } from './Components/Drivers/drivers/drivers.component';
+import {ViewDriversComponent} from './Components/Drivers/view-drivers/view-drivers.component';
 import { OrdersComponent } from './Components/Orders/orders/orders.component';
 import { RestaurantsComponent } from './Components/Restaurants/restaurants/restaurants.component';
 import { UsersComponent } from './Components/Users/users/users.component';
@@ -34,13 +35,22 @@ import { SearchfilterPipe } from './Shared/Custom/searchfilter.pipe';
 import { PriceFilterPipe } from './Shared/Custom/priceFilter.pipe';
 import { RatingFilterPipe } from './Shared/Custom/ratingFilter.pipe';
 import { StatusFilterPipe } from './Shared/Custom/statusFilter.pipe';
+import { StateFilterPipe } from './Shared/Custom/stateFilter.pipe';
 import { SortPipe } from './Shared/Custom/sort.pipe';
+import {SortDriversComponent} from './Components/Drivers/sort-drivers/sort-restaurants.component';
+import {FilterDriversComponent} from './Components/Drivers/filter-drivers/filter-drivers.component';
+import {DriverNamePipe} from './Shared/Custom/driverNameSearch.pipe';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatButtonModule} from '@angular/material/button';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DriversComponent,
+    ViewDriversComponent,
+    SortDriversComponent,
+    FilterDriversComponent,
     OrdersComponent,
     RestaurantsComponent,
     UsersComponent,
@@ -51,13 +61,16 @@ import { SortPipe } from './Shared/Custom/sort.pipe';
     PriceFilterPipe,
     RatingFilterPipe,
     StatusFilterPipe,
+    StateFilterPipe,
+    DriverNamePipe,
     SortPipe,
     UpdateRestaurantComponent,
     ViewMenuComponent,
     DeleteRestaurantComponent,
     SortRestaurantsComponent,
-    FilterPriceRatingComponent
+    FilterPriceRatingComponent,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -69,9 +82,11 @@ import { SortPipe } from './Shared/Custom/sort.pipe';
     NgbModule,
     ReactiveFormsModule,
     MatStepperModule,
-    MatRadioModule
+    MatRadioModule,
+    MatPaginatorModule,
+    MatButtonModule
   ],
-  providers: [RestaurantService, SortPipe],
+  providers: [RestaurantService, UserService, SortPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

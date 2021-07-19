@@ -1,0 +1,21 @@
+ <mat-form-field appearance="fill">
+    <mat-label>Filter Status</mat-label>
+    <mat-select>
+      <mat-option (click)="returnStatusValue('')">
+        Show All
+      </mat-option>
+      <mat-option (click)="returnStatusValue('AVAILABLE')">
+        Available
+      </mat-option>
+      <mat-option (click)="returnStatusValue('BUSY')">
+        Busy
+      </mat-option>
+      <mat-option (click)="returnStatusValue('CHECKED_OUT')">
+        Checked Out
+      </mat-option>
+      <mat-option (click)="returnStatusValue('UNVALIDATED')">
+        Not Validated
+      </mat-option>
+    </mat-select>
+ </mat-form-field>
+
