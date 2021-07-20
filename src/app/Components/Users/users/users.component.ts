@@ -17,6 +17,7 @@ export class UsersComponent implements OnInit {
   orderBy: string ='asc';
   sortBy: string ='Id';
   totalPages = 0;
+  query: string = '';
 
   constructor(private accountService: AccountService) { }
 
@@ -24,9 +25,10 @@ export class UsersComponent implements OnInit {
     this.loadAllUsers();
   }
 
-  loadAllUsers(){
+  loadAllUsers(){    
 
     const extras = {
+      query: this.query,
       sortBy: this.sortBy,
       orderBy: this.orderBy,
       filterBy: this.filterBy
@@ -83,5 +85,6 @@ export class UsersComponent implements OnInit {
 
     this.loadAllUsers();
   }
+
 
 }

@@ -1,8 +1,12 @@
-<div class = 'pagination'>
-    <button (click)='previous.emit()'> Previous </button>
+<ul class = 'pagination'>
+    <button class='page-link' (click)='previous.emit()'> Previous </button>
     <ng-container *ngFor="let n of [].constructor(totalPages + 1); let number = index;">
-       <button (click)='onSelected(number)'> {{ number + 1}} </button>
+       <li 
+        class='page-item active' 
+        (click)='onSelected(number)'
+        [ngClass]="{'active' : currentPage===number}"
+        >  <button class="page-link" href="#">{{ number + 1 }}</button>
+    </li>
     </ng-container>
-    <button (click)='next.emit()'> Next </button>
-
-</div>
+    <button class='page-link' (click)='next.emit()'> Next </button>
+</ul>

@@ -21,11 +21,11 @@ export class AccountService {
       return this.http.get(this.accountsUrl + '/owners/' + username);
   }
   
-  public getUsers(page=0, size=5, {sortBy='', orderBy='', filterBy=''}) :Observable<any>{
+  public getUsers(page=0, size=5, {sortBy='', orderBy='', filterBy='', query=''}) :Observable<any>{
     console.log(filterBy);
     
     return this.http.get(this.accountsUrl +
-       `/users?page=${page}&size=${size}&sortBy=${sortBy}&orderBy=${orderBy}&filterBy=${filterBy}`);
+       `/users?page=${page}&size=${size}&sortBy=${sortBy}&orderBy=${orderBy}&filterBy=${filterBy}&query=${query}`);
   }
 
   public updateUser(user: User, userId: number){
