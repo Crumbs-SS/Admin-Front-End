@@ -13,6 +13,9 @@ export class UsersComponent implements OnInit {
   totalUsers = 0;
   page = 0;
   size = 5;
+  filterBy: string ='';
+  orderBy: string ='asc';
+  sortBy: string ='Id';
   totalPages = 0;
 
   constructor(private accountService: AccountService) { }
@@ -22,12 +25,19 @@ export class UsersComponent implements OnInit {
   }
 
   loadAllUsers(){
-    this.accountService.getUsers(this.page, this.size).subscribe(res => { 
+
+    const extras = {
+      sortBy: this.sortBy,
+      orderBy: this.orderBy,
+      filterBy: this.filterBy
+    };
+
+    this.accountService.getUsers(this.page, this.size, extras).subscribe(res => { 
       const content = res.content;    
       if(content) 
         this.users = content.map((user: User) => new User().deserialize(user));            
         this.totalUsers = res.totalElements;
-        this.totalPages = res.totalPages;
+        this.totalPages = res.totalPages - 1;
     })
   }
 
@@ -37,7 +47,6 @@ export class UsersComponent implements OnInit {
     else
       this.page = 0;
 
-    console.log(this.page);
     this.loadAllUsers();
   }
 
@@ -47,7 +56,6 @@ export class UsersComponent implements OnInit {
     else
       this.page = this.totalPages
 
-    console.log(this.page);
     this.loadAllUsers();
   }
 
@@ -55,7 +63,24 @@ export class UsersComponent implements OnInit {
     if(page <= this.totalPages || page >= 0)
       this.page = page;
 
-    console.log(page);
+    this.loadAllUsers();
+  }
+
+  newRole(role: string){
+    this.filterBy = role;
+    
+    this.loadAllUsers();
+  }
+
+  newSort(sort: string){
+    this.sortBy = sort;
+
+    this.loadAllUsers();
+  }
+
+  newOrder(order: string){
+    this.orderBy = order;
+
     this.loadAllUsers();
   }
 

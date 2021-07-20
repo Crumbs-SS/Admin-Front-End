@@ -41,6 +41,9 @@ import { PhoneFormatPipe } from './Shared/Custom/phone-format.pipe';
 import { DeleteUsersComponent } from './Components/Users/delete-users/delete-users.component';
 import { EnableUsersComponent } from './Components/Users/enable-users/enable-users.component';
 import { PaginationComponent } from './Components/pagination/pagination.component';
+import { FilterRoleComponent } from './Components/Users/filter-role/filter-role.component';
+import { SortUsersComponent } from './Components/Users/sort-users/sort-users.component';
+import { OrderUsersComponent } from './Components/Users/order-users/order-users.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +70,9 @@ import { PaginationComponent } from './Components/pagination/pagination.componen
     DeleteUsersComponent,
     EnableUsersComponent,
     PaginationComponent,
+    FilterRoleComponent,
+    SortUsersComponent,
+    OrderUsersComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.css']
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent {
 
   @Output() previous: EventEmitter<void> = new EventEmitter<void>();
   @Output() next: EventEmitter<void> = new EventEmitter<void>();
@@ -15,9 +15,6 @@ export class PaginationComponent implements OnInit {
   @Input() currentPage: number = 0;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   onSelected(number: number){
     this.selected.emit(number);

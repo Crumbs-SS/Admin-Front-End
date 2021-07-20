@@ -21,8 +21,11 @@ export class AccountService {
       return this.http.get(this.accountsUrl + '/owners/' + username);
   }
   
-  public getUsers(page=0, size=5) :Observable<any>{
-    return this.http.get(this.accountsUrl + `/users?page=${page}&size=${size}`);
+  public getUsers(page=0, size=5, {sortBy='', orderBy='', filterBy=''}) :Observable<any>{
+    console.log(filterBy);
+    
+    return this.http.get(this.accountsUrl +
+       `/users?page=${page}&size=${size}&sortBy=${sortBy}&orderBy=${orderBy}&filterBy=${filterBy}`);
   }
 
   public updateUser(user: User, userId: number){

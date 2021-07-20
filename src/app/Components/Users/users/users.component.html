@@ -7,6 +7,10 @@
         <div class="col-sm-6">
         </div>
       </div>
+      
+      <app-filter-role (newRoleEvent)="newRole($event)"></app-filter-role>
+      <app-sort-users (newSortEvent)="newSort($event)"></app-sort-users>
+      <app-order-users (newOrderEvent)="newOrder($event)" ></app-order-users>
       <app-pagination 
       [totalPages]='totalPages'
       [currentPage]='page'
