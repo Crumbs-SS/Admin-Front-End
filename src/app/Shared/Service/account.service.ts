@@ -22,8 +22,7 @@ export class AccountService {
   }
   
   public getUsers(page=0, size=5, {sortBy='', orderBy='', filterBy='', query=''}) :Observable<any>{
-    console.log(filterBy);
-    
+        
     return this.http.get(this.accountsUrl +
        `/users?page=${page}&size=${size}&sortBy=${sortBy}&orderBy=${orderBy}&filterBy=${filterBy}&query=${query}`);
   }

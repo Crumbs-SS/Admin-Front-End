@@ -40,7 +40,12 @@ export class UsersComponent implements OnInit {
         this.users = content.map((user: User) => new User().deserialize(user));            
         this.totalUsers = res.totalElements;
         this.totalPages = res.totalPages - 1;
+        if(this.page > this.totalPages && this.totalPages > 0){          
+          this.page = this.totalPages;
+          this.loadAllUsers();      
+        }
     })
+
   }
 
   previousPage(){
@@ -70,6 +75,7 @@ export class UsersComponent implements OnInit {
 
   newRole(role: string){
     this.filterBy = role;
+    this.query = '';
     
     this.loadAllUsers();
   }
