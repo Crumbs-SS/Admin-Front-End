@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { EditUserFormComponent } from './edit-user-form.component';
 
@@ -8,7 +10,8 @@ describe('EditUserFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditUserFormComponent ]
+      declarations: [ EditUserFormComponent ],
+      imports: [HttpClientTestingModule, ReactiveFormsModule],
     })
     .compileComponents();
   });

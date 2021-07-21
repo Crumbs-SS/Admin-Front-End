@@ -1,5 +1,4 @@
 import { Component, OnInit , Input,Output, EventEmitter} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RestaurantDTO } from 'src/app/Models/RestaurantDTO';
 import { RestaurantService } from 'src/app/Shared/Service/restaurant.service';
@@ -20,8 +19,7 @@ export class UpdateRestaurantComponent implements OnInit{
   locationError: boolean = false;
   catOptions: Category[] = [];
   
-  constructor(private route: ActivatedRoute, private router: Router,
-    private HttpService: RestaurantService, private modalService: NgbModal) {
+  constructor(private HttpService: RestaurantService, private modalService: NgbModal) {
     this.restaurantDTO = new RestaurantDTO();
    }
    ngOnInit() {

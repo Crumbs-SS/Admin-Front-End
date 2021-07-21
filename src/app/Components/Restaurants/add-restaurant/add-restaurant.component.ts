@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { RestaurantService } from 'src/app/Shared/Service/restaurant.service';
 import { RestaurantDTO } from 'src/app/Models/RestaurantDTO';
 import { OwnerRegistrationDTO } from 'src/app/Models/OwnerRegistrationDTO';
@@ -27,7 +27,6 @@ export class AddRestaurantComponent {
   categories: Category[] = [];
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private restaurantService: RestaurantService, private accountService: AccountService) {
     this.addRestaurantDTO = new RestaurantDTO();
