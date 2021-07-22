@@ -1,22 +1,22 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewRestaurantComponents } from './view-restaurants.component';
+import { EnableUsersComponent } from './enable-users.component';
 
-describe('RudRestaurantsComponent', () => {
-  let component: ViewRestaurantComponents;
-  let fixture: ComponentFixture<ViewRestaurantComponents>;
+describe('EnableUsersComponent', () => {
+  let component: EnableUsersComponent;
+  let fixture: ComponentFixture<EnableUsersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewRestaurantComponents ],
+      declarations: [ EnableUsersComponent ],
       imports: [HttpClientTestingModule]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewRestaurantComponents);
+    fixture = TestBed.createComponent(EnableUsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

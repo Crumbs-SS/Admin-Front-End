@@ -1,0 +1,70 @@
+<ng-template #modalTemplate let-modal>
+    <div class="modal-header">
+        <h1> Edit User </h1>
+        
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+    <div class="modal-body">
+        <form class='form-group' [formGroup]='newUser' (ngSubmit)="onSubmit()">
+            
+            <div class='form-group'>
+                <label for="firstName">First Name: </label>
+                <input class='form-control' type="text" id="firstName" formControlName="firstName">
+                <div *ngIf="(firstName.invalid && firstName.touched) || firstName.dirty">
+                    <small class="form-text" *ngIf="firstName.errors?.required" class="text-danger">First name is required</small>
+                    <small class="form-text" *ngIf="firstName.errors?.maxlength" class="text-danger">Max characters are 20</small>
+                    <small class="form-text" *ngIf="firstName.errors?.pattern" class="text-danger">Name can only contain letters and apostrophes.</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name: </label>
+                <input class='form-control' type="text" id="lastName" formControlName="lastName">    
+                <div *ngIf="(lastName.invalid && lastName.touched) || lastName.dirty">
+                    <small class="form-text" *ngIf="lastName.errors?.required" class="text-danger">Last name is required</small>
+                    <small class="form-text" *ngIf="lastName.errors?.maxlength" class="text-danger">Max characters are 20</small>
+                    <small class="form-text" *ngIf="lastName.errors?.pattern" class="text-danger">Name can only contain letters and apostrophes.</small>
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label for="username">Username: </label>
+                <input class='form-control' type="text" id="username" formControlName="username">
+                <div *ngIf="(username.invalid && username.touched) || username.dirty">
+                    <small class="form-text" *ngIf="username.errors?.required" class="text-danger">Username is required</small>
+                    <small class="form-text" *ngIf="username.errors?.maxlength" class="text-danger">Max characters are 25</small>
+                    <small class="form-text" *ngIf="username.errors?.pattern" class="text-danger">Username can only contain letters and numbers.</small>
+                    
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="email">Email: </label>
+                <input class='form-control' type="email" id="email" formControlName="email">
+                <div *ngIf="(email.invalid && email.touched) || email.dirty">
+                    <small class="form-text" *ngIf="email.errors?.required" class="text-danger">Email is required</small>
+                    <small class="form-text" *ngIf="email.errors?.pattern" class="text-danger">Please provide a valid email address</small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone: </label>
+                <input class='form-control' type="text" id="phone" formControlName="phone">
+                <div *ngIf="(phone.invalid && phone.touched) || phone.dirty">
+                    <small class="form-text" *ngIf="phone.errors?.required" class="text-danger">Phone number  is required</small>
+                    <small class="form-text" *ngIf="phone.errors?.pattern || phone.errors?.maxlength || phone.errors?.minlength" class="text-danger">Please provide a valid phone number</small>
+                </div>
+            </div>
+
+            <p class='form-text text-danger error' *ngIf="error">{{ error }}</p>
+            <button type="submit" class="btn btn-primary" [disabled]='!newUser.valid'>Update</button>
+        </form>
+    </div>
+</ng-template>
+
+<button type="button" class="btn btn-primary" (click)='openModal(modalTemplate)'>Edit</button>

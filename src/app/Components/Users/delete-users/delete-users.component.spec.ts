@@ -1,22 +1,22 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ViewRestaurantComponents } from './view-restaurants.component';
+import { DeleteUsersComponent } from './delete-users.component';
 
-describe('RudRestaurantsComponent', () => {
-  let component: ViewRestaurantComponents;
-  let fixture: ComponentFixture<ViewRestaurantComponents>;
+describe('DeleteUsersComponent', () => {
+  let component: DeleteUsersComponent;
+  let fixture: ComponentFixture<DeleteUsersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewRestaurantComponents ],
-      imports: [HttpClientTestingModule]
+      declarations: [ DeleteUsersComponent ],
+      imports: [ HttpClientTestingModule ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ViewRestaurantComponents);
+    fixture = TestBed.createComponent(DeleteUsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AddRestaurantComponent } from './add-restaurant.component';
 
@@ -10,12 +11,7 @@ describe('AddRestaurantComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ AddRestaurantComponent ],
-      providers:
-      [
-        {
-          provide: ActivatedRoute,
-        }
-      ]
+      imports: [RouterTestingModule, HttpClientTestingModule]
     })
     .compileComponents();
   });

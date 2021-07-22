@@ -1,0 +1,20 @@
+<mat-form-field appearance="fill">
+    <mat-label>Sort By</mat-label>
+    <mat-select>
+      <mat-option (click)="newSort('id')">
+        Id
+      </mat-option>
+      <mat-option (click)="newSort('email')">
+        Email
+      </mat-option>
+      <mat-option (click)="newSort('firstName')">
+        First Name
+      </mat-option>
+      <mat-option (click)="newSort('lastName')">
+        Last Name
+      </mat-option>
+      <mat-option (click)="newSort('username')">
+        Username
+      </mat-option>
+    </mat-select>
+  </mat-form-field>

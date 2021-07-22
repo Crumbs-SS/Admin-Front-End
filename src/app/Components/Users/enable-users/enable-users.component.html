@@ -1,0 +1,32 @@
+<ng-template #modalTemplate let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Confirm</h4>
+        <button type="button" class="close" aria-label="Close"
+            (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <form [formGroup]='form' (ngSubmit)='enableUser()' class='form-group'>
+
+            <p>Are you sure you wish to enable the selected roles for user: <b>{{user.username}}</b>?</p>
+
+            <ng-container *ngFor="let role of roles; let i = index">
+                <div class='form-group'>
+                    <input [id]='role' type="checkbox" [formControlName]='role'>
+                    <label class='form-check-label' [for]='role'> {{ role }} </label>
+                </div>
+                
+            </ng-container>
+                
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" 
+                    (click)="modal.dismiss()">Cancel</button>
+                <button type="submit" class="btn btn-success"> Enable </button>
+            </div>
+        </form>
+
+    </div>
+</ng-template>
+<button type="button" class="btn btn-success" (click)="open(modalTemplate)">Enable</button>
