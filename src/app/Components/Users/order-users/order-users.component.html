@@ -1,0 +1,11 @@
+<mat-form-field appearance="fill">
+    <mat-label>Order by</mat-label>
+    <mat-select>
+      <mat-option (click)="newOrder('asc')">
+        Ascending
+      </mat-option>
+      <mat-option (click)="newOrder('desc')">
+        Descending
+      </mat-option>
+    </mat-select>
+  </mat-form-field>

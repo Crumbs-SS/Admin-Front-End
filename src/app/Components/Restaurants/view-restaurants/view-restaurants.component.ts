@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RestaurantService } from 'src/app/Shared/Service/restaurant.service';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view-restaurants',
@@ -17,8 +15,7 @@ export class ViewRestaurantComponents implements OnInit {
   rating!: number;
   status!: String;
 
-  constructor(private route: ActivatedRoute, private router: Router,
-    private HttpService: RestaurantService, private modalService: NgbModal) {}
+  constructor(private HttpService: RestaurantService) {}
 
   ngOnInit() {
     this.loadAllRestaurants();

@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, Output ,EventEmitter} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { RestaurantService } from 'src/app/Shared/Service/restaurant.service';
@@ -15,8 +14,7 @@ export class DeleteRestaurantComponent implements OnInit {
   @Output() deleted = new EventEmitter<boolean>();
   deleteSuccess: boolean = true;
 
-  constructor(private route: ActivatedRoute, private router: Router,
-    private HttpService: RestaurantService, private modalService: NgbModal) { }
+  constructor(private HttpService: RestaurantService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
   }

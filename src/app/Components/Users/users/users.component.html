@@ -1,1 +1,69 @@
-<p>users works!</p>
+<div class="card my-5">
+    <h1 style="text-align: center;">Users</h1>
+    <div class="card-body">
+      <h2 style="text-align: center;"> Total number of users: {{ totalUsers }}</h2>
+      
+      <form class='form-group row' (ngSubmit)='loadAllUsers()'>
+        <label for="search" class="col-sm-2 col-form-label" style="text-align: right;">Search</label>
+        <div class="col-sm-6">
+          <input type="text" [(ngModel)]="query" class="form-control" id="search" name='query'>
+        </div>
+      </form>
+
+      <app-filter-role (newRoleEvent)="newRole($event)"></app-filter-role>
+      <app-sort-users (newSortEvent)="newSort($event)"></app-sort-users>
+      <app-order-users (newOrderEvent)="newOrder($event)" ></app-order-users>
+      <app-pagination 
+      [totalPages]='totalPages'
+      [currentPage]='page'
+      (previous)='previousPage()' 
+      (next)='nextPage()' 
+      (selected)='pageSelected($event)'></app-pagination>
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone Number</th> 
+            <th scope="col">Roles</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete/Enable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.id}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.getFullName()}}</td>
+            <td> {{ user.email }} </td>
+            <td> {{ user.phone | phoneFormat }} </td>
+            <td> {{ user.getRoles() }} </td>
+            <td>
+              <app-edit-user-form [user]='user' (updatedUser)='loadAllUsers()'></app-edit-user-form>
+            </td>
+            <td>
+              <app-delete-users 
+                (userDeleted)='loadAllUsers()'
+                *ngIf="user.getRoles() !== 'Deleted' " 
+                [user]='user'></app-delete-users>
+              <app-enable-users 
+                *ngIf="user.getRoles() === 'Deleted' " 
+                [user]='user'
+                (userEnabled)='loadAllUsers()'
+              ></app-enable-users>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <app-pagination 
+        [totalPages]='totalPages'
+        [currentPage]='page'
+        (previous)='previousPage()' 
+        (next)='nextPage()' 
+        (selected)='pageSelected($event)'></app-pagination>
+    </div>
+  </div>
+  
