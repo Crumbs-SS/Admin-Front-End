@@ -1,5 +1,13 @@
 <div class="card my-5">
     <h1 style="text-align: center;">Orders</h1>
+
+    <form class='form-group row' (ngSubmit)='getOrders()'>
+      <label for="search" class="col-sm-2 col-form-label" style="text-align: right;">Search</label>
+      <div class="col-sm-6">
+        <input type="text" [(ngModel)]="query" class="form-control" id="search" name='query'>
+      </div>
+      <button mat-raised-button color="primary">Submit</button>
+    </form>
     <div class="card-body">
       <mat-paginator
       (page)="returnPageState($event)"
@@ -8,6 +16,8 @@
       [length]="totalOrders"
       [showFirstLastButtons]="true">
     </mat-paginator>
+    <app-filter-order (newStatusEmitter)=newStatusEmitter($event) ></app-filter-order>
+
       <table class="table table-bordered table-striped">
         <thead class="thead-dark">
           <tr>

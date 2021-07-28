@@ -28,7 +28,14 @@ export class OrdersComponent implements OnInit {
   }
 
   getOrders(){
-    this.orderService.getOrders(this.page, this.size).subscribe((res: any) => {
+    const extras = {
+      query: this.query,
+      filterBy: this.filterBy,
+      sortBy: this.sortBy,
+      orderBy: this.orderBy
+    }
+
+    this.orderService.getOrders(this.page, this.size, extras).subscribe((res: any) => {
       const content = res.content;
 
       if(content){
@@ -42,6 +49,11 @@ export class OrdersComponent implements OnInit {
       }
 
     })
+  }
+
+  newStatusEmitter(input: any){
+    this.filterBy = input;
+    this.getOrders();
   }
 
   returnPageState(val: PageEvent) {

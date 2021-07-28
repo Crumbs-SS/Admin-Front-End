@@ -10,7 +10,8 @@ export class OrdersService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getOrders(page: number, size: number){
-    return this.httpClient.get(this.rootUrl + `/orders?page=${page}&size=${size}`);
+  public getOrders(page: number, size: number, extras: any){
+    return this.httpClient.get(this.rootUrl + 
+      `/orders?page=${page}&size=${size}&query=${extras.query}&filterBy=${extras.filterBy}`);
   }
 }
