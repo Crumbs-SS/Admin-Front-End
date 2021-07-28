@@ -47,6 +47,8 @@ import { OrderUsersComponent } from './Components/Users/order-users/order-users.
 import { EditOrderComponent } from './Components/Orders/edit-order/edit-order.component';
 import { DeleteOrderComponent } from './Components/Orders/delete-order/delete-order.component';
 import { FilterOrderComponent } from './Components/Orders/filter-order/filter-order.component';
+import { SortOrdersComponent } from './Components/Orders/sort-orders/sort-orders.component';
+import { OrderByOrdersComponent } from './Components/Orders/order-by-orders/order-by-orders.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +79,9 @@ import { FilterOrderComponent } from './Components/Orders/filter-order/filter-or
     OrderUsersComponent,
     EditOrderComponent,
     DeleteOrderComponent,
-    FilterOrderComponent
+    FilterOrderComponent,
+    SortOrdersComponent,
+    OrderByOrdersComponent
   ],
   imports: [
     BrowserModule,

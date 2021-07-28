@@ -56,6 +56,16 @@ export class OrdersComponent implements OnInit {
     this.getOrders();
   }
 
+  newSortByEvent(input: any){
+    this.sortBy = input;
+    this.getOrders();
+  }
+
+  newOrderBy(input: any){
+    this.orderBy = input;
+    this.getOrders();
+  }
+
   returnPageState(val: PageEvent) {
     this.size = val.pageSize;
     this.page = val.pageIndex;

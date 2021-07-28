@@ -17,7 +17,8 @@
       [showFirstLastButtons]="true">
     </mat-paginator>
     <app-filter-order (newStatusEmitter)=newStatusEmitter($event) ></app-filter-order>
-
+    <app-sort-orders (newSortByEvent)=newSortByEvent($event) ></app-sort-orders>
+    <app-order-by-orders (orderByEmitter)="newOrderBy($event)" ></app-order-by-orders>
       <table class="table table-bordered table-striped">
         <thead class="thead-dark">
           <tr>
