@@ -13,12 +13,15 @@
       <app-filter-role (newRoleEvent)="newRole($event)"></app-filter-role>
       <app-sort-users (newSortEvent)="newSort($event)"></app-sort-users>
       <app-order-users (newOrderEvent)="newOrder($event)" ></app-order-users>
-      <app-pagination 
-      [totalPages]='totalPages'
-      [currentPage]='page'
-      (previous)='previousPage()' 
-      (next)='nextPage()' 
-      (selected)='pageSelected($event)'></app-pagination>
+
+      <mat-paginator
+      (page)="returnPageState($event)"
+      [pageSize]="size"
+      [pageSizeOptions]="pageOptions"
+      [length]="totalUsers"
+      [showFirstLastButtons]="true">
+    </mat-paginator>
+
       <table class="table table-bordered table-striped">
         <thead class="thead-dark">
           <tr>
@@ -58,12 +61,14 @@
           </tr>
         </tbody>
       </table>
-      <app-pagination 
-        [totalPages]='totalPages'
-        [currentPage]='page'
-        (previous)='previousPage()' 
-        (next)='nextPage()' 
-        (selected)='pageSelected($event)'></app-pagination>
+
+      <mat-paginator
+      (page)="returnPageState($event)"
+      [pageSize]="size"
+      [pageSizeOptions]="pageOptions"
+      [length]="totalUsers"
+      [showFirstLastButtons]="true">
+    </mat-paginator>
     </div>
   </div>
   

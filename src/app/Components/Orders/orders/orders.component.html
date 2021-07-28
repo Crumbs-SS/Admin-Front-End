@@ -1,16 +1,13 @@
 <div class="card my-5">
-    <h1 style="text-align: center;">Users</h1>
+    <h1 style="text-align: center;">Orders</h1>
     <div class="card-body">
-      <h2 style="text-align: center;"> Orders </h2>
-      <app-filter-role (newRoleEvent)="newRole($event)"></app-filter-role>
-      <app-sort-users (newSortEvent)="newSort($event)"></app-sort-users>
-      <app-order-users (newOrderEvent)="newOrder($event)" ></app-order-users>
-      <app-pagination 
-      [totalPages]='totalPages'
-      [currentPage]='page'
-      (previous)='previousPage()' 
-      (next)='nextPage()' 
-      (selected)='pageSelected($event)'></app-pagination>
+      <mat-paginator
+      (page)="returnPageState($event)"
+      [pageSize]="size"
+      [pageSizeOptions]="pageOptions"
+      [length]="totalOrders"
+      [showFirstLastButtons]="true">
+    </mat-paginator>
       <table class="table table-bordered table-striped">
         <thead class="thead-dark">
           <tr>
@@ -25,44 +22,36 @@
             <th scope='col'>Created At</th>
             <th scope='col'>Preferences</th>
             <th scope='col'>Phone</th>
-
-
-
-
+            <th scope='col'>Edit</th>
+            <th scope='col'>Delete</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let user of users">
-            <td>{{user.id}}</td>
-            <td>{{user.username}}</td>
-            <td>{{user.getFullName()}}</td>
-            <td> {{ user.email }} </td>
-            <td> {{ user.phone | phoneFormat }} </td>
-            <td> {{ user.getRoles() }} </td>
-            <td>
-              <app-edit-user-form [user]='user' (updatedUser)='loadAllUsers()'></app-edit-user-form>
-            </td>
-            <td>
-              <app-delete-users 
-                (userDeleted)='loadAllUsers()'
-                *ngIf="user.getRoles() !== 'Deleted' " 
-                [user]='user'></app-delete-users>
-              <app-enable-users 
-                *ngIf="user.getRoles() === 'Deleted' " 
-                [user]='user'
-                (userEnabled)='loadAllUsers()'
-              ></app-enable-users>
-
-            </td>
+          <tr *ngFor='let order of orders'>
+            <td>{{order.id}}</td>
+            <td>{{order.customer.userDetails.getFullName()}}</td>
+            <td>{{order.driver}}</td>
+            <td>{{order.restaurant.name}}</td>
+            <td>{{order.payment}}</td>
+            <td>{{order.deliveryLocation.toString()}}</td>
+            <td>{{order.orderStatus}}</td>
+            <td>{{order.deliveryTime}}</td>
+            <td>{{order.createdAt}}</td>
+            <td>{{order.preferences}}</td>
+            <td>{{order.phone | phoneFormat}}</td>
+            <td><app-edit-order></app-edit-order></td>
+            <td><app-delete-order></app-delete-order></td>
           </tr>
         </tbody>
       </table>
-      <app-pagination 
-        [totalPages]='totalPages'
-        [currentPage]='page'
-        (previous)='previousPage()' 
-        (next)='nextPage()' 
-        (selected)='pageSelected($event)'></app-pagination>
+
+      <mat-paginator
+      (page)="returnPageState($event)"
+      [pageSize]="size"
+      [pageSizeOptions]="pageOptions"
+      [length]="totalOrders"
+      [showFirstLastButtons]="true">
+    </mat-paginator>
     </div>
   </div>
   

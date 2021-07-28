@@ -1,5 +1,3 @@
-import { isEmptyBindingElement } from "typescript";
-import { PhoneFormatPipe } from "../Shared/Custom/phone-format.pipe";
 import { Deserializable } from "./deserializable";
 
 export class User implements Deserializable{

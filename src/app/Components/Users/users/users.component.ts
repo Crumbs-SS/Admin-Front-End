@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/Shared/Service/account.service';
 import { User } from 'src/app/Models/User';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-users',
@@ -10,6 +11,7 @@ import { User } from 'src/app/Models/User';
 export class UsersComponent implements OnInit {
 
   users: User[] = [];
+  pageOptions = [5, 10 ,15];
   totalUsers = 0;
   page = 0;
   size = 5;
@@ -48,28 +50,9 @@ export class UsersComponent implements OnInit {
 
   }
 
-  previousPage(){
-    if(this.page > 0)
-      this.page -= 1;
-    else
-      this.page = 0;
-
-    this.loadAllUsers();
-  }
-
-  nextPage(){
-    if(this.page < this.totalPages)
-      this.page += 1;
-    else
-      this.page = this.totalPages
-
-    this.loadAllUsers();
-  }
-
-  pageSelected(page: number){
-    if(page <= this.totalPages || page >= 0)
-      this.page = page;
-
+  returnPageState(val: PageEvent) {
+    this.size = val.pageSize;
+    this.page = val.pageIndex;
     this.loadAllUsers();
   }
 

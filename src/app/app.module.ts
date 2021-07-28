@@ -10,6 +10,7 @@ import {NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 //Service
 import { RestaurantService } from './Shared/Service/restaurant.service';
@@ -40,10 +41,11 @@ import { SortPipe } from './Shared/Custom/sort.pipe';
 import { PhoneFormatPipe } from './Shared/Custom/phone-format.pipe';
 import { DeleteUsersComponent } from './Components/Users/delete-users/delete-users.component';
 import { EnableUsersComponent } from './Components/Users/enable-users/enable-users.component';
-import { PaginationComponent } from './Components/pagination/pagination.component';
 import { FilterRoleComponent } from './Components/Users/filter-role/filter-role.component';
 import { SortUsersComponent } from './Components/Users/sort-users/sort-users.component';
 import { OrderUsersComponent } from './Components/Users/order-users/order-users.component';
+import { EditOrderComponent } from './Components/Orders/edit-order/edit-order.component';
+import { DeleteOrderComponent } from './Components/Orders/delete-order/delete-order.component';
 
 @NgModule({
   declarations: [
@@ -69,10 +71,11 @@ import { OrderUsersComponent } from './Components/Users/order-users/order-users.
     EditUserFormComponent,
     DeleteUsersComponent,
     EnableUsersComponent,
-    PaginationComponent,
     FilterRoleComponent,
     SortUsersComponent,
     OrderUsersComponent,
+    EditOrderComponent,
+    DeleteOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +88,8 @@ import { OrderUsersComponent } from './Components/Users/order-users/order-users.
     NgbModule,
     ReactiveFormsModule,
     MatStepperModule,
-    MatRadioModule
+    MatRadioModule,
+    MatPaginatorModule
   ],
   providers: [RestaurantService, AccountService, SortPipe],
   bootstrap: [AppComponent]
