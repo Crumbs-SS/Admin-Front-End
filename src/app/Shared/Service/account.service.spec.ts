@@ -1,5 +1,5 @@
 
-import { TestBed , inject} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { AccountService } from './account.service';
 import { User } from 'src/app/Models/User';
