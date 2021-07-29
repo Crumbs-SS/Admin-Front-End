@@ -6,7 +6,8 @@ export class Order implements Deserializable{
 
     public createdAt: any;
     public customer: Customer = new Customer();
-    public deliveryTime: any;
+    public deliveryTime: Date = new Date();
+    public isoTime: Date = new Date();
     public deliveryLocation: Location = new Location();
     public driver: any;
     public foodOrders: any;
@@ -18,11 +19,9 @@ export class Order implements Deserializable{
     public restaurant: any;
 
 
-    deserialize(input: any): this{
+    deserialize(input: any): this{        
         this.createdAt = new Date(input.createdAt).toLocaleString();
-        this.customer = new Customer().deserialize(input.customer);
-        this.deliveryLocation = new Location().deserialize(input.deliveryLocation);
-        this.deliveryTime = new Date(input.deliveryTime).toLocaleString();
+        this.deliveryTime = new Date(input.deliveryTime);
         this.driver = input.driver;
         this.foodOrders = input.foodOrders;
         this.orderStatus = input.orderStatus.status;
@@ -31,6 +30,13 @@ export class Order implements Deserializable{
         this.restaurant = input.restaurant;
         this.phone = input.phone;
         this.id = input.id;
+        this.isoTime = new Date(new Date(this.deliveryTime)
+            .setHours(this.deliveryTime.getHours() - 5));
+        
+        if(input.customer)
+            this.customer = new Customer().deserialize(input.customer);
+        if(input.deliveryLocation)
+            this.deliveryLocation = new Location().deserialize(input.deliveryLocation);
 
 
         return this;

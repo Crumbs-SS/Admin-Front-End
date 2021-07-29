@@ -1,4 +1,69 @@
+<ng-template #modalTemplate let-modal>
+    <div class="modal-header">
+        <h1> Edit Order </h1>
+        
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+    <div class="modal-body">
+        <form class='form-group' [formGroup]='newOrder' (ngSubmit)="onSubmit()">
+            
+
+            <div class="form-group">
+                <label for="street">Street Address: </label>
+                <input class='form-control' type="text" id="street" formControlName="street">    
+                <div *ngIf="(street.invalid && street.touched) || street.dirty">
+                    <small class="form-text" *ngIf="street.errors?.required" class="text-danger">Street address is required</small>
+                    <small class="form-text" *ngIf="street.errors?.maxlength" class="text-danger">Max characters are 50</small>
+                    <small class="form-text" *ngIf="street.errors?.minlength" class="text-danger">Min characters are 5</small>
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label for="phone">Phone: </label>
+                <input class='form-control' type="text" id="phone" formControlName="phone">
+                <div *ngIf="(phone.invalid && phone.touched) || phone.dirty">
+                    <small class="form-text" *ngIf="phone.errors?.required" class="text-danger">Phone number  is required</small>
+                    <small class="form-text" *ngIf="phone.errors?.pattern || phone.errors?.maxlength || phone.errors?.minlength" class="text-danger">Please provide a valid phone number</small>
+                </div>
+            </div>
+
+            <div class='form-group'>
+                <label for="preferences">Preferences: </label>
+                <textarea class='form-control' type="text" id="preferences" formControlName="preferences"></textarea>
+            </div>
+
+            <div class='form-group'>
+                <label for='deliveryTime'>Delivery Time: </label>
+                <input 
+                    type="datetime-local" 
+                    id="deliveryTime" 
+                    class="form-control" 
+                    formControlName="deliveryTime"
+                    [min]="minDate"
+                    [max]="maxDate"
+                />
+            </div>
 
 
 
-<button type="button" class="btn btn-primary">Edit</button>
+            <div class="form-group">
+                <label for="orderStatus">Order Status: </label>
+                <select class="form-control col-md-6" formControlName="orderStatus">
+                    <option>AWAITING_DRIVER</option>
+                    <option>FULFILLED</option>
+                    <option>DELIVERING</option>
+                </select>
+            </div>
+
+            <p class='form-text text-danger error' *ngIf="error">{{ error }}</p>
+            <button type="submit" class="btn btn-primary" [disabled]='!newOrder.valid'>Update</button>
+        </form>
+    </div>
+</ng-template>
+
+
+<button type="button" class="btn btn-primary" (click)='openModal(modalTemplate)'>Edit</button>

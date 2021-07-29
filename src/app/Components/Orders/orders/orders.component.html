@@ -24,9 +24,7 @@
           <tr>
             <th scope="col">#</th>
             <th scope='col'>Customer</th>
-            <th scope='col'>Driver</th>
             <th scope='col'>Restaurant</th>
-            <th scope='col'>Payment</th>
             <th scope='col'>Delivery Address</th>
             <th scope='col'>Status</th>
             <th scope='col'>Delivery Time</th>
@@ -41,16 +39,17 @@
           <tr *ngFor='let order of orders'>
             <td>{{order.id}}</td>
             <td>{{order.customer.userDetails.getFullName()}}</td>
-            <td>{{order.driver}}</td>
             <td>{{order.restaurant.name}}</td>
-            <td>{{order.payment}}</td>
             <td>{{order.deliveryLocation.toString()}}</td>
             <td>{{order.orderStatus}}</td>
-            <td>{{order.deliveryTime}}</td>
+            <td>{{order.deliveryTime.toLocaleString()}}</td>
             <td>{{order.createdAt}}</td>
             <td>{{order.preferences}}</td>
             <td>{{order.phone | phoneFormat}}</td>
-            <td><app-edit-order></app-edit-order></td>
+            <td><app-edit-order
+              (updateOrder)='getOrders()'
+              [order]='order'
+            ></app-edit-order></td>
             <td><app-delete-order></app-delete-order></td>
           </tr>
         </tbody>

@@ -1,6 +1,6 @@
-import { query } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UpdateOrder } from 'src/app/Models/UpdateOrder';
 
 @Injectable({
   providedIn: 'root'
@@ -16,4 +16,9 @@ export class OrdersService {
     return this.httpClient.get(this.rootUrl + 
       `/orders?page=${page}&size=${size}&query=${query}&filterBy=${filterBy}&sortBy=${sortBy}&orderBy=${orderBy}`);
   }
-}4
+
+  public updateOrder(order: UpdateOrder, id: number){
+    return this.httpClient.put(this.rootUrl+`/orders/${id}`, order);
+  }
+
+}
