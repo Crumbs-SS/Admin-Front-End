@@ -50,7 +50,10 @@
               (updateOrder)='getOrders()'
               [order]='order'
             ></app-edit-order></td>
-            <td><app-delete-order></app-delete-order></td>
+            <td><app-delete-order
+              [order]='order'
+              (deleteOrder)='getOrders()'
+              ></app-delete-order></td>
           </tr>
         </tbody>
       </table>

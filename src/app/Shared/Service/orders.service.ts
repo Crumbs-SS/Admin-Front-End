@@ -21,4 +21,8 @@ export class OrdersService {
     return this.httpClient.put(this.rootUrl+`/orders/${id}`, order);
   }
 
+  public deleteOrder(id: number){    
+    return this.httpClient.delete(this.rootUrl + `/orders/${id}`);
+  }
+
 }
