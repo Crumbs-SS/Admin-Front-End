@@ -10,6 +10,9 @@ import {NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatSelectModule} from '@angular/material/select';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatButtonModule} from '@angular/material/button';
+
 
 //Service
 import { RestaurantService } from './Shared/Service/restaurant.service';
@@ -29,6 +32,8 @@ import { ViewMenuComponent } from './Components/Restaurants/view-menu/view-menu.
 import { DeleteRestaurantComponent } from './Components/Restaurants/delete-restaurant/delete-restaurant.component';
 import { SortRestaurantsComponent } from './Components/Restaurants/sort-restaurants/sort-restaurants.component';
 import { FilterPriceRatingComponent } from './Components/Restaurants/filter-price-rating/filter-price-rating.component';
+import {SortDriversComponent} from './Components/Drivers/sort-drivers/sort-restaurants.component';
+import {FilterDriversComponent} from './Components/Drivers/filter-drivers/filter-drivers.component';
 
 //Pipes
 import { SearchfilterPipe } from './Shared/Custom/searchfilter.pipe';
@@ -37,11 +42,7 @@ import { RatingFilterPipe } from './Shared/Custom/ratingFilter.pipe';
 import { StatusFilterPipe } from './Shared/Custom/statusFilter.pipe';
 import { StateFilterPipe } from './Shared/Custom/stateFilter.pipe';
 import { SortPipe } from './Shared/Custom/sort.pipe';
-import {SortDriversComponent} from './Components/Drivers/sort-drivers/sort-restaurants.component';
-import {FilterDriversComponent} from './Components/Drivers/filter-drivers/filter-drivers.component';
 import {DriverNamePipe} from './Shared/Custom/driverNameSearch.pipe';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatButtonModule} from '@angular/material/button';
 
 
 
