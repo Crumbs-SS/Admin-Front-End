@@ -50,7 +50,6 @@ export class ViewDriversComponent implements OnInit {
   }
 
   returnSearchString() {
-    console.log('pressed button');
     this.loadDrivers();
   }
 
