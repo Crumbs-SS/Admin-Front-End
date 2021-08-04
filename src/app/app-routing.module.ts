@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 //Components
 import { AdminComponent } from './Components/Admin/admin/admin.component';
-import { DriversComponent } from './Components/Drivers/drivers/drivers.component';
+import { ViewDriversComponent} from './Components/Drivers/view-drivers/view-drivers.component';
 import { OrdersComponent } from './Components/Orders/orders/orders.component';
 import { UsersComponent } from './Components/Users/users/users.component';
 import { RestaurantsComponent } from './Components/Restaurants/restaurants/restaurants.component';
@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'crumbs/admin/drivers',
-    component: DriversComponent
+    component: ViewDriversComponent
   },
   {
     path: 'crumbs/admin/restaurants',

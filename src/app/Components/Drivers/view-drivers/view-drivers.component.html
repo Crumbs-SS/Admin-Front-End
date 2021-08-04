@@ -1,0 +1,49 @@
+<div class="card my-5">
+    <h1 style="text-align: center;">List of Drivers in Crumbs Food Service</h1>
+    <div class="card-body">
+        <div class='form-group row'>
+            <label for="search" class="col-sm-2 col-form-label" style="text-align: right;">Search</label>
+            <div class="col-sm-6">
+                <div style="display: flex;">
+                    <input type="text" [(ngModel)]="searchString" class="form-control" id="search">
+                    <button mat-raised-button color="primary" (click)="returnSearchString()">Submit</button>
+                </div>
+                <app-sort-drivers (newSortEvent)="returnSortConfig($event)"></app-sort-drivers>
+                <app-filter-drivers (newStatusFilterEvent)="returnStatusValue($event)"></app-filter-drivers>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone #</th>
+                <th scope="col">License Id</th>
+                <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let d of drivers;">
+                <td>{{d.id}}</td>
+                <td>{{d.username}}</td>
+                <td>{{d.firstName}}</td>
+                <td>{{d.lastName}}</td>
+                <td>{{d.email}}</td>
+                <td>{{d.phone}}</td>
+                <td>{{d.licenseId}}</td>
+                <td>{{d.state}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <mat-paginator
+                (page)="returnPageState($event)"
+                [pageSize]="pageSize"
+                [pageSizeOptions]="pageSizeOptions"
+                [length]="length"
+                [showFirstLastButtons]="true">
+        </mat-paginator>
+    </div>
+</div>
