@@ -1,50 +1,103 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import {  Router } from '@angular/router';
 import { RestaurantService } from 'src/app/Shared/Service/restaurant.service';
-import { AddRestaurantDTO } from 'src/app/Models/add-restaurant-dto';
+import { RestaurantDTO } from 'src/app/Models/RestaurantDTO';
+import { OwnerRegistrationDTO } from 'src/app/Models/OwnerRegistrationDTO';
 import { Category } from 'src/app/Models/category';
-import {FormControl} from '@angular/forms';
+import { AccountService } from 'src/app/Shared/Service/account.service';
+import { MatRadioChange } from '@angular/material/radio';
+import { MatStepper } from '@angular/material/stepper';
+import { ExistingOwnerDTO } from 'src/app/Models/ExistingOwnerDTO';
 
 @Component({
   selector: 'app-add-restaurant',
   templateUrl: './add-restaurant.component.html',
   styleUrls: ['./add-restaurant.component.css']
 })
-export class AddRestaurantComponent  {
+export class AddRestaurantComponent {
 
-  addRestaurantDTO: AddRestaurantDTO;
-  catOptions: Category[];
+  addRestaurantDTO: RestaurantDTO;
+  ownerRegistrationDTO: OwnerRegistrationDTO;
+  existingOwnerDTO: ExistingOwnerDTO;
+  newOwner !: boolean;
+
+  locationError: boolean = false;
+  errorMessage: string = "";
+
+  categories: Category[] = [];
 
   constructor(
-    private route: ActivatedRoute, 
-      private router: Router, 
-        private httpService: RestaurantService) {
-    this.addRestaurantDTO = new AddRestaurantDTO();
-    this.catOptions = [
-      {name:"American"},
-      {name:"Japanese"},
-      {name:"Italian"},
-      {name:"Pizza"},
-      {name:"Burger"},
-      {name:"Sushi"},
-      {name:"Fast-Food"},
-      {name:"Fine Dining"},
-      {name:"Breakfast"},
-      {name:"Healthy"}
-    ]
+    private router: Router,
+    private restaurantService: RestaurantService, private accountService: AccountService) {
+    this.addRestaurantDTO = new RestaurantDTO();
+    this.ownerRegistrationDTO = new OwnerRegistrationDTO();
+    this.existingOwnerDTO = new ExistingOwnerDTO();
   }
-  
+  ngOnInit() {
+    this.loadCategories();
+  }
+  loadCategories() {
+    this.restaurantService.getCategories().subscribe(res => {
+      this.categories = res;
+    });
+  }
   onSubmit() {
-    this.httpService.save(this.addRestaurantDTO).subscribe(
-      (result) => {this.gotoRestaurantList();},
+    this.locationError = false;
+
+    this.restaurantService.save(this.addRestaurantDTO).subscribe(
+      (response) => {
+        console.log(response);
+        this.gotoRestaurantList();
+      },
       (error) => {
         console.log(error)
-      alert(error.error.message)}
-      );
-  }
- 
-  gotoRestaurantList() {
-    this.router.navigate(['crumbs/admin/restaurants/rudRestaurants']);
+        if (error.error.message.includes("location")) {
+          this.locationError = true;
+        }
+      }
+    );
   }
 
+  gotoRestaurantList() {
+    this.router.navigate(['crumbs/admin/restaurants/viewRestaurants']);
+  }
+  onChange(change: MatRadioChange) {
+    this.newOwner = change.value;
+    this.errorMessage = "";
+    this.existingOwnerDTO.username="";
+    this.ownerRegistrationDTO.firstName="";
+    this.ownerRegistrationDTO.lastName="";
+    this.ownerRegistrationDTO.email="";
+    this.ownerRegistrationDTO.username="";
+    this.ownerRegistrationDTO.password="";
+    this.ownerRegistrationDTO.phone="";
+  }
+
+  checkUser(stepper: MatStepper) {
+
+    if (this.newOwner) {
+      this.accountService.registerOwner(this.ownerRegistrationDTO).subscribe(
+        (response: any) => {
+          this.addRestaurantDTO.ownerId = response;
+          stepper.next();
+        },
+        (error: any) => {
+          this.errorMessage = error.error.message;
+          console.log(error);
+        }
+      );
+    }
+    else {
+      this.accountService.ownerExists(this.existingOwnerDTO.username).subscribe(
+        (response: any) => {
+          this.addRestaurantDTO.ownerId = response;
+          stepper.next();
+        },
+        (error: any) => {
+          this.errorMessage = error.error.message;
+          console.log(error.error.message)
+        }
+      )
+    }
+  }
 }

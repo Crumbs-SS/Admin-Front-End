@@ -1,0 +1,28 @@
+<ng-template #menu let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Restaurant Menu</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <mat-card *ngFor="let item of restaurant.menuItems; let i=index">
+            <mat-card-header>
+                <mat-card-title>{{item.name}}</mat-card-title>
+                <mat-card-subtitle>{{item.price}}$</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="assets/burger.jpeg" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                <p>
+                    {{item.description}}
+                </p>
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+
+</ng-template>
+<button type="button" class="btn btn-primary" (click)="open(menu)">View Menu</button>

@@ -1,0 +1,20 @@
+<mat-form-field appearance="fill">
+    <mat-label>Sort By</mat-label>
+    <mat-select>
+      <mat-option (click)="newSortBy('id')">
+        Id
+      </mat-option>
+      <mat-option (click)="newSortBy('customer')">
+        Customer
+      </mat-option>
+      <mat-option (click)="newSortBy('deliveryLocation')">
+        Address
+      </mat-option>
+      <mat-option (click)="newSortBy('createdAt')">
+        Created At
+      </mat-option>
+      <mat-option (click)="newSortBy('restaurant')">
+        Restaurant
+      </mat-option>
+    </mat-select>
+  </mat-form-field>

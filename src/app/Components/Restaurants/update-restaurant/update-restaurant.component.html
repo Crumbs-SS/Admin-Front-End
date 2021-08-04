@@ -1,0 +1,240 @@
+<ng-template #update let-modal>
+
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <form (ngSubmit)="onViewChanges()" #restaurantForm="ngForm" [hidden]="updateStatus!=1">
+            <div>
+                <h1> Update Restaurant Owner Details</h1>
+                <div class="form-group">
+                    <h3>Original value: {{restaurant.restaurantOwner.userDetails.firstName}}</h3>
+                    <label for="firstName">Enter new restaurant owner first name or leave field blank:</label>
+                    <input type="text" [(ngModel)]="restaurantDTO.firstName" class="form-control" id="firstName"
+                        name="firstName" maxlength="30" pattern="^[a-zA-Z ]*$"
+                        [class.is-valid]="firstName.valid && firstName.dirty" #firstName="ngModel">
+                    <div *ngIf="firstName.errors?.pattern" class="alert alert-danger">
+                        First name can only contain letters
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h3>Original value: {{restaurant.restaurantOwner.userDetails.lastName}}</h3>
+                    <label for="lastName">Enter new restaurant owner last name or leave field blank:</label>
+                    <input type="text" [(ngModel)]="restaurantDTO.lastName" class="form-control" id="lastName"
+                        name="lastName" maxlength="30" pattern="^[a-zA-Z ]*$"
+                        [class.is-valid]="lastName.valid && lastName.dirty" #lastName="ngModel">
+                    <div *ngIf="lastName.errors?.pattern" class="alert alert-danger">
+                        Last name can only contain letters
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h3>Original value: {{restaurant.restaurantOwner.userDetails.email}}</h3>
+                    <label for="email">Enter new restaurant owner e-mail or leave field blank:</label>
+                    <input type="email" [(ngModel)]="restaurantDTO.email" class="form-control" id="email" name="email"
+                        pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [class.is-valid]="email.valid && email.dirty"
+                        #email="ngModel">
+                    <div *ngIf="email.errors?.pattern" class="alert alert-danger">
+                        Please provide a valid e-mail address
+                    </div>
+                    <div *ngIf="emailError" class="alert alert-danger">
+                        Restaurant owner with this email was already found in database. Please enter new e-mail address.
+                      </div>
+                </div>
+            </div>
+            <div>
+                <h1>Update Restaurant Location</h1>
+                <div class="form-group">
+                    <h3>Original value: {{restaurant.location.street}}</h3>
+                    <label for="address">Enter Street Address:</label>
+                    <input type="text" [(ngModel)]="restaurantDTO.street" class="form-control" id="address"
+                        name="address" maxlength="50" pattern="^[#.0-9a-zA-Z\s,-]+$"
+                        [class.is-valid]="address.valid && address.dirty" #address="ngModel">
+                    <div *ngIf="address.errors?.pattern" class="alert alert-danger">
+                        Special characters are not allowed in street address
+                    </div>
+                    <div *ngIf="locationError" class="alert alert-danger">
+                        This location already exists in database. Please enter new location.
+                     </div>
+                </div>
+                <div class="form-group">
+                    <h3>Original value: {{restaurant.location.city}}</h3>
+                    <label for="city">Enter new city:</label>
+                    <input type="text" [(ngModel)]="restaurantDTO.city" class="form-control" id="city" name="city"
+                        maxlength="15" pattern="^[a-zA-Z ]*$" [class.is-valid]="city.valid && address.dirty"
+                        #city="ngModel">
+                    <div *ngIf="city.errors?.pattern" class="alert alert-danger">
+                        City name can only contain letters
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h3>Original value: {{restaurant.location.zipCode}}</h3>
+                    <label for="zip">Enter new zip code:</label>
+                    <input type="text" [(ngModel)]="restaurantDTO.zip" class="form-control" id="zip" name="zip"
+                        minlength="5" maxlength="5" pattern="[0-9]*" [class.is-valid]="zip.valid && zip.dirty"
+                        #zip="ngModel">
+                    <div *ngIf="zip.errors?.minlength" class="alert alert-danger">
+                        Zip must be exactly 5 characters long.
+                    </div>
+                    <div *ngIf="zip.errors?.pattern" class="alert alert-danger">
+                        Zip must only consist of numbers
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h3>Original value: {{restaurant.location.state}}</h3>
+                    <label for="state">Enter new state:</label>
+                    <input type="text" [(ngModel)]="restaurantDTO.state" class="form-control" id="state" name="state"
+                        minlength="2" maxlength="2" pattern="^[a-zA-Z ]*$" [class.is-valid]="state.valid && state.dirty"
+                        #state="ngModel">
+                    <div *ngIf="state.errors?.pattern" class="alert alert-danger">
+                        State can only contain letters
+                    </div>
+                    <div *ngIf="state.errors?.minlength" class="alert alert-danger">
+                        State must be exactly 2 characters long.
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h1>Update Restaurant Details</h1>
+                <div class="form-group">
+                    <h3>Original value: {{restaurant.name}}</h3>
+                    <label for="resName">Enter new restaurant name or leave field blank:</label>
+                    <input type="text" [(ngModel)]="restaurantDTO.name" class="form-control" id="resName" name="resName"
+                        maxlength="30" [class.is-valid]="state.valid && state.dirty" #resName="ngModel">
+                </div>
+
+                <div class="form-group">
+                    <h3>Original value: {{restaurant.priceRating}}</h3>
+                    <label>Choose new price rating or leave blank: </label>
+                    <div class="form-control">
+                        <label class="radio-inline">
+                            <input type="radio" name="priceRating" value=1 [(ngModel)]="restaurantDTO.priceRating"
+                                #priceRating="ngModel">
+                            1 &nbsp;&nbsp;&nbsp;&nbsp;
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="priceRating" value=2 [(ngModel)]="restaurantDTO.priceRating"
+                                #priceRating="ngModel">
+                            2 &nbsp;&nbsp;&nbsp;&nbsp;
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="priceRating" value=3 [(ngModel)]="restaurantDTO.priceRating"
+                                #priceRating="ngModel">
+                            3
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h3>Original values:</h3>
+                    <p *ngFor="let cat of restaurant.categories">{{cat.id.categoryId}}</p>
+                    <label>Choose new restaurant categories or leave field blank:</label>
+                    <div>
+                        <mat-form-field appearance="fill">
+                            <mat-label>New Categories</mat-label>
+                        <mat-select name="categories" [(ngModel)]="restaurantDTO.categories" multiple size="10"
+                            id="categories"  #categories="ngModel">
+                            <mat-option *ngFor="let cat of catOptions" [value]="cat.name">{{cat.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary" >View Changes</button>
+            </div>
+            <!-- <pre>{{ restaurantDTO | json }}</pre> -->
+           
+        </form>
+
+        <div [hidden]="updateStatus!=2">
+
+            <div class="card-body">
+                <h1>You have modified these fields:</h1>
+                <br>
+                <h2>Restaurant Owner Details:</h2>
+                <div *ngIf="firstName.dirty && firstName.value!=''">
+                    <div> New First Name: {{ restaurantDTO.firstName }}</div>
+                    <div> Instead of: {{restaurant.restaurantOwner.userDetails.firstName}}</div>
+                </div>
+                <br>
+                <div *ngIf="lastName.dirty && lastName.value!=''">
+                    <div>New Last Name: {{ restaurantDTO.lastName}}</div>
+                    <div>Instead of: {{restaurant.restaurantOwner.userDetails.lastName}}</div>
+                </div>
+                <br>
+                <div *ngIf="email.dirty && email.value!=''">
+                    <div>New E-mail: {{ restaurantDTO.email }}</div>
+                    <div>Instead of: {{restaurant.restaurantOwner.userDetails.email}}</div>
+                    <div *ngIf="emailError" class="alert alert-danger">
+                        Restaurant owner with this email was already found in database. Please enter new e-mail address.
+                      </div>
+                </div>
+                <br><br>
+
+                <h2>Location Details:</h2>
+                <div *ngIf="address.dirty && address.value!=''">
+                    <div>New Street Address: {{ restaurantDTO.street }}</div>
+                    <div>Instead of: {{ restaurant.location.street}}</div>
+                    <div *ngIf="locationError" class="alert alert-danger">
+                        This location already exists in database. Please enter new location.
+                     </div>
+                </div>
+                <br>
+                <div *ngIf="city.dirty && city.value!=''">
+                    <div>New City: {{ restaurantDTO.city }}</div>
+                    <div>Instead of: {{ restaurant.location.city}}</div>
+                </div>
+                <br>
+                <div *ngIf="zip.dirty && zip.value!=''">
+                    <div>New Zip Code: {{ restaurantDTO.zip }}</div>
+                    <div>Instead of: {{ restaurant.location.zipCode}}</div>
+                </div>
+                <br>
+                <div *ngIf="state.dirty && state.value!=''">
+                    <div>State: {{ restaurantDTO.state }}</div>
+                    <div>Instead of: {{ restaurant.location.state}}</div>
+                </div>
+                <br><br>
+
+                <h2>Restaurant Details:</h2>
+                <div *ngIf="resName.dirty && resName.value!=''">
+                    <div>Restaurant name: {{ restaurantDTO.name }}</div>
+                    <div>Instead of: {{ restaurant.name}}</div>
+                </div>
+                <br>
+                <div *ngIf="priceRating.dirty && priceRating.value!=''">
+                    <div>Price rating: {{ restaurantDTO.priceRating }}</div>
+                    <div>Instead of: {{ restaurant.priceRating}}</div>
+                </div>
+                <br>
+                <div *ngIf="categories.dirty && categories.value!=''">
+                    <div>Categories: <p *ngFor="let cat of restaurantDTO.categories">{{ cat}}</p>
+                    </div>
+                    <div>Instead of: <p *ngFor="let cat of restaurant.categories">{{ cat.id.categoryId}}</p>
+                    </div>
+                </div>
+                <br>
+                <button class="btn btn-primary" (click)="updateStatus=1">Edit</button>
+            </div>
+
+        </div>
+        <div [hidden]= "updateStatus!=3">
+            <h1>Update Successful!</h1>
+        </div>
+        
+
+    </div>
+   
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        <button type="button" class="btn btn-success" (click)="onUpdate()" [disabled]="!restaurantForm.form.valid"[hidden]="updateStatus==3">Update</button>
+    </div>
+
+</ng-template>
+<button type="button" class="btn btn-primary" (click)="openUpdate(update)">Edit</button>

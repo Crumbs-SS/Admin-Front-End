@@ -1,0 +1,61 @@
+<div class="card my-5">
+  <h1 style="text-align: center;">List of Restaurants in Crumbs Food Service</h1>
+  <div class="card-body">
+    <h2 style="text-align: center;"> Total number of restaurants: {{ totalRestaurants }}</h2>
+    <div class='form-group row'>
+      <label for="search" class="col-sm-2 col-form-label" style="text-align: right;">Search</label>
+      <div class="col-sm-6">
+        <input type="text" [(ngModel)]="searchString" class="form-control" id="search">
+        <app-sort-restaurants [restaurants]="restaurants" (newSortEvent)="returnRestaurants($event)"></app-sort-restaurants>
+        <app-filter-price-rating  (newPriceRatingFilterEvent)="returnPriceValue($event)" (newRatingFilterEvent)="returnRatingValue($event)" (newStatusFilterEvent)="returnStatusValue($event)"></app-filter-price-rating>
+      </div>
+    </div>
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Restaurant Owner</th>
+          <th scope="col">Location</th>
+          <th scope="col">Categories</th>
+          <th scope="col">Price rating</th>
+          <th scope="col">Rating</th>
+          <th scope="col">Menu</th>
+          <th scope="col">Status</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of restaurants | searchfilter:searchString | pricefilter:price | ratingfilter:rating | statusfilter:status; let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{r.name}}</td>
+          <td>
+            <p>Name: {{r.restaurantOwner.userDetails.firstName}} {{r.restaurantOwner.userDetails.lastName}}</p>
+            <p>E-mail: {{r.restaurantOwner.userDetails.email}}</p>
+            <p>Phone: {{r.restaurantOwner.userDetails.phone}}</p>
+            <p>Username: {{r.restaurantOwner.userDetails.username}}</p>
+          </td>
+          <td>{{r.location.street}}, {{r.location.city}} {{r.location.zipCode}}, {{r.location.state}}</td>
+          <td>
+            <p *ngFor="let cat of r.categories">{{cat.id.categoryId}} </p>
+          </td>
+          <td>{{r.priceRating}}</td>
+          <td>{{r.rating}}</td>
+          <td>
+            <app-view-menu [restaurant]="r"></app-view-menu>
+          </td>
+          <td>
+            {{r.restaurantStatus.status}}
+          </td>
+          <td>
+            <app-update-restaurant [restaurant]="r" (updated)="this.ngOnInit()"></app-update-restaurant>
+          </td>
+          <td>
+            <app-delete-restaurant [restaurant]="r" (deleted)="this.ngOnInit()"></app-delete-restaurant>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

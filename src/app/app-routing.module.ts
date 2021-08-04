@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 //Components
 import { AdminComponent } from './Components/Admin/admin/admin.component';
-import { DriversComponent } from './Components/Drivers/drivers/drivers.component';
+import { ViewDriversComponent} from './Components/Drivers/view-drivers/view-drivers.component';
 import { OrdersComponent } from './Components/Orders/orders/orders.component';
 import { UsersComponent } from './Components/Users/users/users.component';
 import { RestaurantsComponent } from './Components/Restaurants/restaurants/restaurants.component';
-import { RudRestaurantsComponent } from './Components/Restaurants/rud-restaurants/rud-restaurants.component';
+import { ViewRestaurantComponents } from './Components/Restaurants/view-restaurants/view-restaurants.component';
 import { AddRestaurantComponent } from './Components/Restaurants/add-restaurant/add-restaurant.component';
 
 const routes: Routes = [
@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'crumbs/admin/drivers',
-    component: DriversComponent
+    component: ViewDriversComponent
   },
   {
     path: 'crumbs/admin/restaurants',
@@ -36,8 +36,8 @@ const routes: Routes = [
     component: UsersComponent
   },
   {
-    path: 'crumbs/admin/restaurants/rudRestaurants',
-    component: RudRestaurantsComponent
+    path: 'crumbs/admin/restaurants/viewRestaurants',
+    component: ViewRestaurantComponents
   },
   {
     path: 'crumbs/admin/restaurants/addRestaurant',
@@ -47,7 +47,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{ onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

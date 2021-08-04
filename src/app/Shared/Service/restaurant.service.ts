@@ -1,29 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AddRestaurantDTO } from 'src/app/Models/add-restaurant-dto';
+import { RestaurantDTO } from 'src/app/Models/RestaurantDTO';
 import { AddRestaurantComponent } from 'src/app/Components/Restaurants/add-restaurant/add-restaurant.component';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantService {
 
-  private restaurantURL : string;
+  public restaurantURL : string;
 
   constructor(private http: HttpClient) {
-    this.restaurantURL = 'http://localhost:8080/restaurants';
+    this.restaurantURL = 'http://localhost:8070/restaurants';
    }
-   public getAll() {
+   public getAll() :Observable<any>{
     return this.http.get(this.restaurantURL);
   }
-  public save(aRestaurantDTO: AddRestaurantDTO){
-    return this.http.post<AddRestaurantDTO>(this.restaurantURL, aRestaurantDTO);
+  public getCategories():Observable<any>{
+    return this.http.get('http://localhost:8070/categories');
+  }
+  public save(aRestaurantDTO: RestaurantDTO): Observable<any>{
+    return this.http.post<RestaurantDTO>(this.restaurantURL, aRestaurantDTO);
   }
   public delete(id: any){
     return this.http.delete(this.restaurantURL+"/"+id)
-    // {responseType: 'text'}
   }
-  public update(aRestaurantDTO: any){
-    return this.http.put(this.restaurantURL,aRestaurantDTO);
+  public update(id:number,aRestaurantDTO: RestaurantDTO):Observable<any>{
+    return this.http.put(this.restaurantURL+"/"+id,aRestaurantDTO);
   }
 }

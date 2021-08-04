@@ -1,0 +1,62 @@
+<mat-form-field appearance="fill">
+    <mat-label>Filter Price Rating</mat-label>
+    <mat-select>
+      <mat-option (click)="returnPriceValue(0)">
+        Show All
+      </mat-option>
+      <mat-option (click)="returnPriceValue(1)">
+        1
+      </mat-option>
+      <mat-option (click)="returnPriceValue(2)">
+        2
+      </mat-option>
+      <mat-option (click)="returnPriceValue(3)">
+        3
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Filter Rating</mat-label>
+    <mat-select>
+      <mat-option (click)="returnRatingValue(0)">
+        Show All
+      </mat-option>
+      <mat-option (click)="returnRatingValue(1)">
+        1
+      </mat-option>
+      <mat-option (click)="returnRatingValue(2)">
+        2
+      </mat-option>
+      <mat-option (click)="returnRatingValue(3)">
+        3
+      </mat-option>
+      <mat-option (click)="returnRatingValue(4)">
+        4
+      </mat-option>
+      <mat-option (click)="returnRatingValue(5)">
+        5
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <mat-form-field appearance="fill">
+    <mat-label>Filter Status</mat-label>
+    <mat-select>
+      <mat-option (click)="returnStatusValue('')">
+        Show All
+      </mat-option>
+      <mat-option (click)="returnStatusValue('ACTIVE')">
+        Active
+      </mat-option>
+      <mat-option (click)="returnStatusValue('PENDING_DELETE')">
+        Pending Delete
+      </mat-option>
+      <mat-option (click)="returnStatusValue('DELETED')">
+        Deleted
+      </mat-option>
+      <mat-option (click)="returnStatusValue('PENDING_REGISTRATION')">
+        Pending Registration
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
