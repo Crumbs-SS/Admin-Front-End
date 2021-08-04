@@ -1,0 +1,23 @@
+<mat-form-field appearance="fill">
+    <mat-label>Filter Role</mat-label>
+    <mat-select>
+      <mat-option (click)="newRole('')">
+        Show All
+      </mat-option>
+      <mat-option (click)="newRole('owner')">
+        Owner
+      </mat-option>
+      <mat-option (click)="newRole('customer')">
+        Customer
+      </mat-option>
+      <mat-option (click)="newRole('driver')">
+        Driver
+      </mat-option>
+      <mat-option (click)="newRole('admin')">
+        Admin
+      </mat-option>
+      <mat-option (click)="newRole('deleted')">
+        Deleted
+      </mat-option>
+    </mat-select>
+  </mat-form-field>

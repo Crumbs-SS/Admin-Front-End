@@ -2,26 +2,42 @@
   <div class="card-body">
 
     <mat-horizontal-stepper linear #stepper>
-      <form (ngSubmit)="onSubmit()" #restaurantForm="ngForm">
-        <mat-step>
+      
+        <mat-step [editable]="false">
           <ng-template matStepLabel>Fill out Restaurant Owner Details</ng-template>
-          <div>
+
+
+          <div class="form-group">
+            <h2>Are you creating a restaurant for an existing user or a new restaurant owner: </h2>
+            <div class="form-control">
+              <mat-radio-group aria-labelledby="newOwner" name="newOwner" (change)="onChange($event)">
+                <mat-radio-button [value]="true">New Owner &nbsp;</mat-radio-button>
+                <mat-radio-button [value]="false">Existing Owner &nbsp;
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div> 
+            <h3 style="color:red">{{this.errorMessage}}</h3>
+          </div>
+          <form (ngSubmit)="checkUser(stepper)" #ownerForm="ngForm" [hidden]="newOwner==null || newOwner==false">
+          
             <h1> Restaurant Owner Details</h1>
-            <div class="form-group">
-              <label for="firstName">Enter Restaurant Owner First Name:</label>
-              <input type="text" required [(ngModel)]="addRestaurantDTO.firstName" required maxlength="30"
+            <div class="form-group" >
+              <label for="firstName">Enter First Name:</label>
+              <input type="text" required [(ngModel)]="ownerRegistrationDTO.firstName" required maxlength="30"
                 pattern="^[a-zA-Z ]*$" [class.is-valid]="firstName.valid"
                 class="form-control ng-untouched ng-pristine ng-valid" id="firstName" name="firstName"
                 #firstName="ngModel">
               <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger"> First name is
                 required</div>
               <div *ngIf="firstName.errors?.pattern" class="alert alert-danger">
-                First name can only contain letters
+                First name can only contain letters3
               </div>
             </div>
-            <div class="form-group">
-              <label for="lastName">Enter Restaurant Owner Last Name:</label>
-              <input type="text" required [(ngModel)]="addRestaurantDTO.lastName" required maxlength="30"
+            <div class="form-group" >
+              <label for="lastName">Enter Last Name:</label>
+              <input type="text" required [(ngModel)]="ownerRegistrationDTO.lastName" required maxlength="30"
                 pattern="^[a-zA-Z ]*$" [class.is-valid]="lastName.valid"
                 class="form-control ng-untouched ng-pristine ng-valid" id="lastName" name="lastName"
                 #lastName="ngModel">
@@ -32,8 +48,8 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="email">Enter Restaurant Owner E-mail:</label>
-              <input type="email" required [(ngModel)]="addRestaurantDTO.email"
+              <label for="email">Enter E-mail:</label>
+              <input type="email" required [(ngModel)]="ownerRegistrationDTO.email"
                 pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [class.is-valid]="email.valid"
                 class="form-control ng-untouched ng-pristine ng-valid" id="email" name="email" #email="ngModel">
               <div [hidden]="email.valid || email.pristine" class="alert alert-danger"> Email is required</div>
@@ -41,12 +57,62 @@
                 Please provide a valid e-mail address
               </div>
             </div>
-          </div>
-          <div>
-            <button mat-button matStepperNext>Next</button>
-          </div>
-        </mat-step>
+            <div class="form-group">
+              <label for="username">Enter Username:</label>
+              <input type="text" required [(ngModel)]="ownerRegistrationDTO.username" minlength="3" maxlength="20"
+                pattern="^[A-Za-z0-9]*$" [class.is-valid]="username.valid"
+                class="form-control ng-untouched ng-pristine ng-valid" id="username" name="username"
+                #username="ngModel">
+              <div [hidden]="username.valid || username.pristine" class="alert alert-danger"> Username is required and must have a minimum length of 3</div>
+              <div *ngIf="username.errors?.pattern" class="alert alert-danger">
+                Username can only contain letters and numbers.
+              </div>
 
+            </div>
+            <div class="form-group">
+              <label for="password">Enter Password:</label>
+              <input type="text" required [(ngModel)]="ownerRegistrationDTO.password" minlength="6" maxlength="200"
+                [class.is-valid]="password.valid" class="form-control ng-untouched ng-pristine ng-valid" id="password"
+                name="password" #password="ngModel">
+              <div [hidden]="password.valid || password.pristine" class="alert alert-danger"> Password must be at least
+                6 characters</div>
+
+            </div>
+            <div class="form-group">
+              <label for="phone">Enter Phone Number:</label>
+              <input type="text" required [(ngModel)]="ownerRegistrationDTO.phone"
+                pattern="^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$"
+                [class.is-valid]="phone.valid" class="form-control ng-untouched ng-pristine ng-valid" id="phone"
+                name="phone" #phone="ngModel">
+              <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger"> Phone is required</div>
+              <div *ngIf="phone.errors?.pattern" class="alert alert-danger">
+                Please provide a valid phone number
+              </div>
+
+            </div>
+          
+        </form>
+          <div [hidden]="newOwner==null || newOwner==true">
+            <div class="form-group">
+              <label for="ownerUsername">Enter Username:</label>
+              <input type="text" minlength="3" maxlength="20" required [(ngModel)]="existingOwnerDTO.username"
+                pattern="^[A-Za-z0-9]*$" [class.is-valid]="ownerUsername.valid"
+                class="form-control ng-untouched ng-pristine ng-valid" id="ownerUsername" name="ownerUsername" #ownerUsername="ngModel">
+              <div [hidden]="ownerUsername.valid || ownerUsername.pristine" class="alert alert-danger"> Username is required and must have a minimum length of 3</div>
+              <div *ngIf="ownerUsername.errors?.pattern" class="alert alert-danger">
+                Username can only contain letters and numbers.
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <button mat-button (click)="checkUser(stepper)" [disabled]="!ownerForm.form.valid && !ownerUsername.valid" >Confirm</button>
+          </div>
+
+        </mat-step>
+      
+      
+      <form (ngSubmit)="onSubmit()" #restaurantForm="ngForm">
         <mat-step>
           <ng-template matStepLabel>Fill out Restaurant Location</ng-template>
           <div>
@@ -134,7 +200,7 @@
               <mat-form-field appearance="fill">
                 <mat-label>Categories</mat-label>
                 <mat-select name="categories" [(ngModel)]="addRestaurantDTO.categories" multiple size="10">
-                  <mat-option *ngFor="let cat of catOptions" [value]="cat.name">{{cat.name}}</mat-option>
+                  <mat-option *ngFor="let cat of categories" [value]="cat.name">{{cat.name}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -148,18 +214,19 @@
         <mat-step>
           <ng-template matStepLabel>Done</ng-template>
           <div>
+            <h2 *ngIf="!restaurantForm.form.valid" style="color:red">There are missing fields. Please go back and check.</h2>
             <h1>You have entered the following:</h1>
             <h2>Restaurant Owner Details:</h2>
-            <p>First Name: {{addRestaurantDTO.firstName}}</p>
-            <p>Last Name: {{addRestaurantDTO.firstName}}</p>
-            <p>Email: {{addRestaurantDTO.email}}</p>
-            <div *ngIf="emailError" class="alert alert-danger">
-              Restaurant owner with this email was already found in database. Please enter new e-mail address.
-            </div>
+            <p *ngIf="newOwner">First Name: {{ownerRegistrationDTO.firstName}}</p>
+            <p *ngIf="newOwner">Last Name: {{ownerRegistrationDTO.firstName}}</p>
+            <p *ngIf="newOwner">Email: {{ownerRegistrationDTO.email}}</p>
+            <p *ngIf="newOwner">Username: {{ownerRegistrationDTO.username}}</p>
+            <p *ngIf="newOwner">Phone: {{ownerRegistrationDTO.phone}}</p>
+            <p *ngIf="!newOwner">Username: {{existingOwnerDTO.username}}</p>
             <h2>Restaurant Location Details:</h2>
             <p>Street: {{addRestaurantDTO.street}}</p>
             <div *ngIf="locationError" class="alert alert-danger">
-               This location already exists in database. Please enter new location.
+              This location already exists in database. Please enter new location.
             </div>
             <p>City: {{addRestaurantDTO.city}}</p>
             <p>ZIP: {{addRestaurantDTO.zip}}</p>
@@ -180,6 +247,8 @@
 
   </div>
   <div>
-    <pre>{{ addRestaurantDTO | json }}</pre>
+    <!-- <pre>{{ addRestaurantDTO | json }}</pre>
+    <pre>{{ registerOwnerDTO | json }}</pre> 
+    <pre>{{ existingOwnerDTO | json }}</pre> -->
   </div>
 </div>

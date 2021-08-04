@@ -1,1 +1,70 @@
-<p>orders works!</p>
+<div class="card my-5">
+    <h1 style="text-align: center;">Orders</h1>
+
+    <form class='form-group row' (ngSubmit)='getOrders()'>
+      <label for="search" class="col-sm-2 col-form-label" style="text-align: right;">Search</label>
+      <div class="col-sm-6">
+        <input type="text" [(ngModel)]="query" class="form-control" id="search" name='query'>
+      </div>
+      <button mat-raised-button color="primary">Submit</button>
+    </form>
+    <div class="card-body">
+      <mat-paginator
+      (page)="returnPageState($event)"
+      [pageSize]="size"
+      [pageSizeOptions]="pageOptions"
+      [length]="totalOrders"
+      [showFirstLastButtons]="true">
+    </mat-paginator>
+    <app-filter-order (newStatusEmitter)=newStatusEmitter($event) ></app-filter-order>
+    <app-sort-orders (newSortByEvent)=newSortByEvent($event) ></app-sort-orders>
+    <app-order-by-orders (orderByEmitter)="newOrderBy($event)" ></app-order-by-orders>
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope='col'>Customer</th>
+            <th scope='col'>Restaurant</th>
+            <th scope='col'>Delivery Address</th>
+            <th scope='col'>Status</th>
+            <th scope='col'>Delivery Time</th>
+            <th scope='col'>Created At</th>
+            <th scope='col'>Preferences</th>
+            <th scope='col'>Phone</th>
+            <th scope='col'>Edit</th>
+            <th scope='col'>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let order of orders'>
+            <td>{{order.id}}</td>
+            <td>{{order.customer.userDetails.getFullName()}}</td>
+            <td>{{order.restaurant.name}}</td>
+            <td>{{order.deliveryLocation.toString()}}</td>
+            <td>{{order.orderStatus}}</td>
+            <td>{{order.deliveryTime.toLocaleString()}}</td>
+            <td>{{order.createdAt}}</td>
+            <td>{{order.preferences}}</td>
+            <td>{{order.phone | phoneFormat}}</td>
+            <td><app-edit-order
+              (updateOrder)='getOrders()'
+              [order]='order'
+            ></app-edit-order></td>
+            <td><app-delete-order
+              [order]='order'
+              (deleteOrder)='getOrders()'
+              ></app-delete-order></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <mat-paginator
+      (page)="returnPageState($event)"
+      [pageSize]="size"
+      [pageSizeOptions]="pageOptions"
+      [length]="totalOrders"
+      [showFirstLastButtons]="true">
+    </mat-paginator>
+    </div>
+  </div>
+  
