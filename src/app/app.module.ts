@@ -112,7 +112,7 @@ import { PhoneFormatPipe } from './Shared/Custom/phone-format.pipe';
     MatPaginatorModule,
     MatButtonModule
   ],
-  providers: [RestaurantService, UserService, AccountService, SortPipe],
+  providers: [RestaurantService, UserService, AccountService SortPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
