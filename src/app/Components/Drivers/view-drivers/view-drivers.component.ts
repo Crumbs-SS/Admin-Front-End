@@ -40,7 +40,6 @@ export class ViewDriversComponent implements OnInit {
   // tslint:disable-next-line:typedef
   loadDrivers() {
     this.HttpService.getAll(this.searchString, this.sortDirection, this.sortField, this.status, this.pageSize, this.page).subscribe(res => {
-      console.log(res);
       this.drivers = res.content;
       this.pageSize = res.size;
       this.page = res.number;
