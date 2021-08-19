@@ -8,13 +8,13 @@
     </div>
 
     <div class="modal-body">
-        <p>Are you sure you wish to enable this user: <b>{{d.username}}</b>?</p>
+        <p>Are you sure you wish to activate this user: <b>{{d.username}}</b>?</p>
             
         <div class="modal-footer">
             <button type="button" class="btn btn-light" 
                 (click)="modal.dismiss()">Cancel</button>
-            <button type="submit" class="btn btn-success" (click)="enableUser()"> Enable </button>
+            <button type="submit" class="btn btn-success" (click)="enableUser()"> Activate </button>
         </div>
     </div>
 </ng-template>
-<button type="button" class="btn btn-success" (click)="open(modalTemplate)">Enable</button>
+<button type="button" class="btn btn-success" (click)="open(modalTemplate)">Activate</button>

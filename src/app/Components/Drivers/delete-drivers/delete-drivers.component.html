@@ -8,14 +8,14 @@
     </div>
 
     <div class="modal-body">
-        <p>Are you sure you wish to delete user: <b>{{d.username}}</b>?</p>
+        <p>Are you sure you wish to deactivate user: <b>{{d.username}}</b>?</p>
     </div>
 
     <div class="modal-footer">
         <button type="button" class="btn btn-light"
             (click)="modal.dismiss()">Cancel</button>
-        <button type="button" class="btn btn-danger" (click)="deleteUser()"> Delete </button>
+        <button type="button" class="btn btn-danger" (click)="deleteUser()"> Deactivate </button>
     </div>
 
 </ng-template>
-<button type="button" class="btn btn-danger" (click)="open(modalTemplate)">Delete</button>
+<button type="button" class="btn btn-danger" (click)="open(modalTemplate)">Deactivate</button>

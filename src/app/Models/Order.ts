@@ -42,5 +42,11 @@ export class Order implements Deserializable{
         return this;
     }
 
+    getDriver(){
+        if(this.driver){
+            return this.driver.userDetails.username;
+        }
+    }
+
     
 }
