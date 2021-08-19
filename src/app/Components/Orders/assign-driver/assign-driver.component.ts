@@ -39,22 +39,17 @@ export class AssignDriverComponent  implements OnInit{
   onAssign(){
     this.error = '';
     const username = this.usernameFormGroup.get('username').value;
+
     this.userService.checkIfDriverIsAvailable(username).subscribe((data) => {      
       if(data){
         this.orderService.sendOrderRequestToDriver(this.order.id, parseInt(data.toString()))
-        .subscribe(() => {
-          this.ngbModal.dismissAll();
-        }, () => {
-          this.error = "An error has occurred please try again later."
-        });
+        .subscribe(() => this.ngbModal.dismissAll(), () => 
+          this.error = "An error has occurred please try again later.");
       }else{
         this.error = "This driver isn't available."
       }
-    }, (error) => {
-        this.error = (error.status === 404) ? "This driver doesn't exist." 
-        : "An error has occurred please try again later.";
-    })
-
+    }, (error) => this.error = (error.status === 404) ? "This driver doesn't exist." 
+        : "An error has occurred please try again later.")
   }
 
   open(modal: any){
