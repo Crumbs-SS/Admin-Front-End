@@ -22,6 +22,6 @@ export class DeleteDriversComponent  {
       () => {
         this.userDeleted.emit();
         this.ngbModal.dismissAll();
-      });
+      }, () => {});
   }
 }
