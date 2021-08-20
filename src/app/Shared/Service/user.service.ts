@@ -24,4 +24,8 @@ export class UserService {
         params = params.append('page', page.toString());
         return this.http.get(this.accountURL + '/drivers', {params});
     }
+
+    public checkIfDriverIsAvailable(username: string){
+        return this.http.get(this.accountURL + `/drivers/${username}`);
+    }
 }

@@ -10,7 +10,7 @@
     <div class="modal-body">
         <form [formGroup]='form' (ngSubmit)='enableUser()' class='form-group'>
 
-            <p>Are you sure you wish to enable the selected roles for user: <b>{{user.username}}</b>?</p>
+            <p>Are you sure you wish to activate the selected roles for user: <b>{{user.username}}</b>?</p>
 
             <ng-container *ngFor="let role of roles; let i = index">
                 <div class='form-group'>
@@ -23,10 +23,10 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" 
                     (click)="modal.dismiss()">Cancel</button>
-                <button type="submit" class="btn btn-success"> Enable </button>
+                <button type="submit" class="btn btn-success"> Activate </button>
             </div>
         </form>
 
     </div>
 </ng-template>
-<button type="button" class="btn btn-success" (click)="open(modalTemplate)">Enable</button>
+<button type="button" class="btn btn-success" (click)="open(modalTemplate)">Activate</button>

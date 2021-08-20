@@ -56,6 +56,9 @@ import { StateFilterPipe } from './Shared/Custom/stateFilter.pipe';
 import { SortPipe } from './Shared/Custom/sort.pipe';
 import {DriverNamePipe} from './Shared/Custom/driverNameSearch.pipe';
 import { PhoneFormatPipe } from './Shared/Custom/phone-format.pipe';
+import { DeleteDriversComponent } from './Components/Drivers/delete-drivers/delete-drivers.component';
+import { EnableDriversComponent } from './Components/Drivers/enable-drivers/enable-drivers.component';
+import { AssignDriverComponent } from './Components/Orders/assign-driver/assign-driver.component';
 
 
 @NgModule({
@@ -94,7 +97,10 @@ import { PhoneFormatPipe } from './Shared/Custom/phone-format.pipe';
     DeleteOrderComponent,
     FilterOrderComponent,
     SortOrdersComponent,
-    OrderByOrdersComponent
+    OrderByOrdersComponent,
+    DeleteDriversComponent,
+    EnableDriversComponent,
+    AssignDriverComponent
   ],
 
   imports: [

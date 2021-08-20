@@ -31,7 +31,7 @@ export class EditOrderComponent implements OnInit {
 
       const minDate = new Date("2021-01-01T24:00")
       const maxDate = new Date();
-      maxDate.setMonth(this.order.deliveryTime.getMonth() + 1);
+      maxDate.setMonth(this.order.deliverySlot.getMonth() + 1);
       maxDate.setUTCHours(24, 0, 0);
       
       this.minDate = minDate.toISOString().split('.')[0].slice(0, -3);
@@ -42,7 +42,7 @@ export class EditOrderComponent implements OnInit {
         preferences:[this.order.preferences, [
           Validators.maxLength(250)
         ]], 
-        deliveryTime:[this.order.isoTime.toISOString().split('.')[0].slice(0, -3)],
+        deliverySlot:[this.order.isoTime.toISOString().split('.')[0].slice(0, -3)],
         street:[this.order.deliveryLocation.street, [
           ...commonValidators,
           Validators.minLength(5),
@@ -70,7 +70,7 @@ export class EditOrderComponent implements OnInit {
     }
 
     onSubmit(){
-      this.newOrder.value.deliveryTime = new Date(this.newOrder.value.deliveryTime);
+      this.newOrder.value.deliverySlot = new Date(this.newOrder.value.deliverySlot);
       const order = new UpdateOrder().deserialize(this.newOrder.value);
       this.orderService.updateOrder(order, this.order.id).subscribe(() => {
         this.updateOrder.emit();

@@ -7,7 +7,8 @@ import { UpdateOrder } from 'src/app/Models/UpdateOrder';
 })
 export class OrdersService {
 
-  public rootUrl: string = 'http://localhost:8010'
+  public rootUrl: string = 'http://localhost:8010';
+  public snsUrl: string = 'http://localhost:8100';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -23,6 +24,10 @@ export class OrdersService {
 
   public deleteOrder(id: number){    
     return this.httpClient.delete(this.rootUrl + `/orders/${id}`);
+  }
+
+  public sendOrderRequestToDriver(orderId: number, driverId: number){
+    return this.httpClient.post(this.snsUrl + `/orders/${orderId}/drivers/${driverId}`, {});
   }
 
 }

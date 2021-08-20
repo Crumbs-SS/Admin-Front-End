@@ -35,7 +35,13 @@ export class AccountService {
     return this.http.delete(this.accountsUrl + `/users/${userId}`);
   }
 
+  public deleteDriver(driverId: number){
+    return this.http.delete(this.accountsUrl + `/drivers/${driverId}`)
+  }
+
   public enableUser(userId: number, enableUser: any){
     return this.http.put(this.accountsUrl + `/users/${userId}/status`, enableUser);
   }
+
+
 }

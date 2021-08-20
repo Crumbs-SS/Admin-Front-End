@@ -23,6 +23,8 @@
                 <th scope="col">Phone #</th>
                 <th scope="col">License Id</th>
                 <th scope="col">Status</th>
+                <th scope="col">User Status</th>
+                <th scope='col'>Deactivate/Activate</th>
             </tr>
             </thead>
             <tbody>
@@ -35,6 +37,21 @@
                 <td>{{d.phone}}</td>
                 <td>{{d.licenseId}}</td>
                 <td>{{d.state}}</td>
+                <td>{{d.userState}}</td>
+                <td>
+                <app-delete-drivers
+                *ngIf="d.userState !== 'DELETED'"
+                (userDeleted)='loadDrivers()'
+                [d]='d'>
+                </app-delete-drivers>
+                <app-enable-drivers
+                *ngIf="d.userState == 'DELETED'"
+                (userEnabled)='loadDrivers()'
+                [d]='d'
+                >
+                    
+                </app-enable-drivers>
+                </td>
             </tr>
             </tbody>
         </table>
