@@ -1,1 +1,8 @@
-<p>WORK DAMMIT!!</p>
+<button 
+class = 'home-button btn btn-info'
+*ngIf="currentRoute !== '/crumbs/admin'"
+(click)="redirectToHome()"
+mat-raised-button
+>
+    Home
+</button>
