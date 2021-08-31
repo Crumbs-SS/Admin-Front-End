@@ -59,6 +59,7 @@ import { PhoneFormatPipe } from './Shared/Custom/phone-format.pipe';
 import { DeleteDriversComponent } from './Components/Drivers/delete-drivers/delete-drivers.component';
 import { EnableDriversComponent } from './Components/Drivers/enable-drivers/enable-drivers.component';
 import { AssignDriverComponent } from './Components/Orders/assign-driver/assign-driver.component';
+import { HomeButtonComponent } from './Components/home-button/home-button.component';
 
 
 @NgModule({
@@ -100,7 +101,8 @@ import { AssignDriverComponent } from './Components/Orders/assign-driver/assign-
     OrderByOrdersComponent,
     DeleteDriversComponent,
     EnableDriversComponent,
-    AssignDriverComponent
+    AssignDriverComponent,
+    HomeButtonComponent
   ],
 
   imports: [
