@@ -1,4 +1,4 @@
-//Modules
+// Modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,14 +12,14 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
 
-
-//Service
+// Service
 import { RestaurantService } from './Shared/Service/restaurant.service';
 import { UserService } from './Shared/Service/user.service';
 import { AccountService } from './Shared/Service/account.service';
 
-//Components
+// Components
 import { AppComponent } from './app.component';
 import {ViewDriversComponent} from './Components/Drivers/view-drivers/view-drivers.component';
 import { OrdersComponent } from './Components/Orders/orders/orders.component';
@@ -47,7 +47,7 @@ import { FilterOrderComponent } from './Components/Orders/filter-order/filter-or
 import { SortOrdersComponent } from './Components/Orders/sort-orders/sort-orders.component';
 import { OrderByOrdersComponent } from './Components/Orders/order-by-orders/order-by-orders.component';
 
-//Pipes
+// Pipes
 import { SearchfilterPipe } from './Shared/Custom/searchfilter.pipe';
 import { PriceFilterPipe } from './Shared/Custom/priceFilter.pipe';
 import { RatingFilterPipe } from './Shared/Custom/ratingFilter.pipe';
@@ -59,8 +59,12 @@ import { PhoneFormatPipe } from './Shared/Custom/phone-format.pipe';
 import { DeleteDriversComponent } from './Components/Drivers/delete-drivers/delete-drivers.component';
 import { EnableDriversComponent } from './Components/Drivers/enable-drivers/enable-drivers.component';
 import { AssignDriverComponent } from './Components/Orders/assign-driver/assign-driver.component';
+import { LoginPageComponent } from './Components/Login/login-page/login-page/login-page.component';
 import { HomeButtonComponent } from './Components/home-button/home-button.component';
 
+// Guards
+import {AuthGuard} from './Shared/Service/auth.guard';
+import {NoAuthGuard} from './Shared/Service/no-auth.guard';
 
 @NgModule({
   declarations: [
@@ -102,7 +106,8 @@ import { HomeButtonComponent } from './Components/home-button/home-button.compon
     DeleteDriversComponent,
     EnableDriversComponent,
     AssignDriverComponent,
-    HomeButtonComponent
+    LoginPageComponent,
+    HomeButtonComponent,
   ],
 
   imports: [
@@ -118,9 +123,10 @@ import { HomeButtonComponent } from './Components/home-button/home-button.compon
     MatStepperModule,
     MatRadioModule,
     MatPaginatorModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
   ],
-  providers: [RestaurantService, UserService, AccountService, SortPipe],
+  providers: [RestaurantService, UserService, AccountService, SortPipe, AuthGuard, NoAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
