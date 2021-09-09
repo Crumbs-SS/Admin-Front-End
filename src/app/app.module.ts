@@ -60,8 +60,11 @@ import { DeleteDriversComponent } from './Components/Drivers/delete-drivers/dele
 import { EnableDriversComponent } from './Components/Drivers/enable-drivers/enable-drivers.component';
 import { AssignDriverComponent } from './Components/Orders/assign-driver/assign-driver.component';
 import { LoginPageComponent } from './Components/Login/login-page/login-page/login-page.component';
-import {AuthGuard} from './Shared/Service/auth.guard';
+import { HomeButtonComponent } from './Components/home-button/home-button.component';
 
+// Guards
+import {AuthGuard} from './Shared/Service/auth.guard';
+import {NoAuthGuard} from './Shared/Service/no-auth.guard';
 
 @NgModule({
   declarations: [
@@ -103,7 +106,8 @@ import {AuthGuard} from './Shared/Service/auth.guard';
     DeleteDriversComponent,
     EnableDriversComponent,
     AssignDriverComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    HomeButtonComponent,
   ],
 
   imports: [
@@ -122,7 +126,7 @@ import {AuthGuard} from './Shared/Service/auth.guard';
     MatButtonModule,
     MatInputModule,
   ],
-  providers: [RestaurantService, UserService, AccountService, SortPipe, AuthGuard],
+  providers: [RestaurantService, UserService, AccountService, SortPipe, AuthGuard, NoAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
