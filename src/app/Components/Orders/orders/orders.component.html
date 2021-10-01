@@ -24,6 +24,7 @@
           <tr>
             <th scope="col">#</th>
             <th scope='col'>Customer</th>
+            <th scope='col'>Driver</th>
             <th scope='col'>Restaurant</th>
             <th scope='col'>Delivery Address</th>
             <th scope='col'>Status</th>
@@ -32,17 +33,24 @@
             <th scope='col'>Preferences</th>
             <th scope='col'>Phone</th>
             <th scope='col'>Edit</th>
-            <th scope='col'>Delete</th>
+            <th scope='col'>Void</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor='let order of orders'>
             <td>{{order.id}}</td>
-            <td>{{order.customer.userDetails.getFullName()}}</td>
+            <td>{{order.customer.userDetails.username}}</td>
+            <td> 
+              <app-assign-driver 
+                *ngIf = "!order.getDriver()"
+                [order]='order'
+               ></app-assign-driver> 
+               {{ order.getDriver() }}
+            </td>
             <td>{{order.restaurant.name}}</td>
             <td>{{order.deliveryLocation.toString()}}</td>
             <td>{{order.orderStatus}}</td>
-            <td>{{order.deliveryTime.toLocaleString()}}</td>
+            <td>{{order.deliverySlot.toLocaleString()}}</td>
             <td>{{order.createdAt}}</td>
             <td>{{order.preferences}}</td>
             <td>{{order.phone | phoneFormat}}</td>

@@ -6,7 +6,7 @@ export class Order implements Deserializable{
 
     public createdAt: any;
     public customer: Customer = new Customer();
-    public deliveryTime: Date = new Date();
+    public deliverySlot: Date = new Date();
     public isoTime: Date = new Date();
     public deliveryLocation: Location = new Location();
     public driver: any;
@@ -21,7 +21,7 @@ export class Order implements Deserializable{
 
     deserialize(input: any): this{        
         this.createdAt = new Date(input.createdAt).toLocaleString();
-        this.deliveryTime = new Date(input.deliveryTime);
+        this.deliverySlot = new Date(input.deliverySlot);
         this.driver = input.driver;
         this.foodOrders = input.foodOrders;
         this.orderStatus = input.orderStatus.status;
@@ -30,8 +30,8 @@ export class Order implements Deserializable{
         this.restaurant = input.restaurant;
         this.phone = input.phone;
         this.id = input.id;
-        this.isoTime = new Date(new Date(this.deliveryTime)
-            .setHours(this.deliveryTime.getHours() - 5));
+        this.isoTime = new Date(new Date(this.deliverySlot)
+            .setHours(this.deliverySlot.getHours() - 5));
         
         if(input.customer)
             this.customer = new Customer().deserialize(input.customer);
@@ -40,6 +40,12 @@ export class Order implements Deserializable{
 
 
         return this;
+    }
+
+    getDriver(){
+        if(this.driver){
+            return this.driver.userDetails.username;
+        }
     }
 
     

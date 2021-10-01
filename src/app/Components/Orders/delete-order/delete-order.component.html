@@ -9,14 +9,14 @@
     </div>
 
     <div class="modal-body">
-        <p>Are you sure you wish to delete this order?</p>
+        <p>Are you sure you wish to void this order?</p>
     </div>
 
     <div class="modal-footer">
         <button type="button" class="btn btn-light"
             (click)="modal.dismiss()">Cancel</button>
-        <button type="button" class="btn btn-danger" (click)="onDeleteOrder()"> Delete </button>
+        <button type="button" class="btn btn-danger" (click)="onDeleteOrder()"> Void </button>
     </div>
 
 </ng-template>
-<button type="button" class="btn btn-danger" (click)="open(modalTemplate)" >Delete</button>
+<button type="button" class="btn btn-danger" (click)="open(modalTemplate)" >Void</button>
