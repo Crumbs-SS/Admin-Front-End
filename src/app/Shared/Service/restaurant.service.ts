@@ -12,13 +12,13 @@ export class RestaurantService {
   public restaurantURL : string;
 
   constructor(private http: HttpClient) {
-    this.restaurantURL = 'http://localhost:8070/restaurants';
+    this.restaurantURL = 'application-load-balancer-2004143484.us-east-1.elb.amazonaws.com/restaurant-service/restaurants';
    }
    public getAll() :Observable<any>{
     return this.http.get(this.restaurantURL);
   }
   public getCategories():Observable<any>{
-    return this.http.get('http://localhost:8070/categories');
+    return this.http.get('application-load-balancer-2004143484.us-east-1.elb.amazonaws.com/restaurant-service/categories');
   }
   public save(aRestaurantDTO: RestaurantDTO): Observable<any>{
     return this.http.post<RestaurantDTO>(this.restaurantURL, aRestaurantDTO);

@@ -7,8 +7,8 @@ import { UpdateOrder } from 'src/app/Models/UpdateOrder';
 })
 export class OrdersService {
 
-  public rootUrl: string = 'http://localhost:8010';
-  public snsUrl: string = 'http://localhost:8100';
+  public rootUrl: string = 'application-load-balancer-2004143484.us-east-1.elb.amazonaws.com/order-service';
+  public snsUrl: string = 'application-load-balancer-2004143484.us-east-1.elb.amazonaws.com/email-service';
 
   constructor(private httpClient: HttpClient) { }
 

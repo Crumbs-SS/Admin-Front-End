@@ -12,7 +12,7 @@ export class AccountService {
   private accountsUrl: string;
 
   constructor(private http: HttpClient) {
-    this.accountsUrl = 'http://localhost:8080';
+    this.accountsUrl = 'application-load-balancer-2004143484.us-east-1.elb.amazonaws.com/account-service';
    }
   public registerOwner(OwnerRegistration: any): Observable<any>{
     return this.http.post(this.accountsUrl + '/owners/register', OwnerRegistration );

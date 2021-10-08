@@ -10,7 +10,7 @@ export class UserService {
     public accountURL: string;
 
     constructor(private http: HttpClient) {
-        this.accountURL = 'http://localhost:8080';
+        this.accountURL = 'application-load-balancer-2004143484.us-east-1.elb.amazonaws.com/account-service';
     }
 
     public getAll(searchString: string, sortDirection: string, sortField: string, status: string, pageSize: number, page: number)
