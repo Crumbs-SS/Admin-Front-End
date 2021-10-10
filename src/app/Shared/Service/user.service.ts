@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {AuthenticationService} from './authentication.service';
 
 @Injectable({
     providedIn: 'root'
@@ -8,9 +9,13 @@ import { Observable } from 'rxjs';
 export class UserService {
 
     public accountURL: string;
+    private token: any;
+    private opts: object;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
         this.accountURL = 'http://localhost:8080';
+        this.token = this.authenticationService.tokenValue;
+        this.opts = {headers: new HttpHeaders().set('Authorization', this.token)};
     }
 
     public getAll(searchString: string, sortDirection: string, sortField: string, status: string, pageSize: number, page: number)
@@ -22,10 +27,13 @@ export class UserService {
         params = params.append('status', status);
         params = params.append('pageSize', pageSize.toString());
         params = params.append('page', page.toString());
-        return this.http.get(this.accountURL + '/drivers', {params});
+
+        return this.http.get(this.accountURL + '/drivers',
+            {headers: new HttpHeaders().set('Authorization', this.token),
+                params});
     }
 
     public checkIfDriverIsAvailable(username: string){
-        return this.http.get(this.accountURL + `/drivers/${username}`);
+        return this.http.get(this.accountURL + `/drivers/${username}`, this.opts);
     }
 }

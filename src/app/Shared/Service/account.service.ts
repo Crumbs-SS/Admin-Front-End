@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {BehaviorSubject, Observable} from 'rxjs';
 import { User } from 'src/app/Models/User';
+import {AuthenticationService} from './authentication.service';
 
 
 @Injectable({
@@ -10,43 +11,45 @@ import { User } from 'src/app/Models/User';
 export class AccountService {
 
   private accountsUrl: string;
+  private token: any;
+  private opts: object;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
     this.accountsUrl = 'http://localhost:8080';
+    this.token = this.authenticationService.tokenValue;
+    this.opts = {headers: new HttpHeaders().set('Authorization', this.token)};
    }
   public registerOwner(OwnerRegistration: any): Observable<any>{
-    return this.http.post(this.accountsUrl + '/owners/register', OwnerRegistration );
+    return this.http.post(this.accountsUrl + '/owners/register', OwnerRegistration, this.opts);
   }
   // tslint:disable-next-line:typedef
   public ownerExists(username: string){
-      return this.http.get(this.accountsUrl + '/owners/' + username);
+      return this.http.get(this.accountsUrl + '/owners/' + username, this.opts);
   }
 
   public getUsers(page= 0, size= 5, {sortBy= '', orderBy= '', filterBy= '', query= ''}): Observable<any>{
 
     return this.http.get(this.accountsUrl +
-       `/users?page=${page}&size=${size}&sortBy=${sortBy}&orderBy=${orderBy}&filterBy=${filterBy}&query=${query}`);
+       `/users?page=${page}&size=${size}&sortBy=${sortBy}&orderBy=${orderBy}&filterBy=${filterBy}&query=${query}`, this.opts);
   }
 
   // tslint:disable-next-line:typedef
   public updateUser(user: User, userId: number){
-    return this.http.put(this.accountsUrl + `/users/${userId}`, user);
+    return this.http.put(this.accountsUrl + `/users/${userId}`, user, this.opts);
   }
 
   // tslint:disable-next-line:typedef
   public deleteUser(userId: number){
-    return this.http.delete(this.accountsUrl + `/users/${userId}`);
+    return this.http.delete(this.accountsUrl + `/users/${userId}`, this.opts);
   }
 
   // tslint:disable-next-line:typedef
   public deleteDriver(driverId: number){
-    return this.http.delete(this.accountsUrl + `/drivers/${driverId}`);
+    return this.http.delete(this.accountsUrl + `/drivers/${driverId}`, this.opts);
   }
 
   // tslint:disable-next-line:typedef
   public enableUser(userId: number, enableUser: any){
-    return this.http.put(this.accountsUrl + `/users/${userId}/status`, enableUser);
+    return this.http.put(this.accountsUrl + `/users/${userId}/status`, enableUser, this.opts);
   }
-
-
 }

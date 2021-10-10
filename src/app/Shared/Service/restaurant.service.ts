@@ -1,32 +1,37 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RestaurantDTO } from 'src/app/Models/RestaurantDTO';
-import { AddRestaurantComponent } from 'src/app/Components/Restaurants/add-restaurant/add-restaurant.component';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
+import {AuthenticationService} from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantService {
 
-  public restaurantURL : string;
+  public restaurantURL: string;
+  private token: any;
+  private opts: object;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
     this.restaurantURL = 'http://localhost:8070/restaurants';
+    this.token = this.authenticationService.tokenValue;
+    this.opts = {headers: new HttpHeaders().set('Authorization', this.token)};
    }
-   public getAll() :Observable<any>{
-    return this.http.get(this.restaurantURL);
+   public getAll(): Observable<any>{
+    return this.http.get(this.restaurantURL, this.opts);
   }
-  public getCategories():Observable<any>{
-    return this.http.get('http://localhost:8070/categories');
+  public getCategories(): Observable<any>{
+    return this.http.get('http://localhost:8070/categories', this.opts);
   }
   public save(aRestaurantDTO: RestaurantDTO): Observable<any>{
-    return this.http.post<RestaurantDTO>(this.restaurantURL, aRestaurantDTO);
+    return this.http.post<RestaurantDTO>(this.restaurantURL, aRestaurantDTO, this.opts);
   }
+  // tslint:disable-next-line:typedef
   public delete(id: any){
-    return this.http.delete(this.restaurantURL+"/"+id)
+    return this.http.delete(this.restaurantURL + '/' + id, this.opts);
   }
-  public update(id:number,aRestaurantDTO: RestaurantDTO):Observable<any>{
-    return this.http.put(this.restaurantURL+"/"+id,aRestaurantDTO);
+  public update(id: number, aRestaurantDTO: RestaurantDTO): Observable<any>{
+    return this.http.put(this.restaurantURL + '/' + id, aRestaurantDTO, this.opts);
   }
 }
