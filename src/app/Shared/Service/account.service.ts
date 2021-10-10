@@ -15,7 +15,7 @@ export class AccountService {
   private opts: object;
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
-    this.accountsUrl = 'application-load-balancer-773890590.us-east-1.elb.amazonaws.com/account-service';
+    this.accountsUrl = 'http://application-load-balancer-773890590.us-east-1.elb.amazonaws.com/account-service';
     this.token = this.authenticationService.tokenValue;
     this.opts = {headers: new HttpHeaders().set('Authorization', this.token)};
    }
