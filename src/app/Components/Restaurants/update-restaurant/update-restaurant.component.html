@@ -70,19 +70,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <h3>Original value: {{restaurant.location.zipCode}}</h3>
-                    <label for="zip">Enter new zip code:</label>
-                    <input type="text" [(ngModel)]="restaurantDTO.zip" class="form-control" id="zip" name="zip"
-                        minlength="5" maxlength="5" pattern="[0-9]*" [class.is-valid]="zip.valid && zip.dirty"
-                        #zip="ngModel">
-                    <div *ngIf="zip.errors?.minlength" class="alert alert-danger">
-                        Zip must be exactly 5 characters long.
-                    </div>
-                    <div *ngIf="zip.errors?.pattern" class="alert alert-danger">
-                        Zip must only consist of numbers
-                    </div>
-                </div>
-                <div class="form-group">
                     <h3>Original value: {{restaurant.location.state}}</h3>
                     <label for="state">Enter new state:</label>
                     <input type="text" [(ngModel)]="restaurantDTO.state" class="form-control" id="state" name="state"
@@ -188,11 +175,6 @@
                 <div *ngIf="city.dirty && city.value!=''">
                     <div>New City: {{ restaurantDTO.city }}</div>
                     <div>Instead of: {{ restaurant.location.city}}</div>
-                </div>
-                <br>
-                <div *ngIf="zip.dirty && zip.value!=''">
-                    <div>New Zip Code: {{ restaurantDTO.zip }}</div>
-                    <div>Instead of: {{ restaurant.location.zipCode}}</div>
                 </div>
                 <br>
                 <div *ngIf="state.dirty && state.value!=''">

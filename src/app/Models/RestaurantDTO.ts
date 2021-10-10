@@ -12,7 +12,6 @@ export class RestaurantDTO {
 
     street!: string;
     city!: string;
-    zip!: number;
     state!: string;
 
     name!: string;

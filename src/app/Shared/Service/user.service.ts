@@ -13,7 +13,7 @@ export class UserService {
     private opts: object;
 
     constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
-        this.accountURL = 'http://localhost:8080';
+        this.accountURL = 'http://application-load-balancer-773890590.us-east-1.elb.amazonaws.com/account-service';
         this.token = this.authenticationService.tokenValue;
         this.opts = {headers: new HttpHeaders().set('Authorization', this.token)};
     }

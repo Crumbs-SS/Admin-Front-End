@@ -138,19 +138,6 @@
                 City name can only contain letters
               </div>
             </div>
-            <div class="form-group">
-              <label for="zip">Enter Zip Code:</label>
-              <input type="text" required [(ngModel)]="addRestaurantDTO.zip" required minlength="5" required
-                maxlength="5" pattern="[0-9]*" [class.is-valid]="zip.valid"
-                class="form-control ng-untouched ng-pristine ng-valid" id="zip" name="zip" #zip="ngModel">
-              <div [hidden]="zip.valid || zip.pristine" class="alert alert-danger"> Zip Code is required</div>
-              <div *ngIf="zip.errors?.minlength" class="alert alert-danger">
-                Zip must be exactly 5 characters long.
-              </div>
-              <div *ngIf="zip.errors?.pattern" class="alert alert-danger">
-                Zip must only consist of numbers
-              </div>
-            </div>
 
             <div class="form-group">
               <label for="state">Enter State:</label>
@@ -229,7 +216,6 @@
               This location already exists in database. Please enter new location.
             </div>
             <p>City: {{addRestaurantDTO.city}}</p>
-            <p>ZIP: {{addRestaurantDTO.zip}}</p>
             <p>State: {{addRestaurantDTO.state}}</p>
             <h2>Restaurant Details</h2>
             <p>Restaurant Name: {{addRestaurantDTO.name}}</p>

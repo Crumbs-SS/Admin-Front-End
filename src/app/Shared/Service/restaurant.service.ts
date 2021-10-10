@@ -14,18 +14,18 @@ export class RestaurantService {
   private opts: object;
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
-    this.restaurantURL = 'http://localhost:8070/restaurants';
+    this.restaurantURL = 'http://application-load-balancer-773890590.us-east-1.elb.amazonaws.com/restaurant-service';
     this.token = this.authenticationService.tokenValue;
     this.opts = {headers: new HttpHeaders().set('Authorization', this.token)};
    }
    public getAll(): Observable<any>{
-    return this.http.get(this.restaurantURL, this.opts);
+    return this.http.get(this.restaurantURL + '/restaurants', this.opts);
   }
   public getCategories(): Observable<any>{
-    return this.http.get('http://localhost:8070/categories', this.opts);
+    return this.http.get(this.restaurantURL + '/categories', this.opts);
   }
   public save(aRestaurantDTO: RestaurantDTO): Observable<any>{
-    return this.http.post<RestaurantDTO>(this.restaurantURL, aRestaurantDTO, this.opts);
+    return this.http.post<RestaurantDTO>(this.restaurantURL + '/owner/' + '/restaurant', aRestaurantDTO, this.opts);
   }
   // tslint:disable-next-line:typedef
   public delete(id: any){
