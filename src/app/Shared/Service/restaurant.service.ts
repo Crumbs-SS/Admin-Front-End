@@ -22,7 +22,7 @@ export class RestaurantService {
     return this.http.get(this.restaurantURL + '/restaurants', this.opts);
   }
   public getCategories():Observable<any>{
-    return this.http.get('http://application-load-balancer-2004143484.us-east-1.elb.amazonaws.com/restaurant-service/categories');
+    return this.http.get(this.restaurantURL + '/categories');
   }
   public save(aRestaurantDTO: RestaurantDTO): Observable<any>{
     return this.http.post<RestaurantDTO>(this.restaurantURL + '/owner/' + '/restaurant', aRestaurantDTO, this.opts);

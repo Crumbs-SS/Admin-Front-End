@@ -19,7 +19,7 @@ export class AuthenticationService {
     this.user = this.userSubject.asObservable();
     this.tokenSubject = new BehaviorSubject<any>(localStorage.getItem('token') as string);
     this.token = this.tokenSubject.asObservable();
-    this.accountsUrl = 'http://application-load-balancer-2004143484.us-east-1.elb.amazonaws.com/account-service';
+    this.accountsUrl = 'http://application-load-balancer-773890590.us-east-1.elb.amazonaws.com/account-service';
   }
 
   public get userValue(): any {
