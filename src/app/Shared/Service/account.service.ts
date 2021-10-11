@@ -21,7 +21,7 @@ export class AccountService {
     this.opts = {headers: new HttpHeaders().set('Authorization', this.token)};
    }
   public registerOwner(OwnerRegistration: any): Observable<any>{
-    return this.http.post(this.accountsUrl + '/owners/register', OwnerRegistration, this.opts);
+    return this.http.post(this.accountsUrl + '/register/owner', OwnerRegistration, this.opts);
   }
   // tslint:disable-next-line:typedef
   public ownerExists(username: string){
