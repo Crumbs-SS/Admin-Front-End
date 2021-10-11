@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RestaurantDTO } from 'src/app/Models/RestaurantDTO';
 import {Observable} from 'rxjs';
 import {AuthenticationService} from './authentication.service';
-import {baseUrl} from '../Globals';
+import { RESTAURANT_SERVICE_URL } from '../Globals';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class RestaurantService {
   private opts: object;
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
-    this.restaurantURL = baseUrl + '/restaurant-service';
+    this.restaurantURL = RESTAURANT_SERVICE_URL;
     this.token = this.authenticationService.tokenValue;
     this.opts = {headers: new HttpHeaders().set('Authorization', this.token)};
    }

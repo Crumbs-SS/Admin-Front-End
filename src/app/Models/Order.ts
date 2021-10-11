@@ -44,7 +44,6 @@ export class Order implements Deserializable{
 
     getDriver(){
         if(this.driver){
-            console.log("getDriver(): ", this.driver);
             return this.driver.userDetails.username;
         }
     }

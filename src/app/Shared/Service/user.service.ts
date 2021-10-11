@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {AuthenticationService} from './authentication.service';
-import {baseUrl} from '../Globals';
+import { ACCOUNT_SERVICE_URL } from '../Globals';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +14,7 @@ export class UserService {
     private opts: object;
 
     constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
-        this.accountURL = baseUrl + '/account-service';
+        this.accountURL = ACCOUNT_SERVICE_URL;
         this.token = this.authenticationService.tokenValue;
         this.opts = {headers: new HttpHeaders().set('Authorization', this.token)};
     }

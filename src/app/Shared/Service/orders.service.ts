@@ -3,15 +3,15 @@ import { Injectable } from '@angular/core';
 import { UpdateOrder } from 'src/app/Models/UpdateOrder';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {AuthenticationService} from './authentication.service';
-import {baseUrl} from '../Globals';
+import { ORDER_SERVICE_URL, EMAIL_SERVICE_URL } from '../Globals';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrdersService {
 
-  public rootUrl: string = baseUrl + '/order-service';
-  public snsUrl: string = baseUrl + '/email-service';
+  public rootUrl: string = ORDER_SERVICE_URL;
+  public snsUrl: string = EMAIL_SERVICE_URL;
   private token: any;
   private opts: object;
 
