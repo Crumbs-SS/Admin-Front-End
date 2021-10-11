@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RestaurantDTO } from 'src/app/Models/RestaurantDTO';
 import {Observable} from 'rxjs';
 import {AuthenticationService} from './authentication.service';
+import {baseUrl} from '../Globals';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +15,14 @@ export class RestaurantService {
   private opts: object;
 
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
-    this.restaurantURL = 'http://application-load-balancer-773890590.us-east-1.elb.amazonaws.com/restaurant-service';
+    this.restaurantURL = baseUrl + '/restaurant-service';
     this.token = this.authenticationService.tokenValue;
     this.opts = {headers: new HttpHeaders().set('Authorization', this.token)};
    }
    public getAll(): Observable<any>{
     return this.http.get(this.restaurantURL + '/restaurants', this.opts);
   }
-  public getCategories():Observable<any>{
+  public getCategories(): Observable<any>{
     return this.http.get(this.restaurantURL + '/categories');
   }
   public save(aRestaurantDTO: RestaurantDTO): Observable<any>{

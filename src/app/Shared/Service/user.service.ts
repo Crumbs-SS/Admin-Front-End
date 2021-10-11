@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {AuthenticationService} from './authentication.service';
+import {baseUrl} from '../Globals';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,7 @@ export class UserService {
     private opts: object;
 
     constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
-        this.accountURL = 'http://application-load-balancer-773890590.us-east-1.elb.amazonaws.com/account-service';
+        this.accountURL = baseUrl + '/account-service';
         this.token = this.authenticationService.tokenValue;
         this.opts = {headers: new HttpHeaders().set('Authorization', this.token)};
     }

@@ -3,14 +3,15 @@ import { Injectable } from '@angular/core';
 import { UpdateOrder } from 'src/app/Models/UpdateOrder';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {AuthenticationService} from './authentication.service';
+import {baseUrl} from '../Globals';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrdersService {
 
-  public rootUrl: string = 'http://application-load-balancer-773890590.us-east-1.elb.amazonaws.com/order-service';
-  public snsUrl: string = 'http://application-load-balancer-773890590.us-east-1.elb.amazonaws.com/email-service';
+  public rootUrl: string = baseUrl + '/order-service';
+  public snsUrl: string = baseUrl + '/email-service';
   private token: any;
   private opts: object;
 

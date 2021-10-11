@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {baseUrl} from '../Globals';
 
 
 @Injectable({
@@ -19,7 +20,7 @@ export class AuthenticationService {
     this.user = this.userSubject.asObservable();
     this.tokenSubject = new BehaviorSubject<any>(localStorage.getItem('token') as string);
     this.token = this.tokenSubject.asObservable();
-    this.accountsUrl = 'http://application-load-balancer-773890590.us-east-1.elb.amazonaws.com/account-service';
+    this.accountsUrl = baseUrl + '/account-service';
   }
 
   public get userValue(): any {
