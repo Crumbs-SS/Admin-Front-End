@@ -209,7 +209,7 @@
             <p *ngIf="newOwner">Email: {{ownerRegistrationDTO.email}}</p>
             <p *ngIf="newOwner">Username: {{ownerRegistrationDTO.username}}</p>
             <p *ngIf="newOwner">Phone: {{ownerRegistrationDTO.phone}}</p>
-            <p *ngIf="!newOwner">Username: {{existingOwnerDTO.username}}</p>
+            <p *ngIf="!newOwner">Username: {{username}}</p>
             <h2>Restaurant Location Details:</h2>
             <p>Street: {{addRestaurantDTO.street}}</p>
             <div *ngIf="locationError" class="alert alert-danger">
