@@ -90,7 +90,7 @@ export class AddRestaurantComponent {
     else {
       this.accountService.ownerExists(this.existingOwnerDTO.username).subscribe(
         (response: any) => {
-          this.addRestaurantDTO.username = response;
+          this.addRestaurantDTO.username = this.existingOwnerDTO.username;
           stepper.next();
         },
         (error: any) => {
