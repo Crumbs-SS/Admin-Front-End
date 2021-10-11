@@ -26,13 +26,13 @@ export class RestaurantService {
     return this.http.get(this.restaurantURL + '/categories');
   }
   public save(aRestaurantDTO: RestaurantDTO): Observable<any>{
-    return this.http.post<RestaurantDTO>(this.restaurantURL + '/owner/' + '/restaurant', aRestaurantDTO, this.opts);
+    return this.http.post<RestaurantDTO>(this.restaurantURL + '/owner/' + aRestaurantDTO.username + '/restaurant', aRestaurantDTO, this.opts);
   }
   // tslint:disable-next-line:typedef
   public delete(id: any){
-    return this.http.delete(this.restaurantURL + '/' + id, this.opts);
+    return this.http.delete(this.restaurantURL + '/owner'  + '/restaurant/'+ id, this.opts);
   }
   public update(id: number, aRestaurantDTO: RestaurantDTO): Observable<any>{
-    return this.http.put(this.restaurantURL + '/' + id, aRestaurantDTO, this.opts);
+    return this.http.put(this.restaurantURL + '/owner/' + aRestaurantDTO.username + '/restaurant/' + id, aRestaurantDTO,  this.opts);
   }
 }
