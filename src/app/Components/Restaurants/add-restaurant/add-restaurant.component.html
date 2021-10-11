@@ -95,7 +95,7 @@
           <div [hidden]="newOwner==null || newOwner==true">
             <div class="form-group">
               <label for="ownerUsername">Enter Username:</label>
-              <input type="text" minlength="3" maxlength="20" required [(ngModel)]="existingOwnerDTO.username"
+              <input type="text" minlength="3" maxlength="20" required [(ngModel)]="username"
                 pattern="^[A-Za-z0-9]*$" [class.is-valid]="ownerUsername.valid"
                 class="form-control ng-untouched ng-pristine ng-valid" id="ownerUsername" name="ownerUsername" #ownerUsername="ngModel">
               <div [hidden]="ownerUsername.valid || ownerUsername.pristine" class="alert alert-danger"> Username is required and must have a minimum length of 3</div>

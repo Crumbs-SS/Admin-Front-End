@@ -25,8 +25,8 @@ export class RestaurantService {
   public getCategories(): Observable<any>{
     return this.http.get(this.restaurantURL + '/categories');
   }
-  public save(aRestaurantDTO: RestaurantDTO): Observable<any>{
-    return this.http.post<RestaurantDTO>(this.restaurantURL + '/owner/' + aRestaurantDTO.username + '/restaurant', aRestaurantDTO, this.opts);
+  public save(username: string, aRestaurantDTO: RestaurantDTO): Observable<any>{
+    return this.http.post<RestaurantDTO>(this.restaurantURL + '/owner/' + username + '/restaurant', aRestaurantDTO, this.opts);
   }
   // tslint:disable-next-line:typedef
   public delete(id: any){

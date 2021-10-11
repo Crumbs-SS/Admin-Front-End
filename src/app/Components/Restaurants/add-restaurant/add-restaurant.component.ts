@@ -7,7 +7,6 @@ import { Category } from 'src/app/Models/Category';
 import { AccountService } from 'src/app/Shared/Service/account.service';
 import { MatRadioChange } from '@angular/material/radio';
 import { MatStepper } from '@angular/material/stepper';
-import { ExistingOwnerDTO } from 'src/app/Models/ExistingOwnerDTO';
 
 @Component({
   selector: 'app-add-restaurant',
@@ -18,8 +17,8 @@ export class AddRestaurantComponent {
 
   addRestaurantDTO: RestaurantDTO;
   ownerRegistrationDTO: OwnerRegistrationDTO;
-  existingOwnerDTO: ExistingOwnerDTO;
   newOwner !: boolean;
+  username !: string;
 
   locationError: boolean = false;
   errorMessage: string = "";
@@ -31,7 +30,6 @@ export class AddRestaurantComponent {
     private restaurantService: RestaurantService, private accountService: AccountService) {
     this.addRestaurantDTO = new RestaurantDTO();
     this.ownerRegistrationDTO = new OwnerRegistrationDTO();
-    this.existingOwnerDTO = new ExistingOwnerDTO();
   }
   ngOnInit() {
     this.loadCategories();
@@ -44,7 +42,7 @@ export class AddRestaurantComponent {
   onSubmit() {
     this.locationError = false;
 
-    this.restaurantService.save(this.addRestaurantDTO).subscribe(
+    this.restaurantService.save(this.username, this.addRestaurantDTO).subscribe(
       (response) => {
         console.log(response);
         this.gotoRestaurantList();
@@ -64,7 +62,7 @@ export class AddRestaurantComponent {
   onChange(change: MatRadioChange) {
     this.newOwner = change.value;
     this.errorMessage = "";
-    this.existingOwnerDTO.username="";
+    this.username="";
     this.ownerRegistrationDTO.firstName="";
     this.ownerRegistrationDTO.lastName="";
     this.ownerRegistrationDTO.email="";
@@ -78,7 +76,7 @@ export class AddRestaurantComponent {
     if (this.newOwner) {
       this.accountService.registerOwner(this.ownerRegistrationDTO).subscribe(
         (response: any) => {
-          this.addRestaurantDTO.ownerId = response;
+          this.username = response;
           stepper.next();
         },
         (error: any) => {
@@ -88,13 +86,13 @@ export class AddRestaurantComponent {
       );
     }
     else {
-      this.accountService.ownerExists(this.existingOwnerDTO.username).subscribe(
+      this.accountService.ownerExists(this.username).subscribe(
         (response: any) => {
-          this.addRestaurantDTO.ownerId = response;
           stepper.next();
         },
         (error: any) => {
           this.errorMessage = error.error.message;
+          this.username='';
           console.log(error.error.message)
         }
       )

@@ -2,7 +2,6 @@ import { MenuItem } from "./MenuItem";
 
 export class RestaurantDTO {
 
-    ownerId!: number;
     firstName!: string;
     lastName!: string;
     email!: string;
