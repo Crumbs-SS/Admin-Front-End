@@ -40,6 +40,7 @@ export class OrdersComponent implements OnInit {
 
       if(content){
         this.orders = content.map((order: Order) => new Order().deserialize(order));
+        console.log("Orders fetched: ", this.orders);
         this.totalOrders = res.totalElements;
         this.totalPages = res.totalPages;
         if(this.page > this.totalPages && this.totalPages > 0){
