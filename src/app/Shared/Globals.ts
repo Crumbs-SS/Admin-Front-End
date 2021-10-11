@@ -1,7 +1,6 @@
-import { isDevMode } from '@angular/core';
-
+import { environment } from "src/environments/environment";
 const prodUrl = 'https://api.crumbs-ss.link';
-const isDevelopment: boolean = isDevMode(); 
+const isDevelopment: boolean = !environment.production;
 
 const DEV_RESTAURANT_SERVICE_URL="http://localhost:8070";
 const DEV_PAYMENT_SERVICE_URL="http://localhost:8090";
