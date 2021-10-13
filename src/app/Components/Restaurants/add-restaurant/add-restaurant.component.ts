@@ -20,7 +20,7 @@ export class AddRestaurantComponent {
   ownerRegistrationDTO: OwnerRegistrationDTO;
   existingOwnerDTO: ExistingOwnerDTO;
   newOwner !: boolean;
-
+  username!: string;
   locationError: boolean = false;
   errorMessage: string = "";
 
@@ -90,12 +90,14 @@ export class AddRestaurantComponent {
     else {
       this.accountService.ownerExists(this.existingOwnerDTO.username).subscribe(
         (response: any) => {
+          console.log(response.response);
           this.addRestaurantDTO.username = this.existingOwnerDTO.username;
           stepper.next();
         },
         (error: any) => {
-          this.errorMessage = error.error.message;
-          console.log(error.error.message)
+          this.addRestaurantDTO.username = this.existingOwnerDTO.username;
+          console.log(error)
+          stepper.next();
         }
       )
     }
