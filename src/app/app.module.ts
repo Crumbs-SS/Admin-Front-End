@@ -34,7 +34,7 @@ import { DeleteRestaurantComponent } from './Components/Restaurants/delete-resta
 import { SortRestaurantsComponent } from './Components/Restaurants/sort-restaurants/sort-restaurants.component';
 import { FilterPriceRatingComponent } from './Components/Restaurants/filter-price-rating/filter-price-rating.component';
 import { EditUserFormComponent } from './Components/Users/edit-user-form/edit-user-form.component';
-import {SortDriversComponent} from './Components/Drivers/sort-drivers/sort-restaurants.component';
+import {SortDriversComponent} from './Components/Drivers/sort-drivers/sort-drivers.component';
 import {FilterDriversComponent} from './Components/Drivers/filter-drivers/filter-drivers.component';
 import { DeleteUsersComponent } from './Components/Users/delete-users/delete-users.component';
 import { EnableUsersComponent } from './Components/Users/enable-users/enable-users.component';
