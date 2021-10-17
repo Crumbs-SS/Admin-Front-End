@@ -36,7 +36,7 @@ export class UpdateRestaurantComponent implements OnInit{
   onUpdate() {
     this.emailError = false;
     this.locationError = false;
-    console.log(this.restaurant);
+
     this.HttpService.update(this.restaurant.id, this.restaurant.restaurantOwner.userDetails.username, this.restaurantDTO).subscribe(
       (response) => { 
         console.log(response);
