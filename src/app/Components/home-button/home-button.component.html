@@ -1,8 +1,4 @@
-<button 
-class = 'home-button btn btn-info'
-*ngIf="currentRoute !== '/crumbs/admin'"
-(click)="redirectToHome()"
-mat-raised-button
->
-    Home
+<button *ngIf="!hasRoute('/crumbs/admin') && !hasRoute('/crumbs/admin/login') " class='home-button btn btn-info'
+    mat-raised-button>
+    <a routerLink="/">Home</a>
 </button>
