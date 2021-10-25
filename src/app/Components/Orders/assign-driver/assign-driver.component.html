@@ -1,33 +1,37 @@
 <ng-template #modalTemplate let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Assign Driver to Order</h4>
-        <button type="button" class="close" aria-label="Close"
-            (click)="modal.dismiss('Cross click')">
+        <h1 class="modal-title">Select a Driver</h1>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    
+
     <div class="modal-body">
-        <p>Type in the username of the driver</p>
-        <form class='form-group' [formGroup]='usernameFormGroup'>
-            <div class="form-group">
-                <label for="username">Enter Username: </label>
-                <input class='form-control' type="text" id="username" formControlName="username">
-                <div *ngIf="(username.invalid && username.touched) || username.dirty">
-                    <small class="form-text text-danger" *ngIf="username.errors?.required">Username is required</small>
-                    <small 
-                        *ngIf="username.errors?.pattern || username.errors?.maxlength || username.errors?.minlength" 
-                        class="form-text text-danger" 
-                    >Please provide a valid username</small>
-                </div>
-            </div>
-        </form>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone #</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let d of drivers">
+                    <td>{{d.userDetails.username}}</td>
+                    <td>{{d.userDetails.firstName + ' ' + d.userDetails.lastName}}</td>
+                    <td>{{ d.userDetails.email }}</td>
+                    <td> {{ d.userDetails.phone }} </td>
+                </tr>
+            </tbody>
+        </table>
+
         <p class='form-text text-danger error' *ngIf="error">{{ error }}</p>
     </div>
 
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.dismiss()">Cancel</button>
-        <button type="button" class="btn btn-success" (click)="onAssign()"> Assign </button>
+        <button type="button" class="btn btn-success" (click)="onAssign()"> Send Requests </button>
     </div>
 </ng-template>
-<button type="button" class="btn btn-success" (click)="open(modalTemplate)" >Assign Driver</button>
+<button type="button" class="btn btn-success" (click)="open(modalTemplate)">Request a Driver</button>
