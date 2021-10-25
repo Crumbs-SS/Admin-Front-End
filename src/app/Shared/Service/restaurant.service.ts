@@ -28,11 +28,11 @@ export class RestaurantService {
   public save(aRestaurantDTO: RestaurantDTO): Observable<any>{
     return this.http.post<RestaurantDTO>(this.restaurantURL + '/owner/' + aRestaurantDTO.username + '/restaurant', aRestaurantDTO, this.opts);
   }
-  // tslint:disable-next-line:typedef
-  public delete(id: any){
-    return this.http.delete(this.restaurantURL + '/owner'  + '/restaurant/'+ id, this.opts);
+
+  public delete(id: any, username:string){
+    return this.http.delete(this.restaurantURL + '/owner/'  + username + '/restaurant/'+ id, this.opts);
   }
-  public update(id: number, aRestaurantDTO: RestaurantDTO): Observable<any>{
-    return this.http.put(this.restaurantURL + '/owner/' + aRestaurantDTO.username + '/restaurant/' + id, aRestaurantDTO,  this.opts);
+  public update(id: number, username:string, aRestaurantDTO: RestaurantDTO): Observable<any>{
+    return this.http.put(this.restaurantURL + '/owner/' + username + '/restaurant/' + id, aRestaurantDTO,  this.opts);
   }
 }

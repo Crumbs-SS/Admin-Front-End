@@ -22,7 +22,7 @@ export class DeleteRestaurantComponent implements OnInit {
     this.modalService.open(longContent, { scrollable: true, size: 's' });
   }
   deleteRestaurant(id: any) {
-    this.HttpService.delete(id)
+    this.HttpService.delete(id, this.restaurant.restaurantOwner.userDetails.username)
       .subscribe(
         (data) => {
           console.log(data);
