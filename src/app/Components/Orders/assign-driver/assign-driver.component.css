@@ -1,0 +1,15 @@
+.mat-paginator {
+    display: flex;
+    justify-content: center;
+ }
+
+ tbody tr {
+     cursor: pointer;
+     user-select: none;
+
+     transition: background-color .3s;
+ }
+
+ .selected {
+     background-color: rgba(100, 255, 100, .4);
+ }

@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { UserService } from 'src/app/Shared/Service/user.service';
 import { Order } from 'src/app/Models/Order';
 import { AccountService } from 'src/app/Shared/Service/account.service';
+import { PageEvent } from '@angular/material/paginator';
 
 
 const modalOptions: NgbModalOptions = {
@@ -31,19 +32,47 @@ export class AssignDriverComponent implements OnInit {
     private accountService: AccountService
   ) { }
 
-  drivers: any;
-  error = '';
+  drivers: any[] = [];
+  selectedDrivers: string[] = [];
+  error: string = '';
   usernameFormGroup: any;
 
-  ngOnInit(): void {
-    this.accountService.getAvailableDrivers(0, 5, {}).subscribe((drivers: any) => this.drivers = drivers.content);
+  // Pagination
+  totalDrivers: number = 0;
+  pageOptions: number[] = [5, 10, 15, 20];
+  page: number = 0;
+  size: number = 5;
+  filterBy: string = '';
+  orderBy: string = 'asc';
+  sortBy: string = 'Id';
+  totalPages: number = 0;
+  query: string = '';
+
+  ngOnInit(): void { this.getDrivers(); }
+
+
+  getDrivers() {
+    const extras = {
+      query: this.query,
+      filterBy: this.filterBy,
+      sortBy: this.sortBy,
+      orderBy: this.orderBy
+    }
+
+    this.accountService.getAvailableDrivers(this.page, this.size, extras).subscribe((driverPage: any) => {
+      this.totalDrivers = driverPage.totalElements;
+      this.totalPages = driverPage.totalPages;
+      this.drivers = driverPage.content;
+    });
   }
 
   onAssign() {
     this.error = '';
-    const username = this.usernameFormGroup.get('username').value;
+    this.selectedDrivers.forEach(username => this.requestDriver(username));
+  }
 
-    this.userService.checkIfDriverIsAvailable(username).subscribe((data) => {
+  requestDriver(username: string) {
+    this.userService.checkIfDriverIsAvailable(username).subscribe(data => {
       if (data) {
         this.orderService.sendOrderRequestToDriver(this.order.id, parseInt(data.toString()))
           .subscribe(() => this.ngbModal.dismissAll(), () =>
@@ -52,7 +81,6 @@ export class AssignDriverComponent implements OnInit {
         this.error = "This driver isn't available."
       }
     }, (error) => {
-      console.error(error.message);
       this.error = (error.status === 404) ? "This driver doesn't exist."
         : "An error has occurred please try again later."
     })
@@ -62,8 +90,19 @@ export class AssignDriverComponent implements OnInit {
     this.ngbModal.open(modal, modalOptions)
   }
 
-  get username() {
-    return this.usernameFormGroup.get("username");
+  returnPageState(val: PageEvent) {
+    this.size = val.pageSize;
+    this.page = val.pageIndex;
+    this.getDrivers();
   }
 
+  onClick(driver: any) {
+    this.selectedDrivers = this.isDriverSelected(driver) ?
+      [...this.selectedDrivers.filter(driverUsername => driverUsername !== driver.userDetails.username)] :
+      [...this.selectedDrivers, driver.userDetails.username];
+  }
+
+  isDriverSelected(driver: any) {
+    return this.selectedDrivers.find(driverUsername => driverUsername === driver.userDetails.username);
+  }
 }

@@ -5,33 +5,38 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-
+    <p class='modal-desc modal-header'>Select the drivers you'd like to send a notification to</p>
     <div class="modal-body">
-        <table class="table table-bordered table-striped">
+        <table class="table">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Username</th>
                     <th scope="col">Full Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone #</th>
+                    <th scope="col">Rating</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let d of drivers">
-                    <td>{{d.userDetails.username}}</td>
-                    <td>{{d.userDetails.firstName + ' ' + d.userDetails.lastName}}</td>
+                <tr (click)="onClick(d)" [ngClass]="{'selected': isDriverSelected(d)}" *ngFor="let d of drivers">
+                    <td>{{ d.userDetails.username }}</td>
+                    <td>{{ d.userDetails.firstName + ' ' + d.userDetails.lastName }}</td>
                     <td>{{ d.userDetails.email }}</td>
-                    <td> {{ d.userDetails.phone }} </td>
+                    <td>{{ d.userDetails.phone }}</td>
                 </tr>
             </tbody>
         </table>
+        <mat-paginator class="left" (page)="returnPageState($event)" [pageSize]="size" [pageSizeOptions]="pageOptions"
+            [length]="totalDrivers" [showFirstLastButtons]="true">
+        </mat-paginator>
 
         <p class='form-text text-danger error' *ngIf="error">{{ error }}</p>
     </div>
 
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modal.dismiss()">Cancel</button>
-        <button type="button" class="btn btn-success" (click)="onAssign()"> Send Requests </button>
+        <button type="button" class="btn btn-success" (click)="onAssign()"> Send Requests
+            ({{selectedDrivers.length}})</button>
     </div>
 </ng-template>
 <button type="button" class="btn btn-success" (click)="open(modalTemplate)">Request a Driver</button>
