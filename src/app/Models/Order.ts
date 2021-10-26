@@ -2,7 +2,7 @@ import Customer from "./Customer";
 import { Location } from "./Location";
 import { Deserializable } from "./deserializable";
 
-export class Order implements Deserializable{
+export class Order implements Deserializable {
 
     public createdAt: any;
     public customer: Customer = new Customer();
@@ -17,9 +17,10 @@ export class Order implements Deserializable{
     public phone: string = '';
     public preferences: string = '';
     public restaurant: any;
+    public stripeID: string = '';
 
 
-    deserialize(input: any): this{        
+    deserialize(input: any): this {
         this.createdAt = new Date(input.createdAt).toLocaleString();
         this.deliverySlot = new Date(input.deliverySlot);
         this.driver = input.driver;
@@ -30,23 +31,24 @@ export class Order implements Deserializable{
         this.restaurant = input.restaurant;
         this.phone = input.phone;
         this.id = input.id;
+        this.stripeID = input.payment.stripeID;
         this.isoTime = new Date(new Date(this.deliverySlot)
             .setHours(this.deliverySlot.getHours() - 5));
-        
-        if(input.customer)
+
+        if (input.customer)
             this.customer = new Customer().deserialize(input.customer);
-        if(input.deliveryLocation)
+        if (input.deliveryLocation)
             this.deliveryLocation = new Location().deserialize(input.deliveryLocation);
 
 
         return this;
     }
 
-    getDriver(){
-        if(this.driver){
+    getDriver() {
+        if (this.driver) {
             return this.driver.userDetails.username;
         }
     }
 
-    
+
 }

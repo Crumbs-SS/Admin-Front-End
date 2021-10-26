@@ -1,9 +1,4 @@
-.mat-paginator {
-    display: flex;
-    justify-content: center;
- }
-
- tbody tr {
+tbody tr {
      cursor: pointer;
      user-select: none;
      border-radius: .2em;
@@ -12,10 +7,25 @@
  }
 
  .selected {
-     background-color: rgba(76, 0, 130, 0.315);
+     background-color: rgba(0, 255, 34, 0.315);
  }
 
  .slide-toggle {
      margin-bottom: 1em;
      user-select: none;
+ }
+
+ .options{
+     display: flex;
+     justify-content: space-between;
+     align-items: flex-end;
+ }
+
+ .desc { 
+    color: rgb(100, 100, 100);
+    margin-bottom: 1em;
+ }
+
+ .search-field {
+    width: 100%;
  }

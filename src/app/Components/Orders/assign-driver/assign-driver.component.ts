@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter, OnInit, Input } from '@angular/core';
 import { OrdersService } from 'src/app/Shared/Service/orders.service';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from 'src/app/Shared/Service/user.service';
 import { Order } from 'src/app/Models/Order';
 import { AccountService } from 'src/app/Shared/Service/account.service';
@@ -31,8 +31,11 @@ export class AssignDriverComponent implements OnInit {
     private orderService: OrdersService,
     private userService: UserService,
     private accountService: AccountService
-  ) { }
+  ) {
+    this.formGroup = fb.group({ query: "" });
+  }
 
+  formGroup: FormGroup;
   drivers: any[] = [];
   selectedDrivers: string[] = [];
   error: string = '';
@@ -48,14 +51,13 @@ export class AssignDriverComponent implements OnInit {
   orderBy: string = 'asc';
   sortBy: string = 'Id';
   totalPages: number = 0;
-  query: string = '';
 
   ngOnInit(): void { this.getDrivers(); }
 
 
   getDrivers() {
     const extras = {
-      query: this.query,
+      query: this.formGroup.value.query,
       filterBy: this.filterBy,
       sortBy: this.sortBy,
       orderBy: this.orderBy
@@ -148,5 +150,13 @@ export class AssignDriverComponent implements OnInit {
       }
       console.error(e);
     });
+  }
+
+  get query() {
+    return this.formGroup.get('query');
+  }
+
+  set query(value: any) {
+    this.formGroup.setValue({ query: value })
   }
 }

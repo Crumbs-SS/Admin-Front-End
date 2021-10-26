@@ -5,12 +5,16 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <p class='modal-desc modal-header'>Select the drivers you'd like to send a notification to</p>
     <div class="modal-body">
-        <mat-slide-toggle class="slide-toggle" [checked]="allSelected" color='primary'
-            (change)=onSelectChange($event.checked)>
-            Select All Drivers
-        </mat-slide-toggle>
+        <p class='desc'>Select the drivers you'd like to send a notification to</p>
+        <form [formGroup]="formGroup" autocomplete="off" (submit)="getDrivers()">
+            <mat-form-field class="search-field">
+                <input matInput placeholder="Search for driver" formControlName="query">
+                <button type="button" *ngIf="query" matSuffix mat-icon-button (click)="query=''; getDrivers()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </form>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -28,16 +32,20 @@
                     <td>{{ d.userDetails.email }}</td>
                     <td>{{ d.userDetails.phone }}</td>
                     <td>
-                        <fa-icon *ngFor="let star of d.driverRating" [icon]="star">
-
-                        </fa-icon>
+                        <fa-icon *ngFor="let star of d.driverRating" [icon]="star"></fa-icon>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <mat-paginator class="left" (page)="returnPageState($event)" [pageSize]="size" [pageSizeOptions]="pageOptions"
-            [length]="totalDrivers" [showFirstLastButtons]="true">
-        </mat-paginator>
+        <div class="options">
+            <mat-paginator class="left" (page)="returnPageState($event)" [pageSize]="size"
+                [pageSizeOptions]="pageOptions" [length]="totalDrivers" [showFirstLastButtons]="true">
+            </mat-paginator>
+            <mat-slide-toggle class="slide-toggle" [checked]="allSelected" color='primary'
+                (change)=onSelectChange($event.checked)>
+                Select All Drivers
+            </mat-slide-toggle>
+        </div>
 
         <p class='form-text text-danger error' *ngIf="error">{{ error }}</p>
     </div>
