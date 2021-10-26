@@ -6,10 +6,16 @@
  tbody tr {
      cursor: pointer;
      user-select: none;
+     border-radius: .2em;
 
      transition: background-color .3s;
  }
 
  .selected {
-     background-color: rgba(100, 255, 100, .4);
+     background-color: rgba(76, 0, 130, 0.315);
+ }
+
+ .slide-toggle {
+     margin-bottom: 1em;
+     user-select: none;
  }

@@ -39,4 +39,8 @@ export class UserService {
     public checkIfDriverIsAvailable(username: string) {
         return this.http.get(this.accountURL + `/drivers/${username}`, this.opts);
     }
+
+    public getDriverRating(username: string): Observable<number> {
+        return this.http.get<number>(this.accountURL + `/drivers/rating/${username}`, this.opts);
+    }
 }

@@ -7,6 +7,10 @@
     </div>
     <p class='modal-desc modal-header'>Select the drivers you'd like to send a notification to</p>
     <div class="modal-body">
+        <mat-slide-toggle class="slide-toggle" [checked]="allSelected" color='primary'
+            (change)=onSelectChange($event.checked)>
+            Select All Drivers
+        </mat-slide-toggle>
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -23,6 +27,11 @@
                     <td>{{ d.userDetails.firstName + ' ' + d.userDetails.lastName }}</td>
                     <td>{{ d.userDetails.email }}</td>
                     <td>{{ d.userDetails.phone }}</td>
+                    <td>
+                        <fa-icon *ngFor="let star of d.driverRating" [icon]="star">
+
+                        </fa-icon>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -34,8 +43,9 @@
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-light" (click)="modal.dismiss()">Cancel</button>
-        <button type="button" class="btn btn-success" (click)="onAssign()"> Send Requests
+        <button mat-raised-button (click)="modal.dismiss()">Cancel</button>
+        <button mat-raised-button color="primary" (click)="onAssign()" [disabled]="selectedDrivers.length < 1"> Send
+            Requests
             ({{selectedDrivers.length}})</button>
     </div>
 </ng-template>

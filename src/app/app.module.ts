@@ -2,17 +2,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatCardModule} from '@angular/material/card';
-import {FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {MatSelectModule} from '@angular/material/select';
-import {MatStepperModule} from '@angular/material/stepper';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 
 // Service
 import { RestaurantService } from './Shared/Service/restaurant.service';
@@ -21,7 +24,7 @@ import { AccountService } from './Shared/Service/account.service';
 
 // Components
 import { AppComponent } from './app.component';
-import {ViewDriversComponent} from './Components/Drivers/view-drivers/view-drivers.component';
+import { ViewDriversComponent } from './Components/Drivers/view-drivers/view-drivers.component';
 import { OrdersComponent } from './Components/Orders/orders/orders.component';
 import { RestaurantsComponent } from './Components/Restaurants/restaurants/restaurants.component';
 import { UsersComponent } from './Components/Users/users/users.component';
@@ -34,8 +37,8 @@ import { DeleteRestaurantComponent } from './Components/Restaurants/delete-resta
 import { SortRestaurantsComponent } from './Components/Restaurants/sort-restaurants/sort-restaurants.component';
 import { FilterPriceRatingComponent } from './Components/Restaurants/filter-price-rating/filter-price-rating.component';
 import { EditUserFormComponent } from './Components/Users/edit-user-form/edit-user-form.component';
-import {SortDriversComponent} from './Components/Drivers/sort-drivers/sort-drivers.component';
-import {FilterDriversComponent} from './Components/Drivers/filter-drivers/filter-drivers.component';
+import { SortDriversComponent } from './Components/Drivers/sort-drivers/sort-drivers.component';
+import { FilterDriversComponent } from './Components/Drivers/filter-drivers/filter-drivers.component';
 import { DeleteUsersComponent } from './Components/Users/delete-users/delete-users.component';
 import { EnableUsersComponent } from './Components/Users/enable-users/enable-users.component';
 import { FilterRoleComponent } from './Components/Users/filter-role/filter-role.component';
@@ -54,7 +57,7 @@ import { RatingFilterPipe } from './Shared/Custom/ratingFilter.pipe';
 import { StatusFilterPipe } from './Shared/Custom/statusFilter.pipe';
 import { StateFilterPipe } from './Shared/Custom/stateFilter.pipe';
 import { SortPipe } from './Shared/Custom/sort.pipe';
-import {DriverNamePipe} from './Shared/Custom/driverNameSearch.pipe';
+import { DriverNamePipe } from './Shared/Custom/driverNameSearch.pipe';
 import { PhoneFormatPipe } from './Shared/Custom/phone-format.pipe';
 import { DeleteDriversComponent } from './Components/Drivers/delete-drivers/delete-drivers.component';
 import { EnableDriversComponent } from './Components/Drivers/enable-drivers/enable-drivers.component';
@@ -63,8 +66,9 @@ import { LoginPageComponent } from './Components/Login/login-page/login-page/log
 import { HomeButtonComponent } from './Components/home-button/home-button.component';
 
 // Guards
-import {AuthGuard} from './Shared/Service/auth.guard';
-import {NoAuthGuard} from './Shared/Service/no-auth.guard';
+import { AuthGuard } from './Shared/Service/auth.guard';
+import { NoAuthGuard } from './Shared/Service/no-auth.guard';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -125,6 +129,9 @@ import {NoAuthGuard} from './Shared/Service/no-auth.guard';
     MatPaginatorModule,
     MatButtonModule,
     MatInputModule,
+    MatCheckboxModule,
+    MatSlideToggleModule,
+    FontAwesomeModule
   ],
   providers: [RestaurantService, UserService, AccountService, SortPipe, AuthGuard, NoAuthGuard],
   bootstrap: [AppComponent]
