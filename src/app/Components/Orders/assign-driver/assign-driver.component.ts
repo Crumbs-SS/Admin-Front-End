@@ -135,19 +135,15 @@ export class AssignDriverComponent implements OnInit {
     this.userService.getDriverRating(username).subscribe((averageRating: number) => {
       for (let i = 1; i <= 5; i++) {
         if (i <= averageRating) {
-          // Whole Star
           driver.driverRating.push(WholeStar);
         } else if (i <= averageRating + 0.5) {
-          // Half Star
           driver.driverRating.push(faStarHalfAlt);
         } else {
-          // Empty Star
           driver.driverRating.push(BlankStar);
         }
       }
     }, (e) => {
       for (let i = 1; i <= 5; i++) {
-        // Empty Star
         driver.driverRating.push(BlankStar);
       }
       console.error(e);
