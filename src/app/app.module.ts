@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 
 // Service
@@ -133,7 +134,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatCheckboxModule,
     MatSlideToggleModule,
     FontAwesomeModule,
-    MatIconModule
+    MatIconModule,
+    GooglePlaceModule
   ],
   providers: [RestaurantService, UserService, AccountService, SortPipe, AuthGuard, NoAuthGuard],
   bootstrap: [AppComponent]

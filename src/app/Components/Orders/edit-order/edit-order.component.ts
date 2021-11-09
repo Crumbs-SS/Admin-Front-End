@@ -26,8 +26,13 @@ export class EditOrderComponent implements OnInit {
   newOrder: any;
   minDate: string = '';
   maxDate: string = '';
+  validatedAddress: any;
 
   ngOnInit(): void {
+
+    const fullAddress = this.order.deliveryLocation.toString();
+
+    this.validatedAddress = { fullAddress };
 
     const minDate = new Date("2021-01-01T24:00")
     const maxDate = new Date();
@@ -43,7 +48,7 @@ export class EditOrderComponent implements OnInit {
         Validators.maxLength(250)
       ]],
       deliverySlot: [this.order.isoTime.toISOString().split('.')[0].slice(0, -3)],
-      street: [this.order.deliveryLocation.street, [
+      street: [fullAddress, [
         ...commonValidators,
         Validators.minLength(5),
         Validators.maxLength(50)
@@ -70,6 +75,7 @@ export class EditOrderComponent implements OnInit {
   }
 
   onSubmit() {
+    this.newOrder.value.validatedAddress = this.validatedAddress;
     this.newOrder.value.deliverySlot = new Date(this.newOrder.value.deliverySlot);
     this.newOrder.value.stripeID = this.order.stripeID;
     const order = new UpdateOrder().deserialize(this.newOrder.value);
@@ -77,5 +83,9 @@ export class EditOrderComponent implements OnInit {
       this.updateOrder.emit();
       this.ngbModal.dismissAll();
     }, (error) => { this.error = error });
+  }
+
+  handleAddressChange(address: any) {
+    this.validatedAddress = address;
   }
 }

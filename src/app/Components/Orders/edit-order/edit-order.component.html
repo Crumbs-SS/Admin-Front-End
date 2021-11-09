@@ -1,7 +1,7 @@
 <ng-template #modalTemplate let-modal>
     <div class="modal-header">
         <h1> Edit Order </h1>
-        
+
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -10,24 +10,34 @@
 
     <div class="modal-body">
         <form class='form-group' [formGroup]='newOrder' (ngSubmit)="onSubmit()">
-            
+
 
             <div class="form-group">
                 <label for="street">Street Address: </label>
-                <input class='form-control' type="text" id="street" formControlName="street">    
+                <input ngx-google-places-autocomplete class='form-control' type="text" id="street"
+                    formControlName="street" (onAddressChange)="handleAddressChange($event)">
                 <div *ngIf="(street.invalid && street.touched) || street.dirty">
-                    <small class="form-text" *ngIf="street.errors?.required" class="text-danger">Street address is required</small>
-                    <small class="form-text" *ngIf="street.errors?.maxlength" class="text-danger">Max characters are 50</small>
-                    <small class="form-text" *ngIf="street.errors?.minlength" class="text-danger">Min characters are 5</small>
+                    <small class="form-text" *ngIf="street.errors?.required" class="text-danger">Street address is
+                        required</small>
+                    <small class="form-text" *ngIf="street.errors?.maxlength" class="text-danger">Max characters are
+                        50</small>
+                    <small class="form-text" *ngIf="street.errors?.minlength" class="text-danger">Min characters are
+                        5</small>
                 </div>
+                <small class='form-text text-danger'
+                    *ngIf="!validatedAddress.geometry && !validatedAddress.fullAddress">Please enter a valid
+                    address</small>
             </div>
-        
+
             <div class="form-group">
                 <label for="phone">Phone: </label>
                 <input class='form-control' type="text" id="phone" formControlName="phone">
                 <div *ngIf="(phone.invalid && phone.touched) || phone.dirty">
-                    <small class="form-text" *ngIf="phone.errors?.required" class="text-danger">Phone number  is required</small>
-                    <small class="form-text" *ngIf="phone.errors?.pattern || phone.errors?.maxlength || phone.errors?.minlength" class="text-danger">Please provide a valid phone number</small>
+                    <small class="form-text" *ngIf="phone.errors?.required" class="text-danger">Phone number is
+                        required</small>
+                    <small class="form-text"
+                        *ngIf="phone.errors?.pattern || phone.errors?.maxlength || phone.errors?.minlength"
+                        class="text-danger">Please provide a valid phone number</small>
                 </div>
             </div>
 
@@ -38,14 +48,8 @@
 
             <div class='form-group'>
                 <label for='deliverySlot'>Delivery Time: </label>
-                <input 
-                    type="datetime-local" 
-                    id="deliverySlot" 
-                    class="form-control" 
-                    formControlName="deliverySlot"
-                    [min]="minDate"
-                    [max]="maxDate"
-                />
+                <input type="datetime-local" id="deliverySlot" class="form-control" formControlName="deliverySlot"
+                    [min]="minDate" [max]="maxDate" />
             </div>
 
 
@@ -60,7 +64,8 @@
             </div>
 
             <p class='form-text text-danger error' *ngIf="error">{{ error }}</p>
-            <button type="submit" class="btn btn-primary" [disabled]='!newOrder.valid'>Update</button>
+            <button type="submit" class="btn btn-primary"
+                [disabled]='!newOrder.valid || (!validatedAddress.geometry && !validatedAddress.fullAddress) '>Update</button>
         </form>
     </div>
 </ng-template>
